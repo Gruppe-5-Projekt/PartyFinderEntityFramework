@@ -49,9 +49,10 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
-            var eventToUpadate = db.Event
-                .Where(e => e.ID == id);
-            db.Update(eventToUpadate);
+            var eventToUpdate = db.Event
+                .Where(e => e.ID == id).SingleOrDefault();
+            eventToUpdate = updatedEvent;
+            db.Update(updatedEvent);
             db.SaveChanges();
         }
     }

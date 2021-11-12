@@ -81,6 +81,7 @@ namespace PartyFinderService.Controllers
             }
             return status;
         }
-
+        /*[HttpPut]("{id}")]
+        public ActionResult<String> Update(int Id, Event)*/
     }
 }
