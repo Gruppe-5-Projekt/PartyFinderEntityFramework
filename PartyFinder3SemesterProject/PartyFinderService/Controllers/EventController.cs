@@ -81,7 +81,21 @@ namespace PartyFinderService.Controllers
             }
             return status;
         }
-        /*[HttpPut]("{id}")]
-        public ActionResult<String> Update(int Id, Event)*/
+
+        [HttpPut]
+        public ActionResult<string> Update(int Id, Event putEvent)
+        {
+            String status = "";
+            try
+            {
+                _eControl.Put(Id, putEvent);
+                status = "Success";
+            }
+            catch
+            {
+                status = "Failed";
+            }
+            return status;
+        }
     }
 }
