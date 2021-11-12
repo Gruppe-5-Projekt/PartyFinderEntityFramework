@@ -65,16 +65,22 @@ namespace PartyFinderService.Controllers
             return foundReturn;
         }
 
-        // URL: api/event
-        
-        [HttpPost]
-        public void ActionResult(EventDataCreateDTO inEvent)
+        [HttpDelete("{id}")]
+        public ActionResult<String> Delete(int Id)
         {
-            if (inEvent != null)
+
+            String status = "";
+            try
             {
-                ModelConversion.EventDataCreateDTOConvert.ToEvent(inEvent);
+                _eControl.Delete(Id);
+                status = "Success";
             }
+            catch
+            {
+                status = "Failed";
+            }
+            return status;
         }
-        
+
     }
 }

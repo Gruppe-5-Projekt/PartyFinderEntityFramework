@@ -23,7 +23,7 @@ namespace PartyFinderData.DatabaseLayers
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
             var removeByID = db.Event
-                        .Where(e => e.ID == id);
+                        .Where(e => e.ID == id).SingleOrDefault();
             db.Remove(removeByID);
             db.SaveChanges();
         }
