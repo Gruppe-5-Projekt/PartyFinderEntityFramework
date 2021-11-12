@@ -68,11 +68,28 @@ namespace PartyFinderService.Controllers
         [HttpDelete("{id}")]
         public ActionResult<String> Delete(int Id)
         {
-
+            
             String status = "";
             try
             {
                 _eControl.Delete(Id);
+                status = "Success";
+            }
+            catch
+            {
+                status = "Failed";
+            }
+            return status;
+        }
+
+        [HttpPost]
+        public ActionResult<String> PostEvent(Event postEvent)
+        {
+           
+            String status = "";
+            try
+            {
+                _eControl.Add(postEvent);
                 status = "Success";
             }
             catch
