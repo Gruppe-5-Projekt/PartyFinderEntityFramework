@@ -41,8 +41,8 @@ namespace PartyFinderData.DatabaseLayers
             Console.WriteLine("Finding event");
             var db = new PartyFinderContext();
             var foundEvent = db.Event
-                       .Where(e => e.ID == id);
-            return (Event)foundEvent;
+                       .Where(e => e.ID == id).SingleOrDefault();
+            return foundEvent;
         }
 
         public void UpdateEvent(int id, Event updatedEvent)
