@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using PartyFinderData.ModelLayers;
+﻿using PartyFinderData.ModelLayers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace PartyFinderData.DatabaseLayers
 {
     public class EventAccess : IEventAccess
     {
+
         public void CreateEvent(Event eventToAdd)
         {
             var db = new PartyFinderContext();
@@ -22,7 +22,7 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
-            var removeByID = db.Events
+            var removeByID = db.Event
                         .Where(e => e.ID == id);
             db.Remove(removeByID);
             db.SaveChanges();
@@ -32,7 +32,7 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Getting all events");
             var db = new PartyFinderContext();
-            var allEvents = db.Events
+            var allEvents = db.Event
                         .ToList();
             return allEvents;
         }
@@ -40,7 +40,7 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Finding event");
             var db = new PartyFinderContext();
-            var foundEvent = db.Events
+            var foundEvent = db.Event
                        .Where(e => e.ID == id);
             return (Event)foundEvent;
         }
@@ -49,7 +49,7 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
-            var eventToUpadate = db.Events
+            var eventToUpadate = db.Event
                 .Where(e => e.ID == id);
             db.Update(eventToUpadate);
             db.SaveChanges();
