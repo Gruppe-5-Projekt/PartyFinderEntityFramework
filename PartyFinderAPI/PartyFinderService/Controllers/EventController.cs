@@ -60,7 +60,7 @@ namespace PartyFinderService.Controllers
             }
             else
             {
-                foundReturn = new StatusCodeResult(500);        // Internal server error
+                foundReturn = new StatusCodeResult(204);    // Ok, but no content
             }
             return foundReturn;
         }
