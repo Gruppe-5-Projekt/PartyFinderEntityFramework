@@ -20,12 +20,12 @@ namespace PartyFinderMVC.Access
                 return null;
             }*/
 
-            public async Task<int> SaveEvent(EventViewModel eventToSave)
+            /*public async Task<int> SaveEvent(EventViewModel eventToSave)
             {
             var postTask = _httpClient.PostAsJsonAsync<EventViewModel>(eventToSave);
             postTask.Wait();
             return 0;
-        }
+        }*/
         }
     }
     

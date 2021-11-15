@@ -32,30 +32,16 @@ namespace PartyFinderMVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public async Task<int> Index(string eventName, int capacity, DateTime startDateTime, DateTime endDateTime, string description, int profileID)
         {
             EventServiceAccess _eAccess = new EventServiceAccess();
             EventViewModel newEvent = new EventViewModel(eventName, capacity, startDateTime, endDateTime, description, profileID);
             int insertedId = await _eAccess.SaveEvent(newEvent);
-            return insertedId;
+            return 1;
 
         }
 
-        //[HttpGet]
-        //public ActionResult Index(EventViewModel eventvm)
-        //{
-
-
-        /*public async Task<List<EventViewModel>> GetAllEvents()
-        {
-            List<EventViewModel> foundEvents = await _eAccess.GetEvents();
-            return foundEvents;
-        }*/
-
-
-
-        /*
         Console.WriteLine("Hej");
         using (var client = new HttpClient())
 
