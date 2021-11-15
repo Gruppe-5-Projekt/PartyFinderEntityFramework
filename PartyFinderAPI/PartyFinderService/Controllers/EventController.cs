@@ -83,13 +83,14 @@ namespace PartyFinderService.Controllers
         }
 
         [HttpPost]
-        public ActionResult<String> PostEvent(Event postEvent)
+        public ActionResult<String> PostEvent(EventDataCreateDTO postEvent)
         {
            
             String status = "";
             try
             {
-                _eControl.Add(postEvent);
+                Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);
+                _eControl.Add(dbEvent);
                 status = "Success";
             }
             catch
@@ -100,12 +101,13 @@ namespace PartyFinderService.Controllers
         }
 
         [HttpPut]
-        public ActionResult<string> Update(int Id, Event putEvent)
+        public ActionResult<string> Update(int Id, EventDataCreateDTO putEvent)
         {
             String status = "";
             try
             {
-                _eControl.Put(Id, putEvent);
+                Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(putEvent);
+                _eControl.Put(Id, dbEvent);
                 status = "Success";
             }
             catch
