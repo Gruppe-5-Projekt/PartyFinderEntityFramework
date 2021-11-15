@@ -1,0 +1,29 @@
+﻿@model PartyFinderMVC.Models.EventViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<div class="testForms">
+    @using (Html.BeginForm("Index", "Event", FormMethod.Post))
+    //@Model Event
+    {
+    @Html.TextAreaFor(m => m.EventName, new {@class = "form-control"})
+    @Html.TextAreaFor(m => m.EventCapacity, new {@class = "form-control"})
+    @Html.TextAreaFor(m => m.StartDateTime, new {@class = "form-control"})
+    @Html.TextAreaFor(m => m.EndDateTime, new {@class = "form-control"})
+    @Html.TextAreaFor(m => m.Description, new {@class = "form-control"})
+    @Html.TextAreaFor(m => m.ProfileID, new {@class = "form-control"})
+    <button type="submit" value="Opret">Opret</button>
+    }
+
+   
+
+</div>
