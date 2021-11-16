@@ -16,12 +16,7 @@ namespace PartyFinderMVC.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
+        public IActionResult Event()
         {
             return View();
         }
