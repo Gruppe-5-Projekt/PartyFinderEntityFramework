@@ -10,7 +10,7 @@ namespace PartyFinderService.Controllers
     [Route("api/event")]
     [ApiController]
 
-    public class EventController : Controller
+    public class EventController : ControllerBase
     {
         readonly EventDataControl _eControl;
 
