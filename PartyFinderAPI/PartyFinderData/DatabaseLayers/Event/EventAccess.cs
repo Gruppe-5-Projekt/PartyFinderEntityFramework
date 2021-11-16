@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
 namespace PartyFinderData.DatabaseLayers
 {
@@ -23,7 +23,8 @@ namespace PartyFinderData.DatabaseLayers
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
             var removeByID = db.Events
-                        .Where(e => e.Id == id).SingleOrDefault();
+                        .Where(e => e.Id == id)
+                        .SingleOrDefault();
             db.Remove(removeByID);
             db.SaveChanges();
         }
@@ -42,7 +43,8 @@ namespace PartyFinderData.DatabaseLayers
             Console.WriteLine("Finding event");
             var db = new PartyFinderContext();
             var foundEvent = db.Events
-                       .Where(e => e.Id == id).SingleOrDefault();
+                       .Where(e => e.Id == id)
+                       .SingleOrDefault();
             return foundEvent;
         }
 
@@ -51,7 +53,8 @@ namespace PartyFinderData.DatabaseLayers
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
             var eventToUpdate = db.Events
-                .Where(e => e.Id == id).SingleOrDefault();
+                .Where(e => e.Id == id)
+                .SingleOrDefault();
             eventToUpdate = updatedEvent;
             db.Update(updatedEvent);
             db.SaveChanges();
