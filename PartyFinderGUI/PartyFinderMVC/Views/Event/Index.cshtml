@@ -19,25 +19,27 @@
     @using (Html.BeginForm("Index", "Event", FormMethod.Post))
     //@Model Event
     {
-    @Html.TextAreaFor(m => m.EventName, new {@class = "form-control", @placeholder="Fest navn..."})
-    @Html.TextAreaFor(m => m.EventCapacity, new {@class = "form-control", @placeholder="Antal pladser..."})
-    <form>
-  <div class="nativeDateTimePicker">
-    <label asp-for="StartDateTime">Start dato:</label>
-    <input type="datetime-local" id="party" name="bday">
-    <span class="validity"></span>
-  </div>
-   <div class="nativeDateTimePicker">
-    <label asp-for="EndDateTime">Slut dato: </label>
-    <input type="datetime-local" id="party" name="bday">
-    <span class="validity"></span>
-  </div>
-</form>
-    @Html.TextAreaFor(m => m.Description, new {@class = "form-control", @placeholder="Beskrivelse"})
-    @Html.TextAreaFor(m => m.ProfileID, new {@class = "form-control", @placeholder="ProfileID"})
-    <button type="submit" value="Opret">Opret</button>
-    }
+      <div class="eventForm">
+          @Html.TextAreaFor(m => m.EventName, new {@class = "form-control", @placeholder="Fest navn..."})
+          @Html.TextAreaFor(m => m.EventCapacity, new {@class = "form-control", @placeholder="Antal pladser..."})
+            <form>
+                <div class="nativeDateTimePicker">
+                    <label asp-for="StartDateTime">Start dato:</label>
+                    <input type="datetime-local" id="party" name="bday">
+                    <span class="validity"></span>
+                </div>
+                <div class="nativeDateTimePicker">
+                    <label asp-for="EndDateTime">Slut dato: </label>
+                    <input type="datetime-local" id="party" name="bday">
+                    <span class="validity"></span>
+                </div>
+            </form>
+        
 
-   
+        @Html.TextAreaFor(m => m.Description, new {@class = "form-control", @placeholder="Beskrivelse"})
+        @Html.TextAreaFor(m => m.ProfileID, new {@class = "form-control", @placeholder="ProfileID"})
+        <button type="submit" value="Opret">Opret</button>
+        </div>
+    }
 
 </div>
