@@ -36,6 +36,7 @@ namespace PartyFinderData.DatabaseLayers
                         .ToList();
             return allEvents;
         }
+
         public Event GetEventByID(int id)
         {
             Console.WriteLine("Finding event");

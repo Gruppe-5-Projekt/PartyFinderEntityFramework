@@ -38,7 +38,7 @@ namespace PartyFinderData.ModelLayers
             Description = description;
             ProfileID = profileID;
         }
-        public Event(int id, String EventName, int EventCapacity, DateTime StartDateTime, DateTime EndDateTime, String Desription, int ProfileID) : this(EventName, EventCapacity, StartDateTime, EndDateTime, Desription, ProfileID)
+        public Event(int id, String EventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String desription, int profileID) : this(EventName, eventCapacity, startDateTime, endDateTime, desription, profileID)
         {
             ID = id;
         }
