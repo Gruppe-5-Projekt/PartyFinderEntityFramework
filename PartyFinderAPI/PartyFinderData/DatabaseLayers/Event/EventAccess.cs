@@ -22,8 +22,8 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
-            var removeByID = db.Event
-                        .Where(e => e.ID == id).SingleOrDefault();
+            var removeByID = db.Events
+                        .Where(e => e.Id == id).SingleOrDefault();
             db.Remove(removeByID);
             db.SaveChanges();
         }
@@ -32,7 +32,7 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Getting all events");
             var db = new PartyFinderContext();
-            var allEvents = db.Event
+            var allEvents = db.Events
                         .ToList();
             return allEvents;
         }
@@ -41,8 +41,8 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Finding event");
             var db = new PartyFinderContext();
-            var foundEvent = db.Event
-                       .Where(e => e.ID == id).SingleOrDefault();
+            var foundEvent = db.Events
+                       .Where(e => e.Id == id).SingleOrDefault();
             return foundEvent;
         }
 
@@ -50,8 +50,8 @@ namespace PartyFinderData.DatabaseLayers
         {
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
-            var eventToUpdate = db.Event
-                .Where(e => e.ID == id).SingleOrDefault();
+            var eventToUpdate = db.Events
+                .Where(e => e.Id == id).SingleOrDefault();
             eventToUpdate = updatedEvent;
             db.Update(updatedEvent);
             db.SaveChanges();

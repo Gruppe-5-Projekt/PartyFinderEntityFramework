@@ -9,9 +9,19 @@ namespace PartyFinderData.DatabaseLayers.Match
 {
     internal interface MatchAccess : IMatchAccess
     {
-        public void Match(int profileID, int eventID)
+        //Før denne metode startes transaktionen
+        public int CheckCurrentMatches(int eventId)
         {
-            Object matchToAdd = profileID + eventID;
+            var db = new PartyFinderContext();
+            var allMatches = db.Matches
+                .Where(e => e.EventId == eventId)
+                .Where(m => m.Match1 == true)
+                .Count();
+            return allMatches;
+        }
+        public void Match(int profileId, int eventID)
+        {
+            Object matchToAdd = profileId + eventID;
             var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new match");
             db.Add(matchToAdd);

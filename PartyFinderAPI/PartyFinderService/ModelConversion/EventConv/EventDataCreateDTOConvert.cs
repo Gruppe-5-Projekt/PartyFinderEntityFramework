@@ -10,7 +10,7 @@ namespace PartyFinderService.ModelConversion
             Event anEvent = null;
             if (inDTO != null)
             {
-                anEvent = new Event(inDTO.EventName, inDTO.EventCapacity, inDTO.StartDateTime, inDTO.EndDateTime, inDTO.Description, inDTO.ProfileID);
+                anEvent = new Event(inDTO.EventName, inDTO.EventCapacity, inDTO.StartDateTime, inDTO.EndDateTime, inDTO.Description, inDTO.ProfileId);
             }
             return anEvent;
         }

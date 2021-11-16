@@ -1,64 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PartyFinderData.ModelLayers
 {
-    public class Profile
+    public partial class Profile
     {
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public string PhoneNo { get; set; }
-        public string Password { get; set; }
-        public bool IsBanned { get; set; }
-        public string Description { get; set; }
-
-
-        public bool IsProfileEmpty
-        {
-            get
-            {
-                if (String.IsNullOrWhiteSpace(FirstName))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
         public Profile()
         {
-            
+            Chats = new HashSet<Chat>();
+            Events = new HashSet<Event>();
+            Matches = new HashSet<Match>();
+            ReportUserAccusers = new HashSet<ReportUser>();
+            ReportUserOffenders = new HashSet<ReportUser>();
         }
 
-        public Profile(string firstName, string lastName, int age, string gender, string email,
-            string phoneNo, string password, bool isBanned, string description)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Age = age;
-            Gender = gender;
-            Email = email;
-            PhoneNo = phoneNo;
-            Password = password;
-            IsBanned = isBanned;
-            Description = description;
-        }
+        public int Id { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string PhoneNo { get; set; } = null!;
+        public string Password { get; set; } = null!;
+        public int Age { get; set; }
+        public string Gender { get; set; } = null!;
+        public string? Description { get; set; }
+        public bool IsBanned { get; set; }
 
-        public Profile(int id, string firstName, string lastName, int age, string gender, string email, 
-            string phoneNo, string password, bool isBanned, string description) : this(firstName, lastName, 
-                age, gender, email, phoneNo, password, isBanned, description)
-        {
-            ID = id;
-        }
+        public virtual Business Business { get; set; } = null!;
+        public virtual ICollection<Chat> Chats { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
+        public virtual ICollection<ReportUser> ReportUserAccusers { get; set; }
+        public virtual ICollection<ReportUser> ReportUserOffenders { get; set; }
     }
 }

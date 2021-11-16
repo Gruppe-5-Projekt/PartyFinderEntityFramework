@@ -28,7 +28,7 @@ namespace PartyFinderService.ModelConversion
             EventDataReadDTO anEventReadDTO = null;
             if (inEvent != null)
             {
-                anEventReadDTO = new EventDataReadDTO(inEvent.EventName, inEvent.EventCapacity, inEvent.StartDateTime, inEvent.EndDateTime, inEvent.Description, inEvent.ProfileID);
+                anEventReadDTO = new EventDataReadDTO(inEvent.EventName, inEvent.EventCapacity, inEvent.StartDateTime, inEvent.EndDateTime, inEvent.Description, inEvent.ProfileId);
                 anEventReadDTO.EventInfo = $"{inEvent.EventName} {inEvent.EventCapacity} {inEvent.StartDateTime} {inEvent.EndDateTime} {inEvent.Description}";
             }
             return anEventReadDTO;
