@@ -1,32 +1,79 @@
 ﻿using PartyFinderMVC.Models;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PartyFinderMVC.Models;
 
 namespace PartyFinderMVC.Access
 {
 
-        public class EventServiceAccess
+    public class EventServiceAccess
+    {
+
+        static readonly string restUrl = "http://localhost:44377/api/event";
+        readonly HttpClient _httpClient;
+
+        public EventServiceAccess()
         {
+            _httpClient = new HttpClient();
+        }
 
-            static readonly string restUrl = "http://localhost:44377/api/event";
-            readonly HttpClient _httpClient;
+        // Method to retrieve Event(s)
+        public async Task<List<EventViewModel>> GetEvent(int id = -1)
+        {
+            List<EventViewModel> EventFromService = null;
 
-            public EventServiceAccess()
+            // api/event/{id}
+            string useRestUrl = restUrl;
+            bool hasValidId = (id > 0);
+            if (hasValidId)
             {
-                _httpClient = new HttpClient();
+                useRestUrl += id;
             }
-
-            // Method to retrieve Event(s)
-            /*public async Task<List<EventViewModel>> GetEvents(int id = -1)
+            var uri = new Uri(string.Format(useRestUrl));
+            //
+            try
             {
-                return null;
-            }*/
-
-            /*public async Task<int> SaveEvent(EventViewModel eventToSave)
+                var response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    if (hasValidId)
+                    {
+                        EventViewModel foundEvent = JsonConvert.DeserializeObject<EventViewModel>(content);
+                        if (foundEvent != null)
+                        {
+                            EventFromService = new List<EventViewModel>() { foundEvent };
+                        }
+                    }
+                    else
+                    {
+                        EventFromService = JsonConvert.DeserializeObject<List<EventViewModel>>(content);
+                    }
+                }
+                else
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        EventFromService = new List<EventViewModel>();
+                    }
+                    else
+                    {
+                        EventFromService = null;
+                    }
+                }
+            }
+            catch
             {
-            var postTask = _httpClient.PostAsJsonAsync<EventViewModel>(eventToSave);
-            postTask.Wait();
-            return 0;
-        }*/
+                EventFromService = null;
+            }
+            return EventFromService;
         }
     }
+}
+
     
 
