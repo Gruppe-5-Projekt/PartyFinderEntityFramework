@@ -1,0 +1,8 @@
+use dmaa0920_1086216;
+DROP TABLE Business
+DROP TABLE ReportUser
+DROP TABLE Chat
+DROP TABLE Location
+DROP TABLE Match
+DROP TABLE Event
+DROP TABLE Profile
