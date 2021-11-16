@@ -18,6 +18,7 @@ namespace PartyFinderMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.ImagePath = @"/Images/loginpageimage.jpeg";
             return View();
         }
 
