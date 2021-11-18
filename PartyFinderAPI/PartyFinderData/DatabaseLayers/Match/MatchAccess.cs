@@ -46,6 +46,7 @@ namespace PartyFinderData.DatabaseLayers
                     db.Matches
                         .Add(match);
                 }
+                Console.WriteLine("Breakpoint her.");
                 //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
                 int allMatchesNow = CheckCurrentMatches(eventId);
                 if (allMatchesNow < capacity)
@@ -69,17 +70,3 @@ namespace PartyFinderData.DatabaseLayers
     }
 }
 
-
-
-
-//Kodenote:
-/*var allMatches = db.Matches
-                    .Where(e => e.EventId == eventId)
-                    .Where(m => m.Match1 == true)
-                    .Count();
-                */
-/*var specificEvent = db.Events
-    .Where(e => e.Id == eventId)
-    .ToList().FirstOrDefault();
-int capacity = specificEvent.EventCapacity;
-*/
