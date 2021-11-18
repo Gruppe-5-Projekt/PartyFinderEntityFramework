@@ -1,4 +1,4 @@
-﻿namespace PartyFinderService.BusinessLogicLayer.ProfileLogic
+﻿namespace PartyFinderService.BusinessLogicLayer
 {
     public class ProfileDataControl
     {

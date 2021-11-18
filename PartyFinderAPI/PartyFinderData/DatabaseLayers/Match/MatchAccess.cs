@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PartyFinderData.DatabaseLayers.Match
+namespace PartyFinderData.DatabaseLayers
 {
-    internal interface MatchAccess : IMatchAccess
+    public class MatchAccess : IMatchAccess
     {
-        //Før denne metode startes transaktionen
-        
         public int CheckCurrentMatches(int eventId)
         {
             var db = new PartyFinderContext();
@@ -25,16 +23,17 @@ namespace PartyFinderData.DatabaseLayers.Match
             var db = new PartyFinderContext();
             var specificEvent = db.Events
                     .Where(e => e.Id == eventId)
-                    .ToList().FirstOrDefault();
+                    .ToList().SingleOrDefault();
             int capacity = specificEvent.EventCapacity;
+            Console.WriteLine(capacity);
             return capacity;
         }
         
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-         public string CheckAndCommitMatch(int eventId, int profileId)
+         public bool CheckAndCommitMatchPublic(int eventId, int profileId)
         {
             var db = new PartyFinderContext();
-            using var transaction = db.Database.BeginTransaction();
+            bool status = false;
             try
             {
                 //Koden tjekker på databasen om der er plads, og comitter en profil.
@@ -42,30 +41,29 @@ namespace PartyFinderData.DatabaseLayers.Match
                 int capacity = CheckCapacity(eventId);
                 if (allMatches < capacity)
                 {
-                    Object matchToAdd = profileId + eventId;
+                    Match match = new Match {EventId = eventId, ProfileId = profileId, Match1 = true };
                     Console.WriteLine("Inserting a new match");
-                    db.Add(matchToAdd);
+                    db.Matches
+                        .Add(match);
                 }
                 //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
                 int allMatchesNow = CheckCurrentMatches(eventId);
-                if (allMatchesNow <= capacity)
+                if (allMatchesNow < capacity)
                 {
-                    transaction.Commit();
-                    string status = "You have been added to the party";
-                    return status;
+                    db.SaveChanges();
+                    status = true;
                 }
                 else
                 {
-                    transaction.Rollback();
-                    string status = "The party is at maximum capacity";
-                    return status;
+                    status = false;
                 }
             }
             catch
             {
-                string status = "There was an error, you have not been added";
-                return status;
+                status = false;
             }
+
+            return status;
         }
             
     }

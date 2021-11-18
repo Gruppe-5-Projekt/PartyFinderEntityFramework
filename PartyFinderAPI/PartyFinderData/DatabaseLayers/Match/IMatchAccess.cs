@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PartyFinderData.DatabaseLayers.Match
+namespace PartyFinderData.DatabaseLayers
 {
-    internal interface IMatchAccess
+    public interface IMatchAccess
     {
         int CheckCurrentMatches(int EventId);
         int CheckCapacity(int eventId);
-        string CheckAndCommitMatch(int profileID, int eventID);
+        bool CheckAndCommitMatchPublic(int profileID, int eventID);
     }
 }

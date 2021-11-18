@@ -3,7 +3,7 @@ using PartyFinderData.DatabaseLayers;
 using PartyFinderData.ModelLayers;
 using System.Collections.Generic;
 
-namespace PartyFinderService.BusinessLogicLayer.EventLogic
+namespace PartyFinderService.BusinessLogicLayer
 {
     public class EventDataControl : IEventData
     {

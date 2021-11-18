@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PartyFinderData.ModelLayers;
-using PartyFinderService.BusinessLogicLayer.EventLogic;
+using PartyFinderService.BusinessLogicLayer;
+using PartyFinderService.BusinessLogicLayer;
 using PartyFinderService.DTO;
 using System.Collections.Generic;
 
