@@ -10,6 +10,7 @@ namespace PartyFinderData.DatabaseLayers.Match
     internal interface IMatchAccess
     {
         int CheckCurrentMatches(int EventId);
-        void Match(int profileID, int eventID);
+        int CheckCapacity(int eventId);
+        string CheckAndCommitMatch(int profileID, int eventID);
     }
 }
