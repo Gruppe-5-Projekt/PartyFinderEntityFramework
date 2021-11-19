@@ -15,4 +15,8 @@
     <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\HomePage\loginpageimage.jpeg" />
+  </ItemGroup>
+
 </Project>
