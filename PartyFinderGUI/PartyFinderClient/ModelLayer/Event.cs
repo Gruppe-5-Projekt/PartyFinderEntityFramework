@@ -31,6 +31,11 @@ namespace PartyFinderClient.ModelLayer
         public Event(int id, String EventName, int EventCapacity, DateTime StartDateTime, DateTime EndDateTime, String Desription, int ProfileID) : this(EventName, EventCapacity, StartDateTime, EndDateTime, Desription, ProfileID)
         {
             ID = id;
-        }  
+        }
+
+        public override string? ToString()
+        {
+            return EventName;
+        }
     }
 }

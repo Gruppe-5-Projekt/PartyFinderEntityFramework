@@ -51,5 +51,10 @@ namespace PartyFinderClient.GuiLayer
         {
 
         }
+
+        /*private async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Event selectedEvet = await _eventControl.
+        }*/
     }
 }

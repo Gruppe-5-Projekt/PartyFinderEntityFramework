@@ -20,7 +20,7 @@ namespace PartyFinderClient.ServiceLayer
         {
             _httpClient = new HttpClient();
         }
-        // Method to retrieve Person(s)
+        // Method to retrieve Event(s)
         public async Task<List<Event>> GetEvents(int id = -1)
         {
             List<Event> EventFromService = null;
@@ -56,14 +56,14 @@ namespace PartyFinderClient.ServiceLayer
                 }
                 else
                 {
-                        if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
-                        {
-                            EventFromService = new List<Event>();
-                        }
-                        else
-                        {
-                            EventFromService = null;
-                        }
+                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                     {
+                        EventFromService = new List<Event>();
+                     }
+                     else
+                     {
+                        EventFromService = null;
+                     }
                  
                 }
             }
