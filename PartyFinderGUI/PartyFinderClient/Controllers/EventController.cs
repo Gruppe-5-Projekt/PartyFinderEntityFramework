@@ -31,6 +31,12 @@ namespace PartyFinderClient.Controllers
             return insertedId;
         }
 
+        public async Task<int> DeleteEvent(Event eventToDelete)
+        {
+            int idOfEventToBeDeleted = await _eAccess.DeleteEvent(eventToDelete);
+            return idOfEventToBeDeleted;
+        }
+       
 
     }
 }

@@ -7,6 +7,7 @@ using PartyFinderClient.ModelLayer;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace PartyFinderClient.ServiceLayer
 {
@@ -105,8 +106,39 @@ namespace PartyFinderClient.ServiceLayer
             }
             return insertedEventId;
         }
+
+        public async Task<int> DeleteEvent(Event eventToDelete)
+        {
+
+            string useRestUrl = restUrl;
+            bool isValid = (eventToDelete.Id > 0);
+            if (isValid)
+            {
+                useRestUrl += eventToDelete.Id;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(eventToDelete);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                response = await _httpClient.DeleteAsync(uri);
+
+            }
+            catch
+            {
+               eventToDelete.Id = -1;
+            }
+            return eventToDelete.Id;
+        }
+
+
     }
+
 }
+
 
        
 
