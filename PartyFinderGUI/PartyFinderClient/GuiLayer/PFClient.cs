@@ -72,6 +72,51 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
+        private void textBoxEndTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxStartTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxCapacity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxLocation_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxHolder_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textEventId_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eventName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         /*private async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             Event selectedEvet = await _eventControl.

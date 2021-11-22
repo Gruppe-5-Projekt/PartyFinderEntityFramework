@@ -34,6 +34,13 @@
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.buttonGetEvents = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxEndTime = new System.Windows.Forms.TextBox();
+            this.textBoxStartTime = new System.Windows.Forms.TextBox();
+            this.textBoxCapacity = new System.Windows.Forms.TextBox();
+            this.textBoxLocation = new System.Windows.Forms.TextBox();
+            this.textBoxHolder = new System.Windows.Forms.TextBox();
+            this.textEventId = new System.Windows.Forms.TextBox();
+            this.eventName = new System.Windows.Forms.TextBox();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelEndTime = new System.Windows.Forms.Label();
@@ -61,6 +68,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "List of Events";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // labelProcessText
             // 
@@ -110,6 +118,13 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBoxEndTime);
+            this.groupBox2.Controls.Add(this.textBoxStartTime);
+            this.groupBox2.Controls.Add(this.textBoxCapacity);
+            this.groupBox2.Controls.Add(this.textBoxLocation);
+            this.groupBox2.Controls.Add(this.textBoxHolder);
+            this.groupBox2.Controls.Add(this.textEventId);
+            this.groupBox2.Controls.Add(this.eventName);
             this.groupBox2.Controls.Add(this.textBoxDescription);
             this.groupBox2.Controls.Add(this.labelDescription);
             this.groupBox2.Controls.Add(this.labelEndTime);
@@ -125,6 +140,105 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Event";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // textBoxEndTime
+            // 
+            this.textBoxEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEndTime.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxEndTime.Location = new System.Drawing.Point(155, 171);
+            this.textBoxEndTime.Multiline = true;
+            this.textBoxEndTime.Name = "textBoxEndTime";
+            this.textBoxEndTime.PlaceholderText = "End time";
+            this.textBoxEndTime.ReadOnly = true;
+            this.textBoxEndTime.Size = new System.Drawing.Size(227, 19);
+            this.textBoxEndTime.TabIndex = 15;
+            this.textBoxEndTime.TextChanged += new System.EventHandler(this.textBoxEndTime_TextChanged);
+            // 
+            // textBoxStartTime
+            // 
+            this.textBoxStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxStartTime.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxStartTime.Location = new System.Drawing.Point(155, 151);
+            this.textBoxStartTime.Multiline = true;
+            this.textBoxStartTime.Name = "textBoxStartTime";
+            this.textBoxStartTime.PlaceholderText = "Start time";
+            this.textBoxStartTime.ReadOnly = true;
+            this.textBoxStartTime.Size = new System.Drawing.Size(227, 20);
+            this.textBoxStartTime.TabIndex = 14;
+            this.textBoxStartTime.TextChanged += new System.EventHandler(this.textBoxStartTime_TextChanged);
+            // 
+            // textBoxCapacity
+            // 
+            this.textBoxCapacity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCapacity.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCapacity.Location = new System.Drawing.Point(155, 131);
+            this.textBoxCapacity.Multiline = true;
+            this.textBoxCapacity.Name = "textBoxCapacity";
+            this.textBoxCapacity.PlaceholderText = "Capacity";
+            this.textBoxCapacity.ReadOnly = true;
+            this.textBoxCapacity.Size = new System.Drawing.Size(227, 20);
+            this.textBoxCapacity.TabIndex = 13;
+            this.textBoxCapacity.TextChanged += new System.EventHandler(this.textBoxCapacity_TextChanged);
+            // 
+            // textBoxLocation
+            // 
+            this.textBoxLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxLocation.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxLocation.Location = new System.Drawing.Point(155, 111);
+            this.textBoxLocation.Multiline = true;
+            this.textBoxLocation.Name = "textBoxLocation";
+            this.textBoxLocation.PlaceholderText = "Location";
+            this.textBoxLocation.ReadOnly = true;
+            this.textBoxLocation.Size = new System.Drawing.Size(227, 20);
+            this.textBoxLocation.TabIndex = 12;
+            this.textBoxLocation.TextChanged += new System.EventHandler(this.textBoxLocation_TextChanged);
+            // 
+            // textBoxHolder
+            // 
+            this.textBoxHolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxHolder.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxHolder.Location = new System.Drawing.Point(155, 91);
+            this.textBoxHolder.Multiline = true;
+            this.textBoxHolder.Name = "textBoxHolder";
+            this.textBoxHolder.PlaceholderText = "Holder";
+            this.textBoxHolder.ReadOnly = true;
+            this.textBoxHolder.Size = new System.Drawing.Size(227, 20);
+            this.textBoxHolder.TabIndex = 11;
+            this.textBoxHolder.TextChanged += new System.EventHandler(this.textBoxHolder_TextChanged);
+            // 
+            // textEventId
+            // 
+            this.textEventId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textEventId.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textEventId.Location = new System.Drawing.Point(155, 71);
+            this.textEventId.Multiline = true;
+            this.textEventId.Name = "textEventId";
+            this.textEventId.PlaceholderText = "Event ID";
+            this.textEventId.ReadOnly = true;
+            this.textEventId.Size = new System.Drawing.Size(227, 20);
+            this.textEventId.TabIndex = 10;
+            this.textEventId.TextChanged += new System.EventHandler(this.textEventId_TextChanged);
+            // 
+            // eventName
+            // 
+            this.eventName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.eventName.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.eventName.Location = new System.Drawing.Point(155, 51);
+            this.eventName.Multiline = true;
+            this.eventName.Name = "eventName";
+            this.eventName.PlaceholderText = "Event name";
+            this.eventName.ReadOnly = true;
+            this.eventName.Size = new System.Drawing.Size(227, 20);
+            this.eventName.TabIndex = 9;
+            this.eventName.TextChanged += new System.EventHandler(this.eventName_TextChanged);
             // 
             // textBoxDescription
             // 
@@ -135,6 +249,8 @@
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.PlaceholderText = "Description";
+            this.textBoxDescription.ReadOnly = true;
+            this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBoxDescription.Size = new System.Drawing.Size(365, 200);
             this.textBoxDescription.TabIndex = 8;
             // 
@@ -244,5 +360,12 @@
         private Label labelEventId;
         private Label labelEventName;
         private TextBox textBoxDescription;
+        private TextBox textBoxEndTime;
+        private TextBox textBoxStartTime;
+        private TextBox textBoxCapacity;
+        private TextBox textBoxLocation;
+        private TextBox textBoxHolder;
+        private TextBox textEventId;
+        private TextBox eventName;
     }
 }
