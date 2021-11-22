@@ -114,7 +114,7 @@ namespace PartyFinderClient.ServiceLayer
             bool isValid = (eventToDelete.Id > 0);
             if (isValid)
             {
-                useRestUrl += eventToDelete.Id;
+                useRestUrl += $"/{eventToDelete.Id}";
             }
             var uri = new Uri(string.Format(useRestUrl));
 

@@ -7,6 +7,7 @@ namespace PartyFinderService.DTO
 {
     public class EventDataReadDTO
     {
+        public int Id { get; set; }
         public string EventName { get; set; }
         public int EventCapacity { get; set; }
         public DateTime StartDateTime { get; set; }
@@ -18,8 +19,9 @@ namespace PartyFinderService.DTO
 
         public EventDataReadDTO() { }
 
-        public EventDataReadDTO(String eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String description, int profileId)
+        public EventDataReadDTO(int id, String eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String description, int profileId)
         {
+            Id = id;
             EventName = eventName;
             EventCapacity = eventCapacity;
             StartDateTime = startDateTime;

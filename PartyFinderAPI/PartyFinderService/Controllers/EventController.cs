@@ -66,21 +66,18 @@ namespace PartyFinderService.Controllers
             return foundReturn;
         }
 
-        [HttpDelete]
-        public ActionResult<String> Delete(Event eventToDelete)
+        [HttpDelete("{id}")]
+        public ActionResult<String> Delete(int id)
         {
-            
-            String status = "";
-            try
+            Event foundEvent = _eControl.Get(id);
+            if (foundEvent == null)
             {
-                _eControl.Delete(eventToDelete);
-                status = "Success";
+                return new StatusCodeResult(404);
             }
-            catch
-            {
-                status = "Failed";
-            }
-            return status;
+
+            _eControl.Delete(foundEvent);
+
+            return new StatusCodeResult(200);
         }
 
         [HttpPost]

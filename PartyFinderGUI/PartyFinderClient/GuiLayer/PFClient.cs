@@ -49,7 +49,7 @@ namespace PartyFinderClient.GuiLayer
 
         public async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("HEJ");
+            
         }
 
         private async void buttonDeleteEvent_Click(object sender, EventArgs e)

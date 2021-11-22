@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PartyFinderData": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}
