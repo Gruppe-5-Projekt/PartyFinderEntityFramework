@@ -66,14 +66,14 @@ namespace PartyFinderService.Controllers
             return foundReturn;
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<String> Delete(int Id)
+        [HttpDelete]
+        public ActionResult<String> Delete(Event eventToDelete)
         {
             
             String status = "";
             try
             {
-                _eControl.Delete(Id);
+                _eControl.Delete(eventToDelete);
                 status = "Success";
             }
             catch
@@ -102,13 +102,13 @@ namespace PartyFinderService.Controllers
         }
 
         [HttpPut]
-        public ActionResult<string> Update(int Id, EventDataCreateDTO putEvent)
+        public ActionResult<string> Update(EventDataCreateDTO putEvent)
         {
             String status = "";
             try
             {
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(putEvent);
-                _eControl.Put(Id, dbEvent);
+                _eControl.Put(dbEvent);
                 status = "Success";
             }
             catch

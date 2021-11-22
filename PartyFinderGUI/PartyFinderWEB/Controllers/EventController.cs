@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PartyFinderWEB.Controllers
 {
     public class EventController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
+        public IActionResult CreateEvent()
+        {
+            return View();
+        }
+        }
     }
-}

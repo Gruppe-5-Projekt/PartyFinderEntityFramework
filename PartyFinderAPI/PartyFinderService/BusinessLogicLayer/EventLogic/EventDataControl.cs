@@ -27,9 +27,9 @@ namespace PartyFinderService.BusinessLogicLayer
         }
 
 
-        public void Delete(int id)
+        public void Delete(Event eventToDelete)
         {
-            _eventAccess.DeleteEventById(id);
+            _eventAccess.DeleteEventById(eventToDelete);
         }
 
         public Event Get(int id)
@@ -52,9 +52,9 @@ namespace PartyFinderService.BusinessLogicLayer
 
         }
 
-        public void Put(int id, Event updatedEvent)
+        public void Put(Event updatedEvent)
         {
-            _eventAccess.UpdateEvent(id, updatedEvent);
+            _eventAccess.UpdateEvent(updatedEvent);
         }
     }
 }
