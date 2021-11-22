@@ -14,12 +14,12 @@ namespace PartyFinderClient.GuiLayer
 {
     public partial class PFClient : Form
     {
-        EventControl _eventControl;
+        EventController _eventControl;
         public PFClient()
         {
             InitializeComponent();
 
-            _eventControl = new EventControl();
+            _eventControl = new EventController();
         }
 
         

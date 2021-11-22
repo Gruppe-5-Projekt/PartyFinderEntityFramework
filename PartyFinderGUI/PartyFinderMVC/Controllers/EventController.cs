@@ -28,16 +28,12 @@ namespace PartyFinderMVC.Controllers
         }
 
         /*[HttpPost]
-        public async Task<int> Index(string eventName, int capacity, DateTime startDateTime, DateTime endDateTime, string description, int profileID)
+        public async void Index(string eventName, int capacity, DateTime startDateTime, DateTime endDateTime, string description, int profileID)
         {
             EventServiceAccess _eAccess = new EventServiceAccess();
             EventViewModel newEvent = new EventViewModel(eventName, capacity, startDateTime, endDateTime, description, profileID);
-            int insertedId = await _eAccess.SaveEvent(newEvent);
-            return 1;
 
-        }
-
-        Console.WriteLine("Hej");
+        
         using (var client = new HttpClient())
 
         {

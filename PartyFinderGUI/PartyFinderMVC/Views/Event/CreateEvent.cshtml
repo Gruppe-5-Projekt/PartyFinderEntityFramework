@@ -6,8 +6,7 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Create Event</h1>
 </div>
 
 
@@ -31,8 +30,6 @@
                     <span class="validity"></span>
                 </div>
             </form>
-        
-
         @Html.TextAreaFor(m => m.Description, new {@class = "form-control", @placeholder="Beskrivelse"})
         @Html.TextAreaFor(m => m.ProfileID, new {@class = "form-control", @placeholder="ProfileID"})
         <button type="submit" value="Opret">Opret</button>

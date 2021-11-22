@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using PartyFinderClient.ModelLayer;
 using PartyFinderClient.ServiceLayer;
 
-namespace PartyFinderClient.ControlLayer
+namespace PartyFinderClient.Controllers
 {
-    public class EventControl
+    public class EventController
     {
 
         EventServiceAccess _eAccess;
 
-        public EventControl()
+        public EventController()
         {
             _eAccess = new EventServiceAccess();
         }
