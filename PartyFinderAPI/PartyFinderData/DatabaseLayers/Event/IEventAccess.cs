@@ -12,7 +12,7 @@ namespace PartyFinderData.DatabaseLayers
         Event GetEventByID(int id);
         List<Event> GetEventAll();
         void CreateEvent(Event eventToAdd);
-        void UpdateEvent(int id, Event updatedEvent);
-        void DeleteEventById(int id);
+        void UpdateEvent(Event updatedEvent);
+        void DeleteEventById(Event eventToDelete);
     }
 }

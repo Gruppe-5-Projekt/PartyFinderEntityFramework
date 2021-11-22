@@ -18,10 +18,11 @@ namespace PartyFinderData.DatabaseLayers
             db.SaveChanges();
         }
 
-        public void DeleteEventById(int id)
+        public void DeleteEventById(Event eventToDelete)
         {
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
+            int id = eventToDelete.Id;
             var removeByID = db.Events
                         .Where(e => e.Id == id)
                         .SingleOrDefault();
@@ -48,10 +49,11 @@ namespace PartyFinderData.DatabaseLayers
             return foundEvent;
         }
 
-        public void UpdateEvent(int id, Event updatedEvent)
+        public void UpdateEvent(Event updatedEvent)
         {
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
+            int id = updatedEvent.Id;
             var eventToUpdate = db.Events
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
