@@ -57,6 +57,21 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
+        private void labelProcessText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         /*private async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             Event selectedEvet = await _eventControl.
