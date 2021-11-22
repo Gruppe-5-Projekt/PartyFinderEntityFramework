@@ -9,7 +9,7 @@ namespace PartyFinderClient.ModelLayer
     public class Event
     {
 
-        public int ID { get; set; }
+        public int Id { get; set; }
         public String EventName { get; set; }
         public int EventCapacity { get; set; }
         public DateTime StartDateTime { get; set; }
@@ -30,7 +30,7 @@ namespace PartyFinderClient.ModelLayer
         }
         public Event(int id, String EventName, int EventCapacity, DateTime StartDateTime, DateTime EndDateTime, String Desription, int ProfileID) : this(EventName, EventCapacity, StartDateTime, EndDateTime, Desription, ProfileID)
         {
-            ID = id;
+            Id = id;
         }
 
         public override string? ToString()

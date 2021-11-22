@@ -47,14 +47,16 @@ namespace PartyFinderClient.GuiLayer
             listBoxEvents.DataSource = fetchedEvents;
         }
 
-        private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
+        public async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Console.WriteLine("HEJ");
         }
 
-        private void buttonDeleteEvent_Click(object sender, EventArgs e)
+        private async void buttonDeleteEvent_Click(object sender, EventArgs e)
         {
-
+            Event eventToDelete = listBoxEvents.SelectedItem as Event;
+      
+            await _eventControl.DeleteEvent(eventToDelete);
         }
 
         private void labelProcessText_Click(object sender, EventArgs e)
@@ -67,10 +69,6 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBoxEndTime_TextChanged(object sender, EventArgs e)
         {
