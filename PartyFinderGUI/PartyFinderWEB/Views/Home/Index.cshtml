@@ -59,7 +59,7 @@ body  {
 
 <body>
     <div class="center">
-    <button style= "font-weight: bold;" class="button button1">OPRET BRUGER</button>
+    <button onclick="welcome()" style= "font-weight: bold;" class="button button1">OPRET BRUGER</button>
      </div>
     <style>
 .button {
@@ -97,6 +97,12 @@ body  {
 .button1 {border-radius: 30px;}
 
 </style>
+
+<script>   
+function welcome() {   
+window.open("https://localhost:44353/Identity/Account/Register");  
+} 
+</script>
 
 
 </body>
