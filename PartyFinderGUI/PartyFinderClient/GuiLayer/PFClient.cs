@@ -1,4 +1,4 @@
-﻿using PartyFinderClient.ControlLayer;
+﻿using PartyFinderClient.Controllers;
 using PartyFinderClient.ModelLayer;
 using System;
 using System.Collections.Generic;
