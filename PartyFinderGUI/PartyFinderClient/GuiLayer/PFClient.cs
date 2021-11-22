@@ -52,6 +52,11 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
+        private void buttonDeleteEvent_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /*private async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             Event selectedEvet = await _eventControl.

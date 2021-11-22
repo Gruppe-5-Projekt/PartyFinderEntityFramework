@@ -32,14 +32,18 @@
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.buttonGetEvents = new System.Windows.Forms.Button();
             this.labelProcessText = new System.Windows.Forms.Label();
+            this.buttonDeleteEvent = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.buttonDeleteEvent);
             this.groupBox1.Controls.Add(this.listBoxEvents);
             this.groupBox1.Controls.Add(this.buttonGetEvents);
-            this.groupBox1.Location = new System.Drawing.Point(403, 6);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(385, 432);
             this.groupBox1.TabIndex = 0;
@@ -48,19 +52,22 @@
             // 
             // listBoxEvents
             // 
+            this.listBoxEvents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxEvents.FormattingEnabled = true;
+            this.listBoxEvents.HorizontalScrollbar = true;
             this.listBoxEvents.ItemHeight = 20;
-            this.listBoxEvents.Location = new System.Drawing.Point(6, 101);
+            this.listBoxEvents.Location = new System.Drawing.Point(6, 61);
             this.listBoxEvents.Name = "listBoxEvents";
-            this.listBoxEvents.Size = new System.Drawing.Size(373, 304);
+            this.listBoxEvents.Size = new System.Drawing.Size(373, 344);
             this.listBoxEvents.TabIndex = 1;
             this.listBoxEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxEvents_SelectedIndexChanged);
             // 
             // buttonGetEvents
             // 
-            this.buttonGetEvents.Location = new System.Drawing.Point(224, 26);
+            this.buttonGetEvents.Location = new System.Drawing.Point(234, 26);
             this.buttonGetEvents.Name = "buttonGetEvents";
-            this.buttonGetEvents.Size = new System.Drawing.Size(155, 48);
+            this.buttonGetEvents.Size = new System.Drawing.Size(145, 33);
             this.buttonGetEvents.TabIndex = 0;
             this.buttonGetEvents.Text = "Get All Events";
             this.buttonGetEvents.UseVisualStyleBackColor = true;
@@ -74,6 +81,16 @@
             this.labelProcessText.Size = new System.Drawing.Size(27, 20);
             this.labelProcessText.TabIndex = 1;
             this.labelProcessText.Text = "---";
+            // 
+            // buttonDeleteEvent
+            // 
+            this.buttonDeleteEvent.Location = new System.Drawing.Point(83, 26);
+            this.buttonDeleteEvent.Name = "buttonDeleteEvent";
+            this.buttonDeleteEvent.Size = new System.Drawing.Size(145, 33);
+            this.buttonDeleteEvent.TabIndex = 2;
+            this.buttonDeleteEvent.Text = "Delete Event";
+            this.buttonDeleteEvent.UseVisualStyleBackColor = true;
+            this.buttonDeleteEvent.Click += new System.EventHandler(this.button1_Click);
             // 
             // PFClient
             // 
@@ -96,5 +113,6 @@
         private ListBox listBoxEvents;
         private Button buttonGetEvents;
         private Label labelProcessText;
+        private Button buttonDeleteEvent;
     }
 }
