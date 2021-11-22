@@ -90,7 +90,7 @@
             this.buttonDeleteEvent.TabIndex = 2;
             this.buttonDeleteEvent.Text = "Delete Event";
             this.buttonDeleteEvent.UseVisualStyleBackColor = true;
-            this.buttonDeleteEvent.Click += new System.EventHandler(this.button1_Click);
+            this.buttonDeleteEvent.Click += new System.EventHandler(this.buttonDeleteEvent_Click);
             // 
             // PFClient
             // 
