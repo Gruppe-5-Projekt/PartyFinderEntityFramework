@@ -1,6 +1,8 @@
 html {
-  font-size: 14px;
-  scroll-behavior: smooth;
+    font-size: 14px;
+    scroll-behavior: smooth;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -10,7 +12,12 @@ html {
 }
 
 
-.background {
+
+body {
+  margin-bottom: 60px;
+}
+
+.HomePageBackground {
     background-image: url("..//images/homePage/loginpageimage.jpg");
     background-color: #000000;
     /* Full height */
@@ -21,18 +28,9 @@ html {
     background-size: cover;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
 
 
-
-.display-4 {
+.HomePageh1 {
     font-size: 64px;
     font-weight: bold;
     margin: 10px;
@@ -48,4 +46,41 @@ body {
         0 0 151px #000000, 
         0 0 200px #000000, 
         0 0 300px #000000;
+}
+
+.button {
+    border: none;
+    color: white;
+    padding: 16px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.button1 {
+    background-color: DarkMagenta;
+    color: Gold;
+    border: 2px solid Fuchsia;
+}
+
+    .button1:hover {
+        background-color: Fuchsia;
+        color: DarkMagenta;
+    }
+
+.button1 {
+    border-radius: 30px;
 }
