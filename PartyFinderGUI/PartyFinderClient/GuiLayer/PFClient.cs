@@ -22,29 +22,32 @@ namespace PartyFinderClient.GuiLayer
             _eventControl = new EventController();
         }
 
-        
-
-        private async void ButtonGetEvents_Click(object sender, EventArgs e)
+        private async void UpdateListBoxEvents()
         {
             string processText = "OK";
             List<Event> fetchedEvents = await _eventControl.GetAllEvents();
             if (fetchedEvents != null)
             {
                 if (fetchedEvents.Count >= 1)
-                {
-                    processText = "Ok";
+                    {
+                        processText = "Ok";
+                    }
+                    else
+                    {
+                        processText = "No persons found";
+                    }
                 }
                 else
                 {
-                    processText = "No persons found";
-                }
-            }
-            else
-            {
                 processText = "Failure: An error occurred";
-            }
+        }
             labelProcessText.Text = processText;
             listBoxEvents.DataSource = fetchedEvents;
+        }
+
+        private async void ButtonGetEvents_Click(object sender, EventArgs e)
+        {
+                UpdateListBoxEvents();
         }
 
         public async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,6 +60,8 @@ namespace PartyFinderClient.GuiLayer
             Event eventToDelete = listBoxEvents.SelectedItem as Event;
       
             await _eventControl.DeleteEvent(eventToDelete);
+
+            UpdateListBoxEvents();
         }
 
         private void labelProcessText_Click(object sender, EventArgs e)
