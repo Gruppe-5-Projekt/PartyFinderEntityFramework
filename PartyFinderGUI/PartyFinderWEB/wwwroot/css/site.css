@@ -74,12 +74,8 @@ body {
         color: DarkMagenta;
     }
 
-/***************
-Swipe Template
-***************/
-
 .CreateEventBackground {
-    background-color: #00BBE0;
+    background-color: gray;
     /* Full height */
     height: 100%;
     /* Center and scale the image nicely */
