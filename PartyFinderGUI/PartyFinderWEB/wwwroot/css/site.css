@@ -1,11 +1,24 @@
 html {
   font-size: 14px;
+  scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+
+.background {
+    background-image: url("..//images/homePage/loginpageimage.jpg");
+    background-color: #000000;
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 html {
@@ -17,6 +30,22 @@ body {
   margin-bottom: 60px;
 }
 
-h1 {
-    display: inline;
+
+
+.display-4 {
+    font-size: 64px;
+    font-weight: bold;
+    margin: 10px;
+    color:#00BBE0;
+    text-shadow: 
+        0 0 7px #000000, 
+        0 0 10px #000000, 
+        0 0 21px #000000, 
+        0 0 42px #000000, 
+        0 0 82px #000000, 
+        0 0 92px #000000, 
+        0 0 102px #000000, 
+        0 0 151px #000000, 
+        0 0 200px #000000, 
+        0 0 300px #000000;
 }
