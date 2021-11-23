@@ -23,19 +23,18 @@ namespace PartyFinderClient.Controllers
             List<Event> foundEvents = await _eAccess.GetEvents();
             return foundEvents;
         }
-
-        public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, int profileID)
-        {
-            Event newEvent = new Event(eventName, eventCapacity, startDateTime, endDateTime, description, profileID);
-            int insertedId = await _eAccess.SaveEvent(newEvent);
-            return insertedId;
-        }
-
         public async Task<int> DeleteEvent(Event eventToDelete)
         {
             int idOfEventToBeDeleted = await _eAccess.DeleteEvent(eventToDelete);
             return idOfEventToBeDeleted;
         }
+
+        /*public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, int profileID)
+        {
+            Event newEvent = new Event(eventName, eventCapacity, startDateTime, endDateTime, description, profileID);
+            int insertedId = await _eAccess.SaveEvent(newEvent);
+            return insertedId;
+        }*/
        
 
     }

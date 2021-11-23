@@ -37,5 +37,10 @@ namespace PartyFinderWEB.Controllers
             return insertedId;
             
         }
+        /*public async Task<EventViewModel> GetEvent(int id)
+        {
+            EventViewModel foundEvent = await _eAccess.(id);
+            return foundEvent;
+        }*/
     }
   }

@@ -14,7 +14,7 @@ namespace PartyFinderClient.ServiceLayer
     public class EventServiceAccess
     {
 
-        static readonly string restUrl = "https://localhost:7235/api/event";
+        static readonly string restUrl = "https://localhost:44377/api/event";
         readonly HttpClient _httpClient;
 
         public EventServiceAccess()
