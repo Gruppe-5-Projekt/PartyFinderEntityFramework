@@ -21,19 +21,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="MatchController" asp-action="SwipeEvent">Find fest</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Match" asp-action="SwipeEvent">Find fest</a>
                         </li>
                       <li class="nav-item dropdown">
                         <a class="text-white nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Event</a>
                         <div class="dropdown-menu">
                           <a class="dropdown-item" asp-area="" asp-controller="Event" asp-action="CreateEvent">Opret fest</a>
-                          <a class="dropdown-item" href="Event/UpdateEvent">Opdater fest</a>
-                          <a class="dropdown-item" href="Event/EventList">Se fester</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="Event/DeleteEvent">Slet fest</a>
+                          <a class="dropdown-item" asp-area="" asp-controller="Event" asp-action="EventList">Se fester</a>
                         </div>
                       </li>
                     </ul>

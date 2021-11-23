@@ -24,6 +24,10 @@ namespace PartyFinderWEB.Controllers
         {
             return View();
         }
+        public IActionResult EventList()
+        {
+            return View();
+        }
         public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, int profileId)
         {
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
