@@ -52,7 +52,8 @@ namespace PartyFinderClient.GuiLayer
 
         public async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            Event selEvent = (Event)listBoxEvents.SelectedItem;
+            DisplayProduct(selEvent);
         }
 
         private async void buttonDeleteEvent_Click(object sender, EventArgs e)
@@ -69,11 +70,20 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+      
+
+        private void DisplayProduct(Event displayedEvent)
         {
+            textBoxEventName.Text = displayedEvent.EventName;
+            textBoxEventId.Text = displayedEvent.Id.ToString();
+            textBoxHolder.Text = displayedEvent.ProfileID.ToString();
+            //textBoxLocation.Text = displayedEvent.Location;
+            textBoxCapacity.Text = displayedEvent.EventCapacity.ToString();
+            textBoxStartTime.Text = displayedEvent.StartDateTime.ToString();
+            textBoxEndTime.Text = displayedEvent.EndDateTime.ToString();
+            textBoxDescription.Text = displayedEvent.Description;
 
         }
-
 
         private void textBoxEndTime_TextChanged(object sender, EventArgs e)
         {
@@ -100,12 +110,12 @@ namespace PartyFinderClient.GuiLayer
 
         }
 
-        private void textEventId_TextChanged(object sender, EventArgs e)
+        private void textBoxEventId_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void eventName_TextChanged(object sender, EventArgs e)
+        private void textBoxEventName_TextChanged(object sender, EventArgs e)
         {
 
         }
