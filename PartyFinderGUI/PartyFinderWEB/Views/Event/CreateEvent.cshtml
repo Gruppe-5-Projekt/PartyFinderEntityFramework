@@ -4,6 +4,7 @@
     ViewData["Title"] = "Event Page";
 }
 
+<body class="CreateEventBackground">
 
 <div class="text-center">
     <h1 class="display-4">Create Event</h1>
@@ -11,29 +12,31 @@
 
 
 
-<div class="testForms">
-    @using (Html.BeginForm("SaveEvent", "Event", FormMethod.Post))
-    //@Model Event
-    {
-      <div class="eventForm">
-          @Html.TextAreaFor(m => m.EventName, new {@class = "form-control", @placeholder="Fest navn..."})
-          @Html.TextAreaFor(m => m.EventCapacity, new {@class = "form-control", @placeholder="Antal pladser..."})
-            <form>
-                <div class="nativeDateTimePicker">
-                    <label asp-for="StartDateTime">Start dato:</label>
-                    <input type="datetime-local" id="party" name="bday">
-                    <span class="validity"></span>
-                </div>
-                <div class="nativeDateTimePicker">
-                    <label asp-for="EndDateTime">Slut dato: </label>
-                    <input type="datetime-local" id="party" name="bday">
-                    <span class="validity"></span>
-                </div>
-            </form>
-        @Html.TextAreaFor(m => m.Description, new {@class = "form-control", @placeholder="Beskrivelse"})
-        @Html.TextAreaFor(m => m.ProfileId, new {@class = "form-control", @placeholder="ProfilId"})
-        <input type="submit" value="Opret"/>
-        </div>
-    }
+    <div class="testForms">
+        @using (Html.BeginForm("SaveEvent", "Event", FormMethod.Post))
+        //@Model Event
+        {
+          <div class="eventForm">
+              @Html.TextAreaFor(m => m.EventName, new {@class = "form-control", @placeholder="Fest navn..."})
+              @Html.TextAreaFor(m => m.EventCapacity, new {@class = "form-control", @placeholder="Antal pladser..."})
+                <form>
+                    <div class="nativeDateTimePicker">
+                        <label asp-for="StartDateTime">Start dato:</label>
+                        <input asp-for="StartDateTime">
+                        <span class="validity"></span>
+                    </div>
+                    <div class="nativeDateTimePicker">
+                        <label asp-for="EndDateTime">Slut dato: </label>
+                        <input asp-for="EndDateTime">
+                        <span class="validity"></span>
+                    </div>
+                </form>
+            @Html.TextAreaFor(m => m.Description, new {@class = "form-control", @placeholder="Beskrivelse"})
+            @Html.TextAreaFor(m => m.ProfileId, new {@class = "form-control", @placeholder="ProfilId"})
+            <input type="submit" value="Opret"/>
+            </div>
+        }
 
-</div>
+    </div>
+
+</body>
