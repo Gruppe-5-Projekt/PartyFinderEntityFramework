@@ -28,14 +28,14 @@ namespace PartyFinderWEB.Controllers
         {
             return View();
         }
-        public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, int profileId)
+        public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description)
         {
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
-            /*var identity = (ClaimsIdentity)User.Identity;
+            var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
-            string userIdValue = claims.Where(c => c.Type == "user_id").FirstOrDefault()?.Value;
+            string userIdValue = claims.Where(c => c.Type == "Id").FirstOrDefault()?.Value;
+            int profileId = int.Parse(userIdValue);
 
-            int profileId = int.Parse(userIdValue);*/
             EventViewModel newEvent = new EventViewModel(eventName, eventCapacity, startDateTime, endDateTime, description, profileId);
             int insertedId = await _eAccess.SaveEvent(newEvent);
             Console.WriteLine(newEvent.EventName);

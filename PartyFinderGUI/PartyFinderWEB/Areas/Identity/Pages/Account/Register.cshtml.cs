@@ -112,7 +112,7 @@ namespace PartyFinderWEB.Areas.Identity.Pages.Account
             [Required]
             [Gender]
             [Display(Name = "Gender")]
-            public bool Gender { get; set; }
+            public string Gender { get; set; }
         }
 
 
