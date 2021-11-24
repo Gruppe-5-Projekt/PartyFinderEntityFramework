@@ -15,21 +15,35 @@ namespace PartyFinderService.BusinessLogicLayer
         }
 
 
-        public void Add(Event eventToAdd)
+        public bool Add(Event eventToAdd)
         {
+            bool successful = false;
             try
             {
                 _eventAccess.CreateEvent(eventToAdd);
+                successful = true;
             }
             catch
             {
+                successful = false;
             }
+            return successful;
         }
 
 
-        public void Delete(Event eventToDelete)
+        public bool Delete(Event eventToDelete)
         {
-            _eventAccess.DeleteEventById(eventToDelete);
+            bool successful = false;
+            try
+            {
+                _eventAccess.DeleteEventById(eventToDelete);
+                successful = true;
+            }
+            catch
+            {
+                successful = false;
+            }
+            return successful;
         }
 
         public Event Get(int id)
@@ -52,9 +66,19 @@ namespace PartyFinderService.BusinessLogicLayer
 
         }
 
-        public void Put(Event updatedEvent)
+        public bool Put(Event updatedEvent)
         {
-            _eventAccess.UpdateEvent(updatedEvent);
+            bool successful = false;
+            try
+            {
+                _eventAccess.UpdateEvent(updatedEvent);
+                successful = true;
+            }
+            catch
+            {
+                successful = false;
+            }
+            return successful;
         }
     }
 }

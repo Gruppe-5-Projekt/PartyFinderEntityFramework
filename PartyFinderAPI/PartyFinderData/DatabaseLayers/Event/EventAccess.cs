@@ -10,24 +10,44 @@ namespace PartyFinderData.DatabaseLayers
     public class EventAccess : IEventAccess
     {
 
-        public void CreateEvent(Event eventToAdd)
+        public bool CreateEvent(Event eventToAdd)
         {
+            bool successful = false;
             var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new event");
-            db.Add(eventToAdd);
-            db.SaveChanges();
+            try
+            {
+                db.Add(eventToAdd);
+                db.SaveChanges();
+                successful = true;
+            }
+            catch
+            {
+                successful = false;
+            }
+            return successful;
         }
 
-        public void DeleteEventById(Event eventToDelete)
+        public bool DeleteEventById(Event eventToDelete)
         {
+            bool successful = false;
             Console.WriteLine("Deleteting event");
             var db = new PartyFinderContext();
             int id = eventToDelete.Id;
             var removeByID = db.Events
                         .Where(e => e.Id == id)
                         .SingleOrDefault();
-            db.Remove(removeByID);
-            db.SaveChanges();
+            try
+            {
+                db.Remove(removeByID);
+                db.SaveChanges();
+                successful = true;
+            }
+            catch
+            {
+                successful = false;
+            }
+            return successful;
         }
 
         public List<Event> GetEventAll()
@@ -49,8 +69,9 @@ namespace PartyFinderData.DatabaseLayers
             return foundEvent;
         }
 
-        public void UpdateEvent(Event updatedEvent)
+        public bool UpdateEvent(Event updatedEvent)
         {
+            bool successful = false;
             Console.WriteLine("Updating event");
             var db = new PartyFinderContext();
             int id = updatedEvent.Id;
@@ -58,8 +79,17 @@ namespace PartyFinderData.DatabaseLayers
                 .Where(e => e.Id == id)
                 .SingleOrDefault();
             eventToUpdate = updatedEvent;
-            db.Update(updatedEvent);
-            db.SaveChanges();
+            try
+            {
+                db.Update(updatedEvent);
+                db.SaveChanges();
+                successful = true;
+            }
+            catch
+            {
+                successful = false;
+            }
+            return successful;
         }
     }
 }

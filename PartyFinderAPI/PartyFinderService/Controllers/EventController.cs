@@ -19,7 +19,7 @@ namespace PartyFinderService.Controllers
         {
             _eControl = new EventDataControl();
         }
-
+        
         // URL: api/event
         [HttpGet]
         public ActionResult<List<EventDataReadDTO>> Get()
@@ -70,14 +70,16 @@ namespace PartyFinderService.Controllers
         public ActionResult<String> Delete(int id)
         {
             Event foundEvent = _eControl.Get(id);
-            if (foundEvent == null)
+            if (foundEvent != null)
             {
-                return new StatusCodeResult(404);
+                _eControl.Delete(foundEvent);
+                return new StatusCodeResult(200);
+            }
+            else
+            {
+                return new StatusCodeResult(204);
             }
 
-            _eControl.Delete(foundEvent);
-
-            return new StatusCodeResult(200);
         }
 
         [HttpPost]

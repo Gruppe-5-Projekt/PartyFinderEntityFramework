@@ -8,9 +8,9 @@ namespace PartyFinderService.BusinessLogicLayer
 
         Event Get(int id);
         List<Event> Get();
-        void Add(Event eventToAdd);
-        void Put(Event updatedEvent);
-        void Delete(Event evenToDelete);
+        bool Add(Event eventToAdd);
+        bool Put(Event updatedEvent);
+        bool Delete(Event evenToDelete);
 
     }
 
