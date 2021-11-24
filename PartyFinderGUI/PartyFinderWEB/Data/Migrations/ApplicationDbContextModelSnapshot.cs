@@ -132,6 +132,23 @@ namespace PartyFinderWEB.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+                    b.Property<DateTime>("Age")
+                        .HasColumnType("date");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+                    b.Property<bool>("IsBanned")
+                        .HasColumnType("bit");
+
                     b.ToTable("AspNetUsers");
                 });
 
