@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[Profile](
 );
 
 
+
 CREATE TABLE [dbo].[Event](
 	[ID] [int] NOT NULL IDENTITY,
 	[EventName] [varchar](50) NOT NULL,
@@ -87,27 +88,13 @@ CREATE TABLE [dbo].[Chat](
 	foreign key (DestinationID)	references	Event(ID) ON DELETE CASCADE,
 	foreign key (SourceID)		references	Profile(ID) ON DELETE CASCADE,
 );
-/*
-INSERT INTO Profile VALUES('asda@asdasd.sd', '15456585', 'password', '0', 'grim som en sten hehe');
-INSERT INTO Profile VALUES('asda@asdasd.sd', '85654525', '@asda@', '0', 'dårlig live musik');
-INSERT INTO Profile VALUES('asda@asdasd.sd', '47832158', '56449879765', '0', 'dårlig live musik');
-INSERT INTO Profile VALUES('asda@asdasd.sd', '96154453', 'XxXGamerMusXxX', '0', 'dårlig live musik');
-INSERT INTO Profile VALUES('asda@asdasd.sd', '95959595', 'ikkepassword1!', '0', 'dårlig live musik');
-INSERT INTO Profile VALUES('asda@asdasd.sd', '+4546464646', 'BestemtPassword', '1', 'tequila er din ven');
 
-INSERT INTO Business VALUES('Flamingo', '53123965', '1', '2');
-INSERT INTO Business VALUES('Old Irish', '15312313', '1', '4');
-INSERT INTO Business VALUES('Mexi Bar', '12412313', '0', '6');
 
-INSERT INTO Event VALUES('Privat fest', '10','2018-06-23 05:55:55.000', '2018-06-23 05:65:55.000', 'oknadfogknsfg', '1');
-INSERT INTO Event VALUES('Offentlig fest', '11','2018-06-23 05:55:55.000', '2018-06-23 05:65:55.000', 'oknadfogknsfg', '2');
+INSERT INTO Profile VALUES('Jens', 'Vils', 'asda@asdasd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
+INSERT INTO Profile VALUES('Peter', 'Vils', 'asda@asdas.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
+INSERT INTO Profile VALUES('Rasmus', 'Vils', 'asda@asdsd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
+INSERT INTO Profile VALUES('Ole', 'Vils', 'asda@dasd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
 
-INSERT INTO Match VALUES('1', '3', '1');
-INSERT INTO Match VALUES('1', '5', '0');
-INSERT INTO Match VALUES('2', '1', '1');
+INSERT INTO Event VALUES('Privat fest', '10','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '1');
+INSERT INTO Event VALUES('Offentlig fest', '11','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '2');
 
-INSERT INTO Location VALUES('Aalborg', '9000', '1');
-INSERT INTO Location VALUES('Aalborg', '9000', '2');
-
-INSERT INTO ReportUser VALUES ('1', '3');
-*/
