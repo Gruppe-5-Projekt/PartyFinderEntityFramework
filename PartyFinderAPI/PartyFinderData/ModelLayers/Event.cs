@@ -5,21 +5,13 @@ namespace PartyFinderData.ModelLayers
 {
     public partial class Event
     {
-        private DateTime startDateTime;
-        private DateTime endDateTime;
-
-        public Event()
-        {
-            Chats = new HashSet<Chat>();
-            Matches = new HashSet<Match>();
-        }
 
         public Event(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, int profileId)
         {
             EventName = eventName;
             EventCapacity = eventCapacity;
-            this.startDateTime = startDateTime;
-            this.endDateTime = endDateTime;
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
             Description = description;
             ProfileId = profileId;
         }
@@ -34,7 +26,7 @@ namespace PartyFinderData.ModelLayers
 
         public virtual Profile Profile { get; set; } = null!;
         public virtual Location Location { get; set; } = null!;
-        public virtual ICollection<Chat> Chats { get; set; } = null!;
-        public virtual ICollection<Match> Matches { get; set; } = null!;
+        public virtual ICollection<Chat> Chats { get; set; } = null;
+        public virtual ICollection<Match> Matches { get; set; } = null;
     }
 }
