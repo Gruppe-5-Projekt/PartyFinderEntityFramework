@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
@@ -41,13 +41,6 @@ namespace PartyFinderWEB.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-
-                    FirstName = table.Column<string>(maxLength: 256, nullable: true),
-                    LastName = table.Column<string>(maxLength: 256, nullable: true),
-                    Age = table.Column<DateTime>(nullable: true),
-                    Gender = table.Column<string>(maxLength: 256, nullable: true),
-                    Description = table.Column<string>(maxLength: 500, nullable: true),
-                    IsBanned = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
