@@ -53,7 +53,10 @@ namespace PartyFinderClient.GuiLayer
         public async void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
             Event selEvent = (Event)listBoxEvents.SelectedItem;
-            DisplayProduct(selEvent);
+            if (selEvent is not null)
+            {
+                DisplayProduct(selEvent);
+            }
         }
 
         private async void buttonDeleteEvent_Click(object sender, EventArgs e)
@@ -82,7 +85,6 @@ namespace PartyFinderClient.GuiLayer
             textBoxStartTime.Text = displayedEvent.StartDateTime.ToString();
             textBoxEndTime.Text = displayedEvent.EndDateTime.ToString();
             textBoxDescription.Text = displayedEvent.Description;
-
         }
 
         private void textBoxEndTime_TextChanged(object sender, EventArgs e)
