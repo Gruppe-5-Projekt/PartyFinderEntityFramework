@@ -20,10 +20,13 @@ namespace PartyFinderWEB.Controllers
         {
             _eAccess = new EventServiceAccess();
         }
+
+        [Authorize]
         public IActionResult CreateEvent()
         {
             return View();
         }
+        [Authorize]
         public IActionResult EventList()
         {
             return View();
