@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PartyFinderClient", "PartyFinderClient\PartyFinderClient.csproj", "{0CC3B4C3-3F9D-4E66-956F-5121A6C8F298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyFinderWEB", "PartyFinderWEB\PartyFinderWEB.csproj", "{2F0960E9-A193-4E47-8A3C-7E8B1EF1E44D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PartyFinderWEB", "PartyFinderWEB\PartyFinderWEB.csproj", "{2F0960E9-A193-4E47-8A3C-7E8B1EF1E44D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

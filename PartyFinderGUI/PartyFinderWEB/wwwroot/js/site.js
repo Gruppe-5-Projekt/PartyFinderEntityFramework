@@ -3,5 +3,5 @@
 
 // Write your JavaScript code.
 function welcome() {
-    window.open("https://localhost:44353/Identity/Account/Register");
+    window.open("/Identity/Account/Register");
 }
