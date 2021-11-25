@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PartyFinderData.Models
+namespace PartyFinderData.ModelLayers
 {
     public partial class AspNetUserLogin
     {

@@ -9,5 +9,7 @@ namespace PartyFinderData.ModelLayers
         public int ProfileId { get; set; }
         public bool Match1 { get; set; }
 
+        public virtual Event Event { get; set; } = null!;
+        public virtual Profile Profile { get; set; } = null!;
     }
 }

@@ -5,6 +5,9 @@ namespace PartyFinderData.ModelLayers
 {
     public partial class Event
     {
+        private DateTime startDateTime;
+        private DateTime endDateTime;
+
         public Event()
         {
             Chats = new HashSet<Chat>();
@@ -15,8 +18,8 @@ namespace PartyFinderData.ModelLayers
         {
             EventName = eventName;
             EventCapacity = eventCapacity;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
+            this.startDateTime = startDateTime;
+            this.endDateTime = endDateTime;
             Description = description;
             ProfileId = profileId;
         }

@@ -17,14 +17,13 @@ namespace PartyFinderData.ModelLayers
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string PhoneNo { get; set; } = null!;
-        public string Password { get; set; } = null!;
         public int Age { get; set; }
         public string Gender { get; set; } = null!;
         public string? Description { get; set; }
         public bool IsBanned { get; set; }
+        public string AspNetUserForeignKey { get; set; } = null!;
 
+        public virtual AspNetUser AspNetUserForeignKeyNavigation { get; set; } = null!;
         public virtual Business Business { get; set; } = null!;
         public virtual ICollection<Chat> Chats { get; set; }
         public virtual ICollection<Event> Events { get; set; }
