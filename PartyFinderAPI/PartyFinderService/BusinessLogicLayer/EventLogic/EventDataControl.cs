@@ -17,17 +17,17 @@ namespace PartyFinderService.BusinessLogicLayer
 
         public bool Add(Event eventToAdd)
         {
-            bool successful = false;
+            bool status = false;
             try
             {
                 _eventAccess.CreateEvent(eventToAdd);
-                successful = true;
+                status = true;
             }
             catch
             {
-                successful = false;
+                status = false;
             }
-            return successful;
+            return status;
         }
 
 

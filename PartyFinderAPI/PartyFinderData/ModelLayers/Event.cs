@@ -34,7 +34,7 @@ namespace PartyFinderData.ModelLayers
 
         public virtual Profile Profile { get; set; } = null!;
         public virtual Location Location { get; set; } = null!;
-        public virtual ICollection<Chat> Chats { get; set; }
-        public virtual ICollection<Match> Matches { get; set; }
+        public virtual ICollection<Chat> Chats { get; set; } = null!;
+        public virtual ICollection<Match> Matches { get; set; } = null!;
     }
 }

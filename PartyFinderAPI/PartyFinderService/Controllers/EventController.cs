@@ -83,19 +83,17 @@ namespace PartyFinderService.Controllers
         }
 
         [HttpPost]
-        public ActionResult<String> PostEvent(EventDataCreateDTO postEvent)
+        public ActionResult<bool> PostEvent(EventDataCreateDTO postEvent)
         {
-           
-            String status = "";
+            bool status = false;
             try
             {
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);
-                _eControl.Add(dbEvent);
-                status = "Success";
+                status = _eControl.Add(dbEvent);
             }
             catch
             {
-                status = "Failed";
+                status = false;
             }
             return status;
         }
