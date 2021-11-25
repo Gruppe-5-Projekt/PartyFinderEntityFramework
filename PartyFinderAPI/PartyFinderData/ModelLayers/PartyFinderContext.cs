@@ -34,7 +34,7 @@ namespace PartyFinderData.ModelLayers
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Name=PartyFinder");
+                optionsBuilder.UseSqlServer(@"Server=hildur.ucn.dk; User=dmaa0920_1086216; Database=dmaa0920_1086216; Password=Password1!;Trusted_Connection=False;");
             }
         }
 
