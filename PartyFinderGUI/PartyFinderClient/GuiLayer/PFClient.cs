@@ -56,6 +56,12 @@ namespace PartyFinderClient.GuiLayer
             if (selEvent is not null)
             {
                 DisplayProduct(selEvent);
+
+                buttonDeleteEvent.Enabled = true;
+            }
+            else
+            {
+                buttonDeleteEvent.Enabled=false;
             }
         }
 
