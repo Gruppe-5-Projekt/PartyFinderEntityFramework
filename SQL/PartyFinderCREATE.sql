@@ -6,28 +6,27 @@ GO
 
 CREATE TABLE [dbo].[Profile](
 	[ID] [int] NOT NULL IDENTITY,
-	[FirstName] [varchar](50) NOT NULL,
-	[LastName] [varchar](50) NOT NULL,
-	[Email] [varchar](100) NOT NULL,
-	[PhoneNo] [varchar](50) NOT NULL,
-	[Password] [varchar](50) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
 	[Age] [int] NOT NULL,
-	[Gender] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NULL,
+	[Gender] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](500) NULL,
 	[IsBanned] [bit] NOT NULL,
+	[AspNetUserForeignKey] [nvarchar](450) NOT NULL,
 
 	primary key (ID),
+	foreign key (AspNetUserForeignKey)	references AspNetUsers(Id)
 );
 
 
 
 CREATE TABLE [dbo].[Event](
 	[ID] [int] NOT NULL IDENTITY,
-	[EventName] [varchar](50) NOT NULL,
+	[EventName] [nvarchar](50) NOT NULL,
 	[EventCapacity] [int] NOT NULL,
 	[StartDateTime] [datetime] NOT NULL,
 	[EndDateTime] [datetime] NOT NULL,
-	[Description] [varchar](500) NULL,
+	[Description] [nvarchar](500) NULL,
 	[ProfileID] [int] NOT NULL,
 	
 	primary key (ID),
@@ -46,9 +45,9 @@ CREATE TABLE [dbo].[Match](
 );
 
 CREATE TABLE [dbo].[Location](
-	[ZIP] [varchar](50) NOT NULL,
-	[City] [varchar](50) NOT NULL,
-	[Address] [varchar](250) NOT NULL,
+	[ZIP] [nvarchar](50) NOT NULL,
+	[City] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](250) NOT NULL,
 	[EventID] [int] NOT NULL,
 
 	primary key (EventID),
@@ -57,8 +56,8 @@ CREATE TABLE [dbo].[Location](
 
 
 CREATE TABLE [dbo].[Business](
-	[Name] [varchar](50) NOT NULL,
-	[CVR] [varchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[CVR] [nvarchar](50) NOT NULL,
 	[Subscription] [bit] NULL,
 	[ProfileID] [int] NOT NULL,
 
@@ -69,7 +68,7 @@ CREATE TABLE [dbo].[Business](
 CREATE TABLE [dbo].[ReportUser](
 	[AccuserID] [int] NOT NULL,
 	[OffenderID] [int] NOT NULL,
-	[Description] [varchar](400) NULL,
+	[Description] [nvarchar](400) NULL,
 	[ID] [int] NOT NULL IDENTITY,
 
 	primary key (ID),
@@ -81,7 +80,7 @@ CREATE TABLE [dbo].[Chat](
 	[DestinationID] [int] NOT NULL,
 	[SourceID] [int] NOT NULL,
 	[TimeSent] [date] NOT NULL,
-	[Body] [varchar](250) NULL,
+	[Body] [nvarchar](250) NULL,
 	[ID] [int] NOT NULL IDENTITY,
 
 	primary key (ID),
@@ -89,6 +88,7 @@ CREATE TABLE [dbo].[Chat](
 	foreign key (SourceID)		references	Profile(ID) ON DELETE CASCADE,
 );
 
+/*
 
 INSERT INTO Profile VALUES('Jens', 'Vils', 'asda@asdasd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
 INSERT INTO Profile VALUES('Peter', 'Vils', 'asda@asdas.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
@@ -98,3 +98,4 @@ INSERT INTO Profile VALUES('Ole', 'Vils', 'asda@dasd.sd', '15456585', 'password'
 INSERT INTO Event VALUES('Privat fest', '10','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '1');
 INSERT INTO Event VALUES('Offentlig fest', '11','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '2');
 
+*/
