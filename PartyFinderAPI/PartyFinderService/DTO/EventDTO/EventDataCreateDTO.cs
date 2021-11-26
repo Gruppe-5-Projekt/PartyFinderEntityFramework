@@ -11,19 +11,21 @@ namespace PartyFinderService.DTO
         public int EventCapacity { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public String Description { get; set; }
+        public string Description { get; set; }
+        public string UserIdValue { get; set; }
         public int ProfileId { get; set; }
 
 
         public EventDataCreateDTO() { }
 
-        public EventDataCreateDTO(String eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String description, int profileId)
+        public EventDataCreateDTO(String eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String description, string userIdValue, int profileId)
         {
             EventName = eventName;
             EventCapacity = eventCapacity;
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
             Description = description;
+            UserIdValue = userIdValue;
             ProfileId = profileId;
         }
     }
