@@ -14,11 +14,16 @@ namespace PartyFinderService.Controllers
     public class EventController : ControllerBase
     {
         readonly EventDataControl _eControl;
+        readonly ProfileDataControl _pControl;
 
         public EventController()
         {
             _eControl = new EventDataControl();
+
+            _pControl = new ProfileDataControl();
         }
+
+        
         
         // URL: api/event
         [HttpGet]
@@ -87,6 +92,9 @@ namespace PartyFinderService.Controllers
         {
             try
             {
+                string loggedInId = postEvent.UserIdValue;
+                int profileId = _pControl.GetProfileByUserIdValue(loggedInId);
+                postEvent.ProfileId = profileId;
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);
                 _eControl.Add(dbEvent);
                 return new StatusCodeResult(200);
