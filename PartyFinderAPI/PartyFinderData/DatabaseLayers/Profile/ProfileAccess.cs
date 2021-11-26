@@ -46,6 +46,16 @@ namespace PartyFinderData.DatabaseLayers
             return foundProfile;
         }
 
+        public int GetProfileIdByUserIdValue(string userIdValue)
+        {
+            var db = new PartyFinderContext();
+            var profile = db.Profiles
+                        .Where(p => p.AspNetUserForeignKey == userIdValue)
+                        .SingleOrDefault();
+            int profileId = profile.Id;
+            return profileId;
+        }
+
         public void UpdateProfile(int id, Profile updatedProfile)
         {
             Console.WriteLine("Updating profile");
