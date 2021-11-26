@@ -53,7 +53,7 @@ body {
 }
 
 
-.button {
+.button1 {
     border: none;
     color: white;
     padding: 16px 60px;
@@ -67,11 +67,11 @@ body {
     cursor: pointer;
 }
 
-.center {
+.left {
     margin: 0;
     position: absolute;
     top: 45%;
-    left: 50%;
+    left: 41%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
@@ -84,6 +84,41 @@ body {
 }
 
     .button1:hover {
+        background-color: Fuchsia;
+        color: DarkMagenta;
+    }
+
+.button2 {
+    border: none;
+    color: white;
+    padding: 16px 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.right {
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 59%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.button2 {
+    background-color: DarkMagenta;
+    color: Gold;
+    border: 2px solid Fuchsia;
+    border-radius: 30px;
+}
+
+    .button2:hover {
         background-color: Fuchsia;
         color: DarkMagenta;
     }
