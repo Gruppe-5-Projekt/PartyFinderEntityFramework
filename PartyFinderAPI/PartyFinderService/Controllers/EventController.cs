@@ -106,13 +106,12 @@ namespace PartyFinderService.Controllers
             {
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(putEvent);
                 _eControl.Put(dbEvent);
-                status = "Success";
+                return new StatusCodeResult(200);
             }
             catch
             {
-                status = "Failed";
+                return new StatusCodeResult(404);
             }
-            return status;
         }
     }
 }
