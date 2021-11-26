@@ -3,5 +3,8 @@
 
 // Write your JavaScript code.
 function welcome() {
-    window.open("/Identity/Account/Register");
+    window.open("/Identity/Account/Register","_self");
+}
+function loginPage() {
+    window.open("/Identity/Account/Login", "_self");
 }
