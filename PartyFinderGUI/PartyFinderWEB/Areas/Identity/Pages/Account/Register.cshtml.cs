@@ -97,22 +97,6 @@ namespace PartyFinderWEB.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            [Required]
-            [FirstName]
-            [Display(Name = "FirstName")]
-            public string FirstName { get; set; }
-            [Required]
-            [LastName]
-            [Display(Name = "LastName")]
-            public string LastName { get; set; }
-            [Required]
-            [Age]
-            [Display(Name = "Birth")]
-            public int Age { get; set; }
-            [Required]
-            [Gender]
-            [Display(Name = "Gender")]
-            public bool Gender { get; set; }
         }
 
 

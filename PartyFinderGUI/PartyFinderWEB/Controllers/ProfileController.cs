@@ -15,11 +15,13 @@ namespace PartyFinderWEB.Controllers
             _pAccess = new ProfileServiceAccess();
         }
 
-        public IActionResult Index()
+        public IActionResult CreateProfile()
         {
             return View();
         }
-        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, string gender)
+
+        
+        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, Gender gender)
         {
             int insertedId = -1;
 

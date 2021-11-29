@@ -20,6 +20,7 @@ namespace PartyFinderWEB.Controllers
         {
             _eAccess = new EventServiceAccess();
         }
+        static Random rnd = new Random();
 
         [Authorize]
         public IActionResult CreateEvent()
@@ -31,7 +32,7 @@ namespace PartyFinderWEB.Controllers
         {
             return View();
         }
-        public async Task<int> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description)
+        public async Task<ActionResult> SaveEvent(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description)
         {
             int insertedId = -1;
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
@@ -50,13 +51,15 @@ namespace PartyFinderWEB.Controllers
             {
 
             }
-            return insertedId;
-
+            return View("CreatedEvent", insertedId as object);
         }
-        /*public async Task<EventViewModel> GetEvent(int id)
-        {
-            EventViewModel foundEvent = await _eAccess.(id);
-            return foundEvent;
-        }*/
+
+        //public async Task<EventViewModel> GetEvent()
+        //{
+        //    List<EventViewModel> foundEvents = await _eAccess();
+        //    int r = rnd.Next(foundEvents.Count);
+        //    EventViewModel foundEvent = foundEvents.FindIndex(r);
+        //    return foundEvent;
+        //}
     }
-  }
+}

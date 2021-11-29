@@ -134,7 +134,6 @@ namespace PartyFinderWEB.ServiceLayer
             return eventToDelete.Id;
         }
 
-
     }
 
 }
