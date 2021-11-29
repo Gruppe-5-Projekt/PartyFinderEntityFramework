@@ -1,13 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PartyFinderData.ModelLayers;
+using PartyFinderService.BusinessLogicLayer;
+using PartyFinderService.DTO.ProfileDTO;
+using PartyFinderService.ModelConversion.ProfileConv;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PartyFinderService.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
     {
+        readonly ProfileDataControl _pControl;
+
+        public ProfileController()
+        {
+            _pControl = new ProfileDataControl();
+        }
+
         // GET: api/<ProfileController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,8 +36,19 @@ namespace PartyFinderService.Controllers
 
         // POST api/<ProfileController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<string> PostProfile(ProfileDataCreateDTO postProfile)
         {
+            try
+            {
+                Profile dbProfile = ModelConversion.ProfileDataCreateDTOConvert.ToProfile(postProfile);
+                _pControl.Add(dbProfile);
+                return new StatusCodeResult(200);
+
+            }
+            catch
+            {
+                return new StatusCodeResult(404);
+            }
         }
 
         // PUT api/<ProfileController>/5

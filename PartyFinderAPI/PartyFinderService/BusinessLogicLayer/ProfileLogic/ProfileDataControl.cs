@@ -1,4 +1,5 @@
 ﻿using PartyFinderData.DatabaseLayers;
+using PartyFinderData.ModelLayers;
 
 namespace PartyFinderService.BusinessLogicLayer
 {
@@ -10,6 +11,21 @@ namespace PartyFinderService.BusinessLogicLayer
         {
             _profileAccess = new ProfileAccess();
         }
+        public bool Add(Profile profileToAdd)
+        {
+            bool status = false;
+            try
+            {
+                _profileAccess.CreateProfile(profileToAdd);
+                status = true;
+            }
+            catch
+            {
+                status = false;
+            }
+            return status;
+        }
+
         public int GetProfileByUserIdValue(string userIdValue)
         {
 

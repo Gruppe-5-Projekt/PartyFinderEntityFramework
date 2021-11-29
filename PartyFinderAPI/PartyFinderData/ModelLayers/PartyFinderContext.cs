@@ -261,6 +261,8 @@ namespace PartyFinderData.ModelLayers
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 
+                entity.Property(e => e.Age).HasColumnType("datetime");
+
                 entity.Property(e => e.Gender).HasMaxLength(50);
 
                 entity.Property(e => e.LastName).HasMaxLength(50);

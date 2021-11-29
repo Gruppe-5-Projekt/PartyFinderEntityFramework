@@ -37,12 +37,12 @@ namespace PartyFinderWEB.Controllers
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var userIdValue = claim.Value;
+            var aspNetFK = claim.Value;
 
             int profileId = -1;
-            if(userIdValue != null)
+            if(aspNetFK != null)
             {
-                EventViewModel newEvent = new EventViewModel(eventName, eventCapacity, startDateTime, endDateTime, description, userIdValue, profileId);
+                EventViewModel newEvent = new EventViewModel(eventName, eventCapacity, startDateTime, endDateTime, description, aspNetFK, profileId);
                 insertedId = await _eAccess.SaveEvent(newEvent);
                 Console.WriteLine(newEvent.EventName);
             }

@@ -18,7 +18,7 @@ namespace PartyFinderService.DTO
 
         public EventDataCreateDTO() { }
 
-        public EventDataCreateDTO(String eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, String description, string userIdValue, int profileId)
+        public EventDataCreateDTO(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, string userIdValue, int profileId)
         {
             EventName = eventName;
             EventCapacity = eventCapacity;

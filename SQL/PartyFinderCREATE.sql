@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[Profile](
 	[ID] [int] NOT NULL IDENTITY,
 	[FirstName] [nvarchar](50) NOT NULL,
 	[LastName] [nvarchar](50) NOT NULL,
-	[Age] [int] NOT NULL,
+	[Age] [datetime] NOT NULL,
 	[Gender] [nvarchar](50) NOT NULL,
 	[Description] [nvarchar](500) NULL,
 	[IsBanned] [bit] NOT NULL,
@@ -88,14 +88,4 @@ CREATE TABLE [dbo].[Chat](
 	foreign key (SourceID)		references	Profile(ID) ON DELETE CASCADE,
 );
 
-/*
-
-INSERT INTO Profile VALUES('Jens', 'Vils', 'asda@asdasd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
-INSERT INTO Profile VALUES('Peter', 'Vils', 'asda@asdas.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
-INSERT INTO Profile VALUES('Rasmus', 'Vils', 'asda@asdsd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
-INSERT INTO Profile VALUES('Ole', 'Vils', 'asda@dasd.sd', '15456585', 'password', '0', 'Male', 'grim som en sten hehe', '0');
-
-INSERT INTO Event VALUES('Privat fest', '10','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '1');
-INSERT INTO Event VALUES('Offentlig fest', '11','2018-06-23T05:45:55', '2018-06-23T05:55:55', 'oknadfogknsfg', '2');
-
-*/
+INSERT INTO Profile VALUES('Admin', 'Adminson', '1998-01-01T23:59:59.997', 'Male','Admin', '0', '9f4527d7-a2a4-4450-ac06-e035676b75e5');
