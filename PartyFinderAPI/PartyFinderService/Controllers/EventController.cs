@@ -53,6 +53,33 @@ namespace PartyFinderService.Controllers
             return foundReturn;
         }
 
+        /*[HttpGet("SpecificEvents")]
+        public ActionResult<List<EventDataReadDTO>> GetSpecificEvents()
+        {
+            ActionResult<List<EventDataReadDTO>> foundReturn;
+            // retrieve and convert data
+            List<Event> foundEvents = _eControl.GetSpecificEvents();
+            List<EventDataReadDTO> foundDTOs = ModelConversion.EventDataReadDTOConvert.FromEventCollection(foundEvents);
+            // evaluate
+            if (foundDTOs != null)
+            {
+                if (foundDTOs.Count > 0)
+                {
+                    foundReturn = Ok(foundDTOs);                 // Statuscode 200
+                }
+                else
+                {
+                    foundReturn = new StatusCodeResult(204);    // Ok, but no content
+                }
+            }
+            else
+            {
+                foundReturn = new StatusCodeResult(500);        // Internal server error
+            }
+            // send response back to client
+            return foundReturn;
+        }*/
+
         [HttpGet("{id}")]
         public ActionResult<EventDataReadDTO> Get(int Id)
         {

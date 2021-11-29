@@ -20,6 +20,7 @@ namespace PartyFinderWEB.Controllers
         {
             _eAccess = new EventServiceAccess();
         }
+        static Random rnd = new Random();
 
         [Authorize]
         public IActionResult CreateEvent()
@@ -44,7 +45,6 @@ namespace PartyFinderWEB.Controllers
             {
                 EventViewModel newEvent = new EventViewModel(eventName, eventCapacity, startDateTime, endDateTime, description, aspNetFK, profileId);
                 insertedId = await _eAccess.SaveEvent(newEvent);
-                Console.WriteLine(newEvent.EventName);
             }
             else
             {
@@ -53,10 +53,13 @@ namespace PartyFinderWEB.Controllers
             return insertedId;
 
         }
-        /*public async Task<EventViewModel> GetEvent(int id)
+        public async Task<EventViewModel> GetEvents()
         {
-            EventViewModel foundEvent = await _eAccess.(id);
+            int id = -1;
+            List<EventViewModel> foundEvents = await _eAccess.GetEvents(id);
+            int r = rnd.Next(foundEvents.Count);
+            EventViewModel foundEvent = foundEvents.ElementAt(r);
             return foundEvent;
-        }*/
+        }
     }
-  }
+}
