@@ -41,7 +41,7 @@ namespace PartyFinderWEB.Controllers
             var aspNetFK = claim.Value;
 
             int profileId = -1;
-            if(aspNetFK != null)
+            if (aspNetFK != null)
             {
                 EventViewModel newEvent = new EventViewModel(eventName, eventCapacity, startDateTime, endDateTime, description, aspNetFK, profileId);
                 insertedId = await _eAccess.SaveEvent(newEvent);
@@ -53,7 +53,6 @@ namespace PartyFinderWEB.Controllers
             return View("CreatedEvent", insertedId as object);
         }
 
-        }
         public async Task<EventViewModel> GetEvents()
         {
             int id = -1;
@@ -63,4 +62,5 @@ namespace PartyFinderWEB.Controllers
             return foundEvent;
         }
     }
+}
 
