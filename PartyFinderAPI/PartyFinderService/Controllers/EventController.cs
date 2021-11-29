@@ -92,7 +92,7 @@ namespace PartyFinderService.Controllers
         {
             try
             {
-                string loggedInId = postEvent.UserIdValue;
+                string loggedInId = postEvent.AspNetFK;
                 int profileId = _pControl.GetProfileByUserIdValue(loggedInId);
                 postEvent.ProfileId = profileId;
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);

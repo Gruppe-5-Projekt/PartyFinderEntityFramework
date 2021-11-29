@@ -46,11 +46,11 @@ namespace PartyFinderData.DatabaseLayers
             return foundProfile;
         }
 
-        public int GetProfileIdByUserIdValue(string userIdValue)
+        public int GetProfileIdByUserIdValue(string aspNetFK)
         {
             var db = new PartyFinderContext();
             var profile = db.Profiles
-                        .Where(p => p.AspNetUserForeignKey == userIdValue)
+                        .Where(p => p.AspNetUserForeignKey == aspNetFK)
                         .SingleOrDefault();
             int profileId = profile.Id;
             return profileId;

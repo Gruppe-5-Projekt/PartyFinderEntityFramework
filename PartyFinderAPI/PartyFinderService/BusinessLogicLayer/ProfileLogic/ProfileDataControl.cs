@@ -26,10 +26,10 @@ namespace PartyFinderService.BusinessLogicLayer
             return status;
         }
 
-        public int GetProfileByUserIdValue(string userIdValue)
+        public int GetProfileByUserIdValue(string aspNetFK)
         {
 
-            int profileId = _profileAccess.GetProfileIdByUserIdValue(userIdValue);
+            int profileId = _profileAccess.GetProfileIdByUserIdValue(aspNetFK);
             return profileId;
         }
     }

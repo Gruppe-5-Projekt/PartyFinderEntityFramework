@@ -5,6 +5,9 @@ namespace PartyFinderData.ModelLayers
 {
     public partial class Profile
     {
+        public Profile()
+        {
+        }
         public Profile(string firstName, string lastName, DateTime age, string gender, string description, bool isBanned, string aspNetFK)
         {
            FirstName = firstName;

@@ -13,7 +13,7 @@ namespace PartyFinderData.DatabaseLayers
         List<Profile> GetProfileAll();
         void CreateProfile(Profile profileToAdd);
         void UpdateProfile(int id, Profile updatedProfile);
-        int GetProfileIdByUserIdValue(string userIdValue);
+        int GetProfileIdByUserIdValue(string aspNetFK);
         void DeleteProfileById(int id);
     }
 }
