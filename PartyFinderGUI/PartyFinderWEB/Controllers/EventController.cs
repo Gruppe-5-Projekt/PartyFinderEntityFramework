@@ -63,4 +63,4 @@ namespace PartyFinderWEB.Controllers
             return foundEvent;
         }
     }
-}
+
