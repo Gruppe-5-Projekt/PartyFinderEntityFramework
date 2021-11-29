@@ -66,6 +66,16 @@ namespace PartyFinderService.BusinessLogicLayer
 
         }
 
+        /*public List<Event> GetSepcificEvents()
+        {
+            List<Event> foundEvents;
+
+            foundEvents = _eventAccess.GetSpecificEvents();
+
+            return foundEvents;
+
+        }*/
+
         public bool Put(Event updatedEvent)
         {
             bool successful = false;
