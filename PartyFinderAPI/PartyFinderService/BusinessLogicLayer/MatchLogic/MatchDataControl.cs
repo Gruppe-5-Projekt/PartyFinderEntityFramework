@@ -1,5 +1,6 @@
 ﻿using PartyFinderData.DatabaseLayers;
 using PartyFinderData.ModelLayers;
+using PartyFinderService.DTO;
 
 namespace PartyFinderService.BusinessLogicLayer
 {
@@ -22,6 +23,20 @@ namespace PartyFinderService.BusinessLogicLayer
             {
             }
             return status;
+        }
+
+        public Event GetSpecificEvent()
+        {
+            Event specificEvent = null;
+            try
+            {
+                specificEvent = _matchAccess.GetSpecificEvent();
+            }
+            catch
+            {
+
+            }
+            return specificEvent;
         }
     }
 }

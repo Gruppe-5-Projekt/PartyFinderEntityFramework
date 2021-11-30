@@ -18,5 +18,6 @@
         public string? Description { get; set; }
         public string? AspNetFK { get; set; }
         public bool IsMatched { get; set; }
+        public virtual ICollection<Match> Matches { get; set; } = null;
     }
 }

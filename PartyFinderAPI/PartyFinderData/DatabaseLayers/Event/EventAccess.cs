@@ -59,15 +59,6 @@ namespace PartyFinderData.DatabaseLayers
             return allEvents;
         }
 
-        /*public List<Event> GetSpecificEvents()
-        {
-            Console.WriteLine("Getting all events");
-            var db = new PartyFinderContext();
-            var allEvents = db.Events
-                        .ToList();
-            return allEvents;
-        }*/
-
         public Event GetEventByID(int id)
         {
             Console.WriteLine("Finding event");

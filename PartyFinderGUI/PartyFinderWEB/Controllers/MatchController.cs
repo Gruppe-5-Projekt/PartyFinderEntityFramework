@@ -12,7 +12,6 @@ namespace PartyFinderWEB.Controllers
         {
             _mAccess = new MatchServiceAccess();
         }
-        static Random rnd = new Random();
         public IActionResult SwipeEvent()
         {
             return View();
@@ -38,13 +37,12 @@ namespace PartyFinderWEB.Controllers
             return View();
             //return View("CreatedEvent", insertedId as object);
         }
-        public async Task<MatchViewModel> GetEvents()
+        public async Task<MatchViewModel> GetEvent(string specificEvent)
         {
             int id = -1;
-            List<MatchViewModel> foundEvents = await _mAccess.GetEvents(id);
-            int r = rnd.Next(foundEvents.Count);
-            MatchViewModel foundEvent = foundEvents.ElementAt(r);
+            MatchViewModel foundEvent = await _mAccess.GetEvent(specificEvent);
             return foundEvent;
+
         }
     }
 }

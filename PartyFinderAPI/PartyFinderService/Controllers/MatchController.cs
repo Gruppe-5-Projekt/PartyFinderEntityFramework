@@ -24,19 +24,19 @@ namespace PartyFinderService.Controllers
             bool isMatched = match.Match1;
             return _mControl.Match(eventId, profileId, isMatched);
         }
-        [HttpGet("SpecificEvents")]
-        public ActionResult<List<MatchDataReadDTO>> GetSpecificEvents()
+        [HttpGet("SpecificEvent")]
+        public ActionResult<Event> GetSpecificEvent()
         {
-            ActionResult<List<MatchDataReadDTO>> foundReturn;
+            ActionResult<Event> foundReturn;
             // retrieve and convert data
-            List<Event> foundEvents = _mControl.GetSpecificEvents();
-            List<MatchDataReadDTO> foundDTOs = ModelConversion.MatchDataReadDTOConvert.FromEventCollection(foundEvents);
+            Event foundEvent = _mControl.GetSpecificEvent();
+
             // evaluate
-            if (foundDTOs != null)
+            if (foundEvent != null)
             {
-                if (foundDTOs.Count > 0)
+                if (foundEvent.Id > 0)
                 {
-                    foundReturn = Ok(foundDTOs);                 // Statuscode 200
+                    foundReturn = Ok(foundEvent);                 // Statuscode 200
                 }
                 else
                 {

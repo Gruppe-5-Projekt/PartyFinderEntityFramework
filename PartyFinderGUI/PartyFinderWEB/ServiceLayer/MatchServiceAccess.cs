@@ -9,11 +9,16 @@ namespace PartyFinderWEB.ServiceLayer
         static readonly string restUrl = "https://localhost:44377/api/match";
         readonly HttpClient _httpClient;
 
-        public async Task<List<MatchViewModel>> GetEvents(int id = -1)
+        public MatchServiceAccess()
+        {
+            _httpClient = new HttpClient();
+        }
+
+        /*public async Task<List<MatchViewModel>> GetEvents(int id = -1)
         {
             List<MatchViewModel> EventFromService = null;
 
-            // api/events/{id}
+            // api/events/{specificevent}
             string useRestUrl = restUrl;
             bool hasValidId = (id > 0);
             if (hasValidId)
@@ -60,12 +65,44 @@ namespace PartyFinderWEB.ServiceLayer
                 EventFromService = null;
             }
             return EventFromService;
+        }*/
+
+        public async Task<MatchViewModel> GetEvent(string specificEvent)
+        {
+            MatchViewModel EventFromService = null;
+
+            // api/events/{specificevent}
+            string useRestUrl = restUrl;
+            bool hasValidString = (specificEvent != null);
+            if (hasValidString)
+            {
+                useRestUrl += specificEvent;
+            }
+            var uri = new Uri(string.Format(useRestUrl));
+            try
+            {
+                var response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    if (hasValidString)
+                    {
+
+                        MatchViewModel foundEvent = JsonConvert.DeserializeObject<MatchViewModel>(content);
+                    }
+                }
+                else
+                {
+                    EventFromService = null;
+                }
+            }
+            catch
+            {
+                EventFromService = null;
+            }
+            return EventFromService;
         }
 
-        public MatchServiceAccess()
-        {
-            _httpClient = new HttpClient();
-        }
         public async Task<int> LikeOrDislike(MatchViewModel matchToSave)
         {
             int insertedMatchId;

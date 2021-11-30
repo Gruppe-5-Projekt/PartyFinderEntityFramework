@@ -9,6 +9,8 @@ namespace PartyFinderData.DatabaseLayers
 {
     public class MatchAccess : IMatchAccess
     {
+
+        static Random rnd = new Random();
         public int CheckCurrentMatches(int eventId)
         {
             var db = new PartyFinderContext();
@@ -78,7 +80,41 @@ namespace PartyFinderData.DatabaseLayers
 
             return status;
         }
+
+        public Event GetSpecificEvent()
+        {
+            var db = new PartyFinderContext();
+
+
+            var foundEvents = db.Events
+                .Where(e => e.EndDateTime > DateTime.Now)
+                .ToList();
+
+            int r = rnd.Next(foundEvents.Count());
+            var foundEvent = foundEvents.ElementAt(r);
+
+            var matches = db.Matches
+                            .Where(m => m.EventId == foundEvent.Id)
+                            .ToList();
+
+            foundEvent.Matches = matches;
             
+            return foundEvent;
+        }
+
+        //public int GetSpecificEventCount(Event foundEvent)
+        //{
+        //    var db = new PartyFinderContext();
+
+        //    int foundEventId = foundEvent.Id;
+
+        //    var matchCount = db.Matches
+        //                .Where(m => m.EventId == foundEventId)
+        //                .Where(m => m.Match1 == true)
+        //                .Count();
+
+        //    return matchCount;
+        //}
     }
 }
 
