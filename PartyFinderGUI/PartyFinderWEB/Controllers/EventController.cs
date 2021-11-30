@@ -59,7 +59,7 @@ namespace PartyFinderWEB.Controllers
             List<EventViewModel> foundEvents = await _eAccess.GetEvents(id);
             int r = rnd.Next(foundEvents.Count);
             EventViewModel foundEvent = foundEvents.ElementAt(r);
-            return foundEvent;
+            return (EventViewModel)(foundEvent as object);
         }
     }
 }

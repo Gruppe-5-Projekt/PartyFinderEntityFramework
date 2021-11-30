@@ -10,6 +10,7 @@ namespace PartyFinderWEB.Controllers
         
         ProfileServiceAccess _pAccess;
 
+
         public ProfileController()
         {
             _pAccess = new ProfileServiceAccess();
