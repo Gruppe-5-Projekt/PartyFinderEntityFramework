@@ -7,20 +7,37 @@
 
 
 
-
+@*Virker ikke endnu*@
 <div class="testForms">
-    @using (Html.BeginForm("GetEvents", "Event", new { Model.EventName }, FormMethod.Get))
+    @using (Html.BeginForm("GetEvents", "Match", new { Model }, FormMethod.Get)) {
     //@Model Event
-        {
-          <div class="eventForm">
-             @Html.LabelFor(m => m.EventName);
-             @Html.LabelFor(m => m.EventCapacity);
-             @Html.LabelFor(m => m.StartDateTime);
-             @Html.LabelFor(m => m.EndDateTime);
-             @Html.LabelFor(m => m.Description);
-            <input type="submit" value="Like"/>
+        
+          <table class="eventForm">
+              <tr>
+                  <th>
+                    @Html.DisplayFor(m => m.EventName)
+                  </th>
+                  <th>
+                    @Html.DisplayFor(m => m.EventCapacity)
+                  </th>
+                  <th>
+                    @Html.DisplayFor(m => m.StartDateTime)
+                  </th>
+                  <th>
+                    @Html.DisplayFor(m => m.EndDateTime)
+                  </th>
+                  <th>
+                    @Html.DisplayFor(m => m.Description)
+                  </th>
+
+            
+
+
+
+
+            @Html.EditorFor(m => m.IsMatched)
             <input type="submit" value="Dislike"/>
-            </div>
+            </table>
         }
 
     </div>
