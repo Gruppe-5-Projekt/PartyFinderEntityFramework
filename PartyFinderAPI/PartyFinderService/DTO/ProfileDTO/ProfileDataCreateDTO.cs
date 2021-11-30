@@ -13,13 +13,14 @@
 
         public ProfileDataCreateDTO() { }
 
-        public ProfileDataCreateDTO(string firstName, string lastName, DateTime age, string gender, string aspNetFK)
+        public ProfileDataCreateDTO(string firstName, string lastName, DateTime age, string description, bool isBanned, string gender, string aspNetFK)
         {
             FirstName = firstName;
             LastName = lastName;
             Age = age;
             Gender = gender;
-            IsBanned = false;
+            Description = description;
+            IsBanned = isBanned;
             AspNetFK = aspNetFK;
         }
     }

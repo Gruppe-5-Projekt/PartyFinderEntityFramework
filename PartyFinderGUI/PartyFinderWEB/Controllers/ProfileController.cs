@@ -21,22 +21,26 @@ namespace PartyFinderWEB.Controllers
         }
 
         
-        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, Gender gender)
+        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, string gender)
         {
             int insertedId = -1;
 
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var aspNetFK = claim.Value;
+            //string sGender = gender.ToString();
 
             if (aspNetFK != null)
             {
-                ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, aspNetFK);
+                string description = "";
+                bool isBanned = false;
+
+                ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, description, isBanned, aspNetFK);
                 insertedId = await _pAccess.SaveProfile(newProfile);
             }
             else
             {
-
+                //You must be logged in to create a profile.
             }
             return insertedId;
 

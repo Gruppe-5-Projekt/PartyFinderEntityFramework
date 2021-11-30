@@ -13,11 +13,10 @@ namespace PartyFinderService.BusinessLogicLayer
         }
         public bool Add(Profile profileToAdd)
         {
-            bool status = false;
+            bool status;
             try
             {
-                _profileAccess.CreateProfile(profileToAdd);
-                status = true;
+                status = _profileAccess.CreateProfile(profileToAdd);
             }
             catch
             {

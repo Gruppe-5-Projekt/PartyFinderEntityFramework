@@ -136,7 +136,6 @@ namespace PartyFinderService.Controllers
         [HttpPut]
         public ActionResult<string> Update(EventDataCreateDTO putEvent)
         {
-            String status = "";
             try
             {
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(putEvent);

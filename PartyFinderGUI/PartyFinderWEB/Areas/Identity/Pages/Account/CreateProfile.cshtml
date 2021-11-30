@@ -24,7 +24,8 @@
                         <span class="validity"></span>
                     </div>
                 </form>
-            @Html.DropDownListFor(m => m.ProfileGender, new SelectList(Enum.GetValues(typeof(Gender))), "Select Gender")
+            @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> { new SelectListItem {Text = "Male", Value = "Male"},
+                               new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, "Select Gender")
             <input type="submit" value="Opret"/>
             </div>
         }

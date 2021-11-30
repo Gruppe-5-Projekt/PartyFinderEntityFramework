@@ -38,11 +38,19 @@ namespace PartyFinderService.Controllers
         [HttpPost]
         public ActionResult<string> PostProfile(ProfileDataCreateDTO postProfile)
         {
+            bool status;
             try
             {
                 Profile dbProfile = ModelConversion.ProfileDataCreateDTOConvert.ToProfile(postProfile);
-                _pControl.Add(dbProfile);
-                return new StatusCodeResult(200);
+                status = _pControl.Add(dbProfile);
+                if (status == true)
+                {
+                    return new StatusCodeResult(200);
+                }
+                else
+                {
+                    return new StatusCodeResult(403);
+                }
 
             }
             catch
