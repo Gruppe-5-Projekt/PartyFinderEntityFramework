@@ -30,33 +30,45 @@ namespace PartyFinderData.DatabaseLayers
         }
         
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-         public bool CheckAndCommitMatchPublic(int eventId, int profileId)
+         public bool CheckAndCommitMatchPublic(int eventId, int profileId, bool isMatched)
         {
             var db = new PartyFinderContext();
             bool status = false;
             try
             {
-                //Koden tjekker på databasen om der er plads, og comitter en profil.
-                int allMatches = CheckCurrentMatches(eventId);
-                int capacity = CheckCapacity(eventId);
-                if (allMatches < capacity)
+                
+                if(isMatched == true)
                 {
-                    Match match = new Match {EventId = eventId, ProfileId = profileId, Match1 = true };
-                    Console.WriteLine("Inserting a new match");
-                    db.Matches
-                        .Add(match);
-                }
-                Console.WriteLine("Breakpoint her.");
-                //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
-                int allMatchesNow = CheckCurrentMatches(eventId);
-                if (allMatchesNow < capacity)
-                {
-                    db.SaveChanges();
-                    status = true;
+                    //Koden tjekker på databasen om der er plads, og comitter en profil.
+                    int allMatches = CheckCurrentMatches(eventId);
+                    int capacity = CheckCapacity(eventId);
+                    if (allMatches < capacity)
+                    {
+                        Match match = new Match { EventId = eventId, ProfileId = profileId, Match1 = isMatched };
+                        Console.WriteLine("Inserting a new match");
+                        db.Matches
+                            .Add(match);
+                        Console.WriteLine("Breakpoint her.");
+                        //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
+                        int allMatchesNow = CheckCurrentMatches(eventId);
+                        if (allMatchesNow < capacity)
+                        {
+                            db.SaveChanges();
+                            status = true;
+                        }
+                        else
+                        {
+                            status = false;
+                        }
+                    }
                 }
                 else
                 {
-                    status = false;
+                    Match match = new Match { EventId = eventId, ProfileId = profileId, Match1 = isMatched };
+                    db.Matches
+                            .Add(match);
+                    db.SaveChanges();
+                    status = true;
                 }
             }
             catch

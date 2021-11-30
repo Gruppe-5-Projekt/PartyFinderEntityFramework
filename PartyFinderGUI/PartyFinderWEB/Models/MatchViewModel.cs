@@ -2,26 +2,21 @@
 {
     public class MatchViewModel
     {
-        public MatchViewModel(string eventName, int eventCapacity, DateTime startDateTime, DateTime endDateTime, string description, string aspNetFK, int profileId)
+        public MatchViewModel(string aspNetFK, int eventId, bool isMatched)
         {
-            EventName = eventName;
-            EventCapacity = eventCapacity;
-            StartDateTime = startDateTime;
-            EndDateTime = endDateTime;
-            Description = description;
             AspNetFK = aspNetFK;
-            ProfileId = profileId;
-
+            EventId = eventId;
+            IsMatched = isMatched;
         }
 
 
-        public int Id { get; set; }
+        public int EventId { get; set; }
         public string EventName { get; set; } = null!;
         public int EventCapacity { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string? Description { get; set; }
         public string? AspNetFK { get; set; }
-        public int ProfileId { get; set; }
+        public bool IsMatched { get; set; }
     }
 }

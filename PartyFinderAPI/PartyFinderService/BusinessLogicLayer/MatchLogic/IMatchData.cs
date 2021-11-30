@@ -2,6 +2,6 @@
 {
     public interface IMatchData
     {
-        bool Match(int eventId, int profileId);
+        bool Match(int eventId, int profileId, bool isMatched);
     }
 }

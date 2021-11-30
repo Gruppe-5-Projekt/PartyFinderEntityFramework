@@ -20,7 +20,8 @@ namespace PartyFinderService.Controllers
         {
             int eventId = match.EventId;
             int profileId = match.ProfileId;
-            return _mControl.Match(eventId, profileId);
+            bool isMatched = match.Match1;
+            return _mControl.Match(eventId, profileId, isMatched);
         }
     }
 }
