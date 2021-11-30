@@ -30,6 +30,7 @@ namespace PartyFinderWEB.Areas.Identity.Pages.Account
         [TempData]
         public string StatusMessage { get; set; }
 
+        //Får fat i Login siden.
         public string LoginUrl { get; set; }
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
@@ -47,6 +48,7 @@ namespace PartyFinderWEB.Areas.Identity.Pages.Account
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
             StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            //Denne referer til hvilken siden den skal åbne.
             LoginUrl = Url.Page("/Account/Login");
             return Page();
         }
