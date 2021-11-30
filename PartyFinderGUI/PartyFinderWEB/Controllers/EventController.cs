@@ -20,7 +20,6 @@ namespace PartyFinderWEB.Controllers
         {
             _eAccess = new EventServiceAccess();
         }
-        static Random rnd = new Random();
 
         [Authorize]
         public IActionResult CreateEvent()
@@ -53,14 +52,7 @@ namespace PartyFinderWEB.Controllers
             return View("CreatedEvent", insertedId as object);
         }
 
-        public async Task<EventViewModel> GetEvents()
-        {
-            int id = -1;
-            List<EventViewModel> foundEvents = await _eAccess.GetEvents(id);
-            int r = rnd.Next(foundEvents.Count);
-            EventViewModel foundEvent = foundEvents.ElementAt(r);
-            return foundEvent;
-        }
+        
     }
 }
 

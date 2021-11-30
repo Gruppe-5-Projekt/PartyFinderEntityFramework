@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PartyFinderWEB.Models;
+using PartyFinderWEB.ServiceLayer;
 using System.Security.Claims;
 
 namespace PartyFinderWEB.Controllers
 {
     public class MatchController : Controller
     {
+        MatchServiceAccess _mAccess;
         public MatchController()
         {
             _mAccess = new MatchServiceAccess();
@@ -27,7 +29,7 @@ namespace PartyFinderWEB.Controllers
             if (aspNetFK != null)
             {
                 MatchViewModel newMatch = new MatchViewModel(aspNetFK, eventId, isMatched);
-                insertedId = await _mAccess.LikeMatch(newMatch);
+                insertedId = await _mAccess.LikeOrDislike(newMatch);
             }
             else
             {
@@ -36,12 +38,12 @@ namespace PartyFinderWEB.Controllers
             return View();
             //return View("CreatedEvent", insertedId as object);
         }
-        public async Task<EventViewModel> GetEvent()
+        public async Task<MatchViewModel> GetEvents()
         {
             int id = -1;
-            List<EventViewModel> foundEvents = await _mAccess.GetEvents(id);
+            List<MatchViewModel> foundEvents = await _mAccess.GetEvents(id);
             int r = rnd.Next(foundEvents.Count);
-            EventViewModel foundEvent = foundEvents.ElementAt(r);
+            MatchViewModel foundEvent = foundEvents.ElementAt(r);
             return foundEvent;
         }
     }
