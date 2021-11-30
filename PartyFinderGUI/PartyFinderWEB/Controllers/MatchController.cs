@@ -9,5 +9,16 @@ namespace PartyFinderWEB.Controllers
             return View();
         }
 
+        //public void match(MatchIds)
+        //{
+        //    Db.add(matchids);
+        //    CheckCap(); //bReAkPoInT!
+        //    CheckIsSpace(); //ElLeR wHaTeVeR dE mEtOdEr HeDdEr
+
+        //    if(space<capacity)
+        //    {
+        //        dB.saveChanges();
+        //    }
+        //}
     }
 }
