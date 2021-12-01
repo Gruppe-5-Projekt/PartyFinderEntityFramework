@@ -9,7 +9,7 @@
 
 @*Virker ikke endnu*@
 <div class="testForms">
-    @using (Html.BeginForm("GetEvent", "Match", new { Model.EventName }, FormMethod.Get)) {
+    @using (Html.BeginForm("GetEvent", "Match", new { Model }, FormMethod.Get)) {
     //@Model Event
         
           <table class="eventForm">
@@ -32,6 +32,8 @@
                  @* <th>
                     @Html.DisplayFor(m => m.calculateCount())
                   </th>*@
+            @Html.EditorFor(m => m.IsMatched)
+            <input type="submit" value="Dislike"/>
             </table>
         }
 
