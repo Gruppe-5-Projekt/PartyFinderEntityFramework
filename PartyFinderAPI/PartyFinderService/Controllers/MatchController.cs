@@ -12,9 +12,12 @@ namespace PartyFinderService.Controllers
     public class MatchController : ControllerBase
     {
         readonly MatchDataControl _mControl;
+        readonly ProfileDataControl _pControl;
         public MatchController()
         {
             _mControl = new MatchDataControl();
+
+            _pControl = new ProfileDataControl();
         }
         [HttpPost]
         public ActionResult<bool> PostMatch(Match match)
@@ -24,12 +27,14 @@ namespace PartyFinderService.Controllers
             bool isMatched = match.Match1;
             return _mControl.Match(eventId, profileId, isMatched);
         }
-        [HttpGet("SpecificEvent")]
-        public ActionResult<Event> GetSpecificEvent()
+        [HttpGet("{aspNetFK}")]
+        public ActionResult<Event> GetSpecificEvent(string aspNetFK)
         {
+            int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
+
             ActionResult<Event> foundReturn;
             // retrieve and convert data
-            Event foundEvent = _mControl.GetSpecificEvent();
+            Event foundEvent = _mControl.GetSpecificEvent(profileId);
 
             // evaluate
             if (foundEvent != null)

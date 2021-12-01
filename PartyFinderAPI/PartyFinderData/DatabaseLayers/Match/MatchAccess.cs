@@ -81,13 +81,14 @@ namespace PartyFinderData.DatabaseLayers
             return status;
         }
 
-        public Event GetSpecificEvent()
+        public Event GetSpecificEvent(int profileId)
         {
             var db = new PartyFinderContext();
 
 
             var foundEvents = db.Events
                 .Where(e => e.EndDateTime > DateTime.Now)
+                .Where(e => e.ProfileId != profileId)
                 .ToList();
 
             int r = rnd.Next(foundEvents.Count());
@@ -95,6 +96,7 @@ namespace PartyFinderData.DatabaseLayers
 
             var matches = db.Matches
                             .Where(m => m.EventId == foundEvent.Id)
+                            .Where(m => m.ProfileId != profileId)
                             .ToList();
 
             foundEvent.Matches = matches;

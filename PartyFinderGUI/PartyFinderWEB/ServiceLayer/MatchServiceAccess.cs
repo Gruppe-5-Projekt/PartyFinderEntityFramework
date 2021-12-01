@@ -1,6 +1,13 @@
-﻿using Newtonsoft.Json;
-using PartyFinderWEB.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using PartyFinderWEB.Models;
 
 namespace PartyFinderWEB.ServiceLayer
 {
@@ -67,18 +74,19 @@ namespace PartyFinderWEB.ServiceLayer
             return EventFromService;
         }*/
 
-        public async Task<MatchViewModel> GetEvent(string specificEvent)
+        public async Task<MatchViewModel> GetEvent(string aspNetFK)
         {
             MatchViewModel EventFromService = null;
 
             // api/events/{specificevent}
             string useRestUrl = restUrl;
-            bool hasValidString = (specificEvent != null);
+            bool hasValidString = (aspNetFK != null);
             if (hasValidString)
             {
-                useRestUrl += specificEvent;
+                useRestUrl += aspNetFK;
             }
             var uri = new Uri(string.Format(useRestUrl));
+            //
             try
             {
                 var response = await _httpClient.GetAsync(uri);
@@ -89,11 +97,19 @@ namespace PartyFinderWEB.ServiceLayer
                     {
 
                         MatchViewModel foundEvent = JsonConvert.DeserializeObject<MatchViewModel>(content);
+                        if (foundEvent != null)
+                        {
+                            EventFromService = foundEvent;
+                        }
                     }
                 }
                 else
                 {
-                    EventFromService = null;
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        EventFromService = null;
+                    }
+
                 }
             }
             catch

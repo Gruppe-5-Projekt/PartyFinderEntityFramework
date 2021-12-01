@@ -19,5 +19,19 @@
         public string? AspNetFK { get; set; }
         public bool IsMatched { get; set; }
         public virtual ICollection<Match> Matches { get; set; } = null;
+
+        public int calculateCount()
+        {
+            int count = 0;
+            foreach (var item in Matches)
+            {
+                if (item.Match1 == true)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
+    
 }
