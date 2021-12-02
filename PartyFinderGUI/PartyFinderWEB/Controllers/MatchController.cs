@@ -37,13 +37,13 @@ namespace PartyFinderWEB.Controllers
             return View();
             //return View("CreatedEvent", insertedId as object);
         }
-        public async Task<MatchViewModel> GetEvent()
+        public async Task<ActionResult> GetEvent()
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var aspNetFK = claim.Value;
             MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
-            return foundEvent;
+            return View(foundEvent);
 
         }
     }
