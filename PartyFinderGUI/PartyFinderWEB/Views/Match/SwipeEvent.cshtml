@@ -6,7 +6,7 @@
 }
 EventName: @Model.EventName
 <br />
-EventCapacity: @Model.EventCapacity
+EventCapacity: @Model.CalculateCount().ToString() / @Model.EventCapacity
 <br />
 Start: @Model.StartDateTime
 <br />
@@ -19,8 +19,12 @@ Description: @Model.Description
         @using (Html.BeginForm("LikeOrDislike", "Match", FormMethod.Post))
         //@Model Event
         {
+
+
             //Kode her der sender EventId (@Model.Id) + isMatched = true
-            <input type="submit" value="Like"/>
+@*            @Model.Id =*@ 
+            @Html.ActionLink("LikeOrDislike", "Match", new {id = Model.Id, IsMatched = true})
+            @Html.ActionLink("Dislike!", "Dislike", new {id = Model.Id, IsMatched = false})
         }
 </div>
 <div class="testForms">
@@ -31,6 +35,7 @@ Description: @Model.Description
             <input type="submit" value="Dislike"/>
         }
 </div>
+
 
 @*<div class="tbg">
   <div class="theader">
