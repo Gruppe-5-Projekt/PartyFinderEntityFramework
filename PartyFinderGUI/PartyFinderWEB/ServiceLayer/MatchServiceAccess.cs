@@ -13,7 +13,7 @@ namespace PartyFinderWEB.ServiceLayer
 {
     public class MatchServiceAccess
     {
-        static readonly string restUrl = "https://localhost:44377/api/match";
+        static readonly string restUrl = "https://localhost:44377/api/match/";
         readonly HttpClient _httpClient;
 
         public MatchServiceAccess()
