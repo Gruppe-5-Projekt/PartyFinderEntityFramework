@@ -21,7 +21,7 @@
         public bool IsMatched { get; set; }
         public virtual ICollection<Match> Matches { get; set; } = null;
 
-        public int calculateCount()
+        public int CalculateCount()
         {
             int count = 0;
             foreach (var item in Matches)

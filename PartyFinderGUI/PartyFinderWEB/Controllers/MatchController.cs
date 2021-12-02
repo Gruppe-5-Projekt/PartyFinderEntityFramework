@@ -12,12 +12,16 @@ namespace PartyFinderWEB.Controllers
         {
             _mAccess = new MatchServiceAccess();
         }
-        public IActionResult SwipeEvent()
+        public async Task<ActionResult> SwipeEvent()
         {
-            return View();
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var aspNetFK = claim.Value;
+            MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
+            return View(foundEvent);
         }
 
-        public async Task<ActionResult> LikeOrDislike(int eventId, bool isMatched)
+        public async Task<int> LikeOrDislike(int eventId, bool isMatched)
         {
             int insertedId = -1;
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
@@ -34,17 +38,9 @@ namespace PartyFinderWEB.Controllers
             {
 
             }
-            return View();
+            return insertedId;
             //return View("CreatedEvent", insertedId as object);
         }
-        public async Task<ActionResult> GetEvent()
-        {
-            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var aspNetFK = claim.Value;
-            MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
-            return View(foundEvent);
-
-        }
+        
     }
 }

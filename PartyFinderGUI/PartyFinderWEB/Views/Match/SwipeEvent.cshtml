@@ -1,45 +1,36 @@
-﻿@model MatchViewModel
+﻿@model PartyFinderWEB.Models.MatchViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+EventName: @Model.EventName
+<br />
+EventCapacity: @Model.EventCapacity
+<br />
+Start: @Model.StartDateTime
+<br />
+End: @Model.EndDateTime
+<br />
+Description: @Model.Description
+<br />
 
-
-
-@*Virker ikke endnu*@
 <div class="testForms">
-    @using (Html.BeginForm("GetEvent", "Match", new { Model }, FormMethod.Get)) {
-    //@Model Event
-        
-          <table class="eventForm">
-              <tr>
-                  <th>
-                    @Html.DisplayFor(m => m.EventName)
-                  </th>
-                  <th>
-                    @Html.DisplayFor(m => m.EventCapacity)
-                  </th>
-                  <th>
-                    @Html.DisplayFor(m => m.StartDateTime)
-                  </th>
-                  <th>
-                    @Html.DisplayFor(m => m.EndDateTime)
-                  </th>
-                  <th>
-                    @Html.DisplayFor(m => m.Description)
-                  </th>
-                  @*<th>
-                    @Html.DisplayFor(m => m.calculateCount())
-                  </th>*@
-            @Html.EditorFor(m => m.IsMatched)
-            <input type="submit" value="Dislike"/>
-            </table>
+        @using (Html.BeginForm("LikeOrDislike", "Match", FormMethod.Post))
+        //@Model Event
+        {
+            //Kode her der sender EventId (@Model.Id) + isMatched = true
+            <input type="submit" value="Like"/>
         }
-
-    </div>
-
-
+</div>
+<div class="testForms">
+        @using (Html.BeginForm("LikeOrDislike", "Match", FormMethod.Post))
+        //@Model Event
+        {
+            //Kode her der sender EventId (@Model.Id) + isMatched = false
+            <input type="submit" value="Dislike"/>
+        }
+</div>
 
 @*<div class="tbg">
   <div class="theader">
