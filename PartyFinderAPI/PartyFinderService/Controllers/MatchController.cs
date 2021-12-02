@@ -28,10 +28,10 @@ namespace PartyFinderService.Controllers
         {
             string aspNetFK = postEvent.AspNetFK;
             int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
-            int eventId = postEvent.EventId;
-            bool isMatched = postEvent.IsMatched;
+            postEvent.ProfileId = profileId;
+            Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
 
-            return _mControl.Match(profileId, eventId, isMatched);
+            return _mControl.Match(dbMatch);
         }
 
         [HttpGet("{aspNetFK}")]

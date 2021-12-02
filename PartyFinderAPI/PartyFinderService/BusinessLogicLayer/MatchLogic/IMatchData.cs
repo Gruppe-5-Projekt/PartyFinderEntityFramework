@@ -4,7 +4,7 @@ namespace PartyFinderService.BusinessLogicLayer
 {
     public interface IMatchData
     {
-        bool Match(int eventId, int profileId, bool isMatched);
+        bool Match(Match match);
         Event GetRandomEvent(int profileId);
     }
 }

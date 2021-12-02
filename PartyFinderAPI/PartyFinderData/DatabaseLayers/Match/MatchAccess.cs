@@ -27,15 +27,17 @@ namespace PartyFinderData.DatabaseLayers
                     .Where(e => e.Id == eventId)
                     .ToList().SingleOrDefault();
             int capacity = specificEvent.EventCapacity;
-            Console.WriteLine(capacity);
             return capacity;
         }
         
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-         public bool CheckAndCommitMatchPublic(int eventId, int profileId, bool isMatched)
+         public bool CheckAndCommitMatchPublic(Match match)
         {
             var db = new PartyFinderContext();
             bool status = false;
+            int eventId = match.EventId;
+            int profileId = match.ProfileId;
+            bool isMatched = match.Match1;
             try
             {
                 
@@ -46,7 +48,6 @@ namespace PartyFinderData.DatabaseLayers
                     int capacity = CheckCapacity(eventId);
                     if (allMatches < capacity)
                     {
-                        Match match = new Match { EventId = eventId, ProfileId = profileId, Match1 = isMatched };
                         Console.WriteLine("Inserting a new match");
                         db.Matches
                             .Add(match);
@@ -66,7 +67,6 @@ namespace PartyFinderData.DatabaseLayers
                 }
                 else
                 {
-                    Match match = new Match { EventId = eventId, ProfileId = profileId, Match1 = isMatched };
                     db.Matches
                             .Add(match);
                     db.SaveChanges();
