@@ -26,9 +26,7 @@ namespace PartyFinderService.Controllers
         [HttpPost]
         public ActionResult<bool> PostMatch(MatchDataCreateDTO postEvent)
         {
-            string aspNetFK = postEvent.AspNetFK;
-            int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
-            postEvent.ProfileId = profileId;
+            postEvent.ProfileId = _pControl.GetProfileByUserIdValue(postEvent.AspNetFK);
             Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
 
             return _mControl.Match(dbMatch);
