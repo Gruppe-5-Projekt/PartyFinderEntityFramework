@@ -1,11 +1,37 @@
 ﻿@page
-@*@model PartyFinderWEB.Areas.Identity.Pages.Account.Manage.ChangeProfileModel*@
-@{
-}
+@using PartyFinderWEB.Models
+@model PartyFinderWEB.Models.ProfileViewModel
+
 @{
     ViewData["Title"] = "Manage Profile";
     ViewData["ActivePage"] = ManageNavPages.ChangeProfile;
+
+<div class="text-center">
+    <h1 class="display-4">Mangae Profile</h1>
+</div>
+
+
+
+    <div class="testForms">
+        @using (Html.BeginForm("SaveProfile", "Profile", FormMethod.Post))
+        //@Model Profile
+        {
+          <div class="eventForm">
+              @Html.TextAreaFor(m => m.FirstName, new {@class = "form-control", @placeholder="Fornavn"})
+              @Html.TextAreaFor(m => m.LastName, new {@class = "form-control", @placeholder="Efternavn"})
+                <form>
+                    <div class="nativeDateTimePicker">
+                        <label asp-for="Age">Fødselsdato:</label>
+                        <input asp-for="Age">
+                        <span class="validity"></span>
+                    </div>
+                </form>
+            @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> { new SelectListItem {Text = "Male", Value = "Male"},
+                               new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, "Select Gender")
+            <input type="submit" value="Opret"/>
+            </div>
+        }
+
+    </div>
 }
 
-<h3>@ViewData["Title"]</h3>
-@*<partial name="_StatusMessage" for="StatusMessage" />*@

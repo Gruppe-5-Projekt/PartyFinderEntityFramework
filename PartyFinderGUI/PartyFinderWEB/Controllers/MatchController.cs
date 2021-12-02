@@ -42,7 +42,8 @@ namespace PartyFinderWEB.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var aspNetFK = claim.Value;
-            MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
+            var aspNetFKSlash = "/" + aspNetFK;
+            MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFKSlash);
             return foundEvent;
 
         }
