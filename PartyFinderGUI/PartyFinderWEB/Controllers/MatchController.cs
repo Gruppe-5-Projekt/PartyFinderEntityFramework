@@ -21,7 +21,7 @@ namespace PartyFinderWEB.Controllers
             return View(foundEvent);
         }
 
-        public async Task<int> LikeOrDislike(int eventId, bool isMatched)
+        public async Task<int> LikeOrDislike(int id, bool isMatched)
         {
             int insertedId = -1;
             //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
@@ -31,7 +31,7 @@ namespace PartyFinderWEB.Controllers
 
             if (aspNetFK != null)
             {
-                MatchViewModel newMatch = new MatchViewModel(aspNetFK, eventId, isMatched);
+                PostMatch newMatch = new PostMatch(aspNetFK, id, isMatched);
                 insertedId = await _mAccess.LikeOrDislike(newMatch);
             }
             else

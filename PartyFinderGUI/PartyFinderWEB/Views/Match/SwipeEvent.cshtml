@@ -3,6 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    int eventId = @Model.Id;
 }
 EventName: @Model.EventName
 <br />
@@ -15,27 +16,21 @@ End: @Model.EndDateTime
 Description: @Model.Description
 <br />
 
+
 <div class="testForms">
-        @using (Html.BeginForm("LikeOrDislike", "Match", FormMethod.Post))
+        @using (Html.BeginForm("LikeOrDislike", "Match", new { id = eventId, isMatched = true }, FormMethod.Post))
         //@Model Event
         {
-
-
-            //Kode her der sender EventId (@Model.Id) + isMatched = true
-@*            @Model.Id =*@ 
-            @Html.ActionLink("LikeOrDislike", "Match", new {id = Model.Id, IsMatched = true})
-            @Html.ActionLink("Dislike!", "Dislike", new {id = Model.Id, IsMatched = false})
+            <input type="submit" value="Like"/>
         }
 </div>
 <div class="testForms">
-        @using (Html.BeginForm("LikeOrDislike", "Match", FormMethod.Post))
+        @using (Html.BeginForm("LikeOrDislike", "Match", new { id = eventId, isMatched = false }, FormMethod.Post))
         //@Model Event
         {
-            //Kode her der sender EventId (@Model.Id) + isMatched = false
-            <input type="submit" value="Dislike"/>
+            <input type="submit" value="Disike"/>
         }
 </div>
-
 
 @*<div class="tbg">
   <div class="theader">

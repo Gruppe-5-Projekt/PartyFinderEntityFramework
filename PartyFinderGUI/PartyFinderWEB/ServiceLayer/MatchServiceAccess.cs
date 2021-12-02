@@ -119,7 +119,7 @@ namespace PartyFinderWEB.ServiceLayer
             return EventFromService;
         }
 
-        public async Task<int> LikeOrDislike(MatchViewModel matchToSave)
+        public async Task<int> LikeOrDislike(PostMatch matchToSave)
         {
             int insertedMatchId;
             //

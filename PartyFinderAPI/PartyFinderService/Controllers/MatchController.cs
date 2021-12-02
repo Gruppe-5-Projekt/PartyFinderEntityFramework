@@ -19,14 +19,13 @@ namespace PartyFinderService.Controllers
 
             _pControl = new ProfileDataControl();
         }
-        [HttpPost]
-        public ActionResult<bool> PostMatch(Match match)
+        //Vi skal have lavet en DTO der tager imod aspNetFK + 
+        /*[HttpPost]
+        public ActionResult<bool> PostMatch(MatchDataCreateDTO postEvent)
         {
-            int eventId = match.EventId;
-            int profileId = match.ProfileId;
-            bool isMatched = match.Match1;
-            return _mControl.Match(eventId, profileId, isMatched);
-        }
+            int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
+            return _mControl.Match(postEvent);
+        }*/
         [HttpGet("{aspNetFK}")]
         public ActionResult<Event> GetSpecificEvent(string aspNetFK)
         {
