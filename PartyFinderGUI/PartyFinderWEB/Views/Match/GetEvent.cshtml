@@ -1,0 +1,27 @@
+﻿@model PartyFinderWEB.Models.MatchViewModel
+@{
+    ViewData["Title"] = "GetEvent";
+}
+
+<h1>GetEvent</h1>
+
+<table class="table table-condensed table-hover">  
+    <thead>  
+        <tr>  
+            <th>@Html.DisplayNameFor(e => e.EventName)</th>  
+            <th>@Html.DisplayNameFor(e => e.EventCapacity)</th>  
+            <th>@Html.DisplayNameFor(e => e.Description)</th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+        @foreach (var ting in ViewBag.EventViewModel)  
+        {  
+            <tr>  
+                <td>@ting.EventName</td>  
+                <td>@ting.EventCapacity</td>  
+                <td>@ting.Description</td>  
+
+            </tr>  
+        }  
+    </tbody>  
+</table> 
