@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PartyFinderData.ModelLayers;
 using PartyFinderService.BusinessLogicLayer;
 using PartyFinderService.DTO;
+using PartyFinderService.DTO.MatchDTO;
 
 namespace PartyFinderService.Controllers
 {
@@ -13,27 +14,34 @@ namespace PartyFinderService.Controllers
     {
         readonly MatchDataControl _mControl;
         readonly ProfileDataControl _pControl;
+
         public MatchController()
         {
             _mControl = new MatchDataControl();
 
             _pControl = new ProfileDataControl();
         }
+
         //Vi skal have lavet en DTO der tager imod aspNetFK + 
-        /*[HttpPost]
+        [HttpPost]
         public ActionResult<bool> PostMatch(MatchDataCreateDTO postEvent)
         {
+            string aspNetFK = postEvent.AspNetFK;
             int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
-            return _mControl.Match(postEvent);
-        }*/
+            int eventId = postEvent.EventId;
+            bool isMatched = postEvent.IsMatched;
+
+            return _mControl.Match(profileId, eventId, isMatched);
+        }
+
         [HttpGet("{aspNetFK}")]
-        public ActionResult<Event> GetSpecificEvent(string aspNetFK)
+        public ActionResult<Event> GetRandomEvent(string aspNetFK)
         {
             int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
 
             ActionResult<Event> foundReturn;
             // retrieve and convert data
-            Event foundEvent = _mControl.GetSpecificEvent(profileId);
+            Event foundEvent = _mControl.GetRandomEvent(profileId);
 
             // evaluate
             if (foundEvent != null)

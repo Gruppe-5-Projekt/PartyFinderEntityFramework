@@ -81,7 +81,7 @@ namespace PartyFinderData.DatabaseLayers
             return status;
         }
 
-        public Event GetSpecificEvent(int profileId)
+        public Event GetRandomEvent(int profileId)
         {
             var db = new PartyFinderContext();
 

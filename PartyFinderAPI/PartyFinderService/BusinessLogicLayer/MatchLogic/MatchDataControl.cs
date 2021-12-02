@@ -25,18 +25,18 @@ namespace PartyFinderService.BusinessLogicLayer
             return status;
         }
 
-        public Event GetSpecificEvent(int profileId)
+        public Event GetRandomEvent(int profileId)
         {
-            Event specificEvent = null;
+            Event randomEvent = null;
             try
             {
-                specificEvent = _matchAccess.GetSpecificEvent(profileId);
+                randomEvent = _matchAccess.GetRandomEvent(profileId);
             }
             catch
             {
 
             }
-            return specificEvent;
+            return randomEvent;
         }
     }
 }

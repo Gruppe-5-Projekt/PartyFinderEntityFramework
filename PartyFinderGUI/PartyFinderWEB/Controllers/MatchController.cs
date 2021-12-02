@@ -31,7 +31,7 @@ namespace PartyFinderWEB.Controllers
 
             if (aspNetFK != null)
             {
-                PostMatch newMatch = new PostMatch(aspNetFK, id, isMatched);
+                MatchViewModel newMatch = new MatchViewModel(aspNetFK, id, isMatched);
                 insertedId = await _mAccess.LikeOrDislike(newMatch);
             }
             else

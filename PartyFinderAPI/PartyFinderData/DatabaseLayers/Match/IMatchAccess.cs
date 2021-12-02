@@ -12,6 +12,6 @@ namespace PartyFinderData.DatabaseLayers
         int CheckCurrentMatches(int EventId);
         int CheckCapacity(int eventId);
         bool CheckAndCommitMatchPublic(int profileID, int eventID, bool isMatched);
-        Event GetSpecificEvent(int profileId);
+        Event GetRandomEvent(int profileId);
     }
 }
