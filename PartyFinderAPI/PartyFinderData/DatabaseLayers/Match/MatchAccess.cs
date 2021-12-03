@@ -99,7 +99,7 @@ namespace PartyFinderData.DatabaseLayers
                 .ToList();
 
                 int r = rnd.Next(foundEvents.Count());
-                foundEvent = foundEvents.ElementAt(3);
+                foundEvent = foundEvents.ElementAt(r);
 
                 foundEvent.Matches = db.Matches
                     .Where(m => m.EventId == foundEvent.Id)

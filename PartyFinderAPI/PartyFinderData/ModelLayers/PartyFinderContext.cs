@@ -237,16 +237,6 @@ namespace PartyFinderData.ModelLayers
                 entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
 
                 entity.Property(e => e.Match1).HasColumnName("Match");
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Matches)
-                    .HasForeignKey(d => d.EventId)
-                    .HasConstraintName("FK__Match__EventID__7226EDCC");
-
-                entity.HasOne(d => d.Profile)
-                    .WithMany(p => p.Matches)
-                    .HasForeignKey(d => d.ProfileId)
-                    .HasConstraintName("FK__Match__ProfileID__731B1205");
             });
 
             modelBuilder.Entity<Profile>(entity =>
