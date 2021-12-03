@@ -12,6 +12,8 @@ namespace PartyFinderData.DatabaseLayers
     {
 
         static Random rnd = new Random();
+        private Event foundEvent;
+
         public int CheckCurrentMatches(int eventId)
         {
             var db = new PartyFinderContext();
@@ -84,42 +86,46 @@ namespace PartyFinderData.DatabaseLayers
 
         public Event GetRandomEvent(int profileId)
         {
+
             var db = new PartyFinderContext();
 
+            bool complete = false;
 
-            var foundEvent = db.Events
+            while (complete == false)
+            {
+                var foundEvents = db.Events
                 .Where(e => e.EndDateTime > DateTime.Now)
                 .Where(e => e.ProfileId != profileId)
-                .Include(m => m.Matches
-                .Where(m => m.ProfileId != profileId)
-                .OrderBy(m => EF.Functions.Random())
-                .First()
-                )
-                .SingleOrDefault();
+                .ToList();
 
-            //var matches = db.Matches
-            //                .Where(m => m.EventId == foundEvent.Id)
-            //                .Where(m => m.ProfileId != profileId)
-            //                .ToList();
+                int r = rnd.Next(foundEvents.Count());
+                foundEvent = foundEvents.ElementAt(3);
 
-            //foundEvent.Matches = matches;
-            
+                foundEvent.Matches = db.Matches
+                    .Where(m => m.EventId == foundEvent.Id)
+                    .ToList();
+
+                if(foundEvent.Matches.Count > 0)
+                {
+                    foreach (Match item in foundEvent.Matches)
+                    {
+                        if (item.ProfileId == profileId || item.ProfileId == null)
+                        {
+                            complete = false;
+                        }
+                        else
+                        {
+                            complete = true;
+                        }
+                    }
+                }
+                else
+                {
+                    complete = true;
+                }
+            }
             return foundEvent;
         }
-
-        //public int GetSpecificEventCount(Event foundEvent)
-        //{
-        //    var db = new PartyFinderContext();
-
-        //    int foundEventId = foundEvent.Id;
-
-        //    var matchCount = db.Matches
-        //                .Where(m => m.EventId == foundEventId)
-        //                .Where(m => m.Match1 == true)
-        //                .Count();
-
-        //    return matchCount;
-        //}
     }
 }
 
