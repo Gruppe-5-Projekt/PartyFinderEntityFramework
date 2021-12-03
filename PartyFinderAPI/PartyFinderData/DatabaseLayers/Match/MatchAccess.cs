@@ -1,4 +1,5 @@
-﻿using PartyFinderData.ModelLayers;
+﻿using Microsoft.EntityFrameworkCore;
+using PartyFinderData.ModelLayers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,20 +87,22 @@ namespace PartyFinderData.DatabaseLayers
             var db = new PartyFinderContext();
 
 
-            var foundEvents = db.Events
+            var foundEvent = db.Events
                 .Where(e => e.EndDateTime > DateTime.Now)
                 .Where(e => e.ProfileId != profileId)
-                .ToList();
+                .Include(m => m.Matches
+                .Where(m => m.ProfileId != profileId)
+                .OrderBy(m => EF.Functions.Random())
+                .First()
+                )
+                .SingleOrDefault();
 
-            int r = rnd.Next(foundEvents.Count());
-            var foundEvent = foundEvents.ElementAt(r);
+            //var matches = db.Matches
+            //                .Where(m => m.EventId == foundEvent.Id)
+            //                .Where(m => m.ProfileId != profileId)
+            //                .ToList();
 
-            var matches = db.Matches
-                            .Where(m => m.EventId == foundEvent.Id)
-                            .Where(m => m.ProfileId != profileId)
-                            .ToList();
-
-            foundEvent.Matches = matches;
+            //foundEvent.Matches = matches;
             
             return foundEvent;
         }
