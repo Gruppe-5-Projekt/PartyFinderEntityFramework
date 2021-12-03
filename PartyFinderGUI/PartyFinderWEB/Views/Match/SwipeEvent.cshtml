@@ -21,14 +21,14 @@ Description: @Model.Description
         @using (Html.BeginForm("LikeOrDislike", "Match", new { id = eventId, isMatched = true }, FormMethod.Post))
         //@Model Event
         {
-            <input type="submit" value="Like"/>
+            <input class="like" type="submit" value="Like"/>
         }
 </div>
 <div class="testForms">
         @using (Html.BeginForm("LikeOrDislike", "Match", new { id = eventId, isMatched = false }, FormMethod.Post))
         //@Model Event
         {
-            <input type="submit" value="Disike"/>
+            <input class="dislike" type="submit" value="Disike"/>
         }
 </div>
 
