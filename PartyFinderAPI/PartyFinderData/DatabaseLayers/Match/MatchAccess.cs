@@ -10,13 +10,18 @@ namespace PartyFinderData.DatabaseLayers
 {
     public class MatchAccess : IMatchAccess
     {
+        readonly PartyFinderContext db;
 
+        public MatchAccess()
+        {
+            db = new PartyFinderContext();
+        }
         static Random rnd = new Random();
         private Event foundEvent;
+        private int eventToRemove;
 
         public int CheckCurrentMatches(int eventId)
         {
-            var db = new PartyFinderContext();
             var allMatches = db.Matches
                 .Where(e => e.EventId == eventId)
                 .Where(m => m.Match1 == true)
@@ -25,55 +30,45 @@ namespace PartyFinderData.DatabaseLayers
         }
         public int CheckCapacity(int eventId)
         {
-            var db = new PartyFinderContext();
             var specificEvent = db.Events
                     .Where(e => e.Id == eventId)
                     .ToList().SingleOrDefault();
             int capacity = specificEvent.EventCapacity;
             return capacity;
         }
-        
+
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-         public int CheckAndCommitMatchPublic(Match match)
+        public int CheckAndCommitMatchPublic(Match match)
         {
-            var db = new PartyFinderContext();
             int eventId = match.EventId;
             int profileId = match.ProfileId;
             bool isMatched = match.Match1;
             int status = -1;
             try
             {
-                
-                if(isMatched == true)
+                if (!isMatched)
                 {
-                    //Koden tjekker på databasen om der er plads, og comitter en profil.
-                    int matchAmount = CheckCurrentMatches(eventId);
-                    int capacity = CheckCapacity(eventId);
-                    if (matchAmount < capacity)
-                    {
-                        Console.WriteLine("Inserting a new match");
-                        db.Matches
-                            .Add(match);
-                        Console.WriteLine("Breakpoint her.");
-                        //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
-                        int allMatchesNow = CheckCurrentMatches(eventId);
-                        if (allMatchesNow < capacity)
-                        {
-                            db.SaveChanges();
-                            status = 0;
-                        }
-                        else
-                        {
-                            status = -2;
-                        }
-                    }
+                    db.Matches
+                           .Add(match);
+                    db.SaveChanges();
+                    status = 0;
                 }
                 else
                 {
                     db.Matches
-                            .Add(match);
-                    db.SaveChanges();
-                    status = 0;
+                           .Add(match);
+                    int matchAmount = CheckCurrentMatches(eventId);
+                    int capacity = CheckCapacity(eventId);
+                    if (matchAmount < capacity)
+                    {
+                        db.SaveChanges();
+                        status = 0;
+                    }
+                    else
+                    {
+                        //db.Dispose();
+                        status = -2;
+                    }
                 }
             }
             catch
@@ -84,24 +79,53 @@ namespace PartyFinderData.DatabaseLayers
             return status;
         }
 
+        //Koden tjekker på databasen om der er plads, og comitter en profil.
+        //if (matchAmount < capacity)
+        //{
+        //    Console.WriteLine("Inserting a new match");
+        //    db.Matches
+        //        .Add(match);
+        //    Console.WriteLine("Breakpoint her.");
+        //    //Koden tjekker igen om der er plads og ruller tilbage hvis der er for mange.
+        //    int allMatchesNow = CheckCurrentMatches(eventId);
+        //    if (allMatchesNow < capacity)
+        //    {
+        //        db.SaveChanges();
+        //        status = 0;
+        //    }
+        //    else
+        //    {
+        //        status = -2;
+        //    }
+
         public Event GetRandomEvent(int profileId)
         {
-
-            var db = new PartyFinderContext();
-
             bool complete = false;
-
             // Så længe while loopet ikke er true, fortsætter den.
-            while (complete == false)
+            var foundEvents = db.Events
+                        .Where(e => e.EndDateTime > DateTime.Now)
+                        .Where(e => e.ProfileId != profileId)
+                        .ToList();
+
+            while (!complete)
             {
-                var foundEvents = db.Events
-                .Where(e => e.EndDateTime > DateTime.Now)
-                .Where(e => e.ProfileId != profileId)
-                .ToList();
+                eventToRemove = -1;
+                var itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
+                foundEvents.Remove(itemToRemove);
+
+                int count = foundEvents.Count;
 
                 // Vælger et tilfældigt event, af de events funktionen over lige har fundet.
-                int r = rnd.Next(foundEvents.Count());
-                foundEvent = foundEvents.ElementAt(r);
+                if (count > 0)
+                {
+                    int r = rnd.Next(count);
+                    foundEvent = foundEvents.ElementAt(r);
+                }
+                else
+                {
+                    foundEvent.Id = -1;
+                    complete = true;
+                }
 
                 // Laver en liste over matches, og placerer dem i en ICollection på eventet.
                 foundEvent.Matches = db.Matches
@@ -112,7 +136,7 @@ namespace PartyFinderData.DatabaseLayers
                 int matchAmount = CheckCurrentMatches(foundEvent.Id);
 
                 // Tjekker om der er matches på eventet.
-                if(foundEvent.Matches.Count > 0)
+                if (foundEvent.Matches.Count > 0)
                 {
                     // foreach der tjekker igennem ICollection af Matches på eventet.
                     foreach (Match item in foundEvent.Matches)
@@ -120,6 +144,7 @@ namespace PartyFinderData.DatabaseLayers
                         // Tjekker at man ikke allerede er matched.
                         if (item.ProfileId == profileId)
                         {
+                            eventToRemove = item.EventId;
                             complete = false;
                         }
                         else
@@ -127,6 +152,7 @@ namespace PartyFinderData.DatabaseLayers
                             // Tjekker om der er plads på eventet.
                             if (matchAmount == capacity)
                             {
+                                eventToRemove = item.EventId;
                                 complete = false;
                             }
                             else
@@ -141,6 +167,7 @@ namespace PartyFinderData.DatabaseLayers
                 {
                     complete = true;
                 }
+
             }
             return foundEvent;
         }

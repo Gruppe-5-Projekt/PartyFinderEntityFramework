@@ -9,10 +9,14 @@ namespace PartyFinderData.DatabaseLayers
 {
     public class ProfileAccess : IProfileAccess
     {
+        readonly PartyFinderContext db;
 
+        public ProfileAccess()
+        {
+            db = new PartyFinderContext();
+        }
         public int CreateProfile(Profile profileToAdd)
         {
-            var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new profile ");
             var exists = db.Profiles
                       .Where(p => p.AspNetUserForeignKey == profileToAdd.AspNetUserForeignKey);
@@ -38,7 +42,6 @@ namespace PartyFinderData.DatabaseLayers
         public void DeleteProfileById(int id)
         {
             Console.WriteLine("Deleteting profile");
-            var db = new PartyFinderContext();
             var removeByID = db.Profiles
                         .Where(e => e.Id == id).SingleOrDefault();
             db.Remove(removeByID);
@@ -48,7 +51,6 @@ namespace PartyFinderData.DatabaseLayers
         public List<Profile> GetProfileAll()
         {
             Console.WriteLine("Getting all profiles");
-            var db = new PartyFinderContext();
             var allProfiles = db.Profiles
                         .ToList();
             return allProfiles;
@@ -57,7 +59,6 @@ namespace PartyFinderData.DatabaseLayers
         public Profile GetProfileByID(int id)
         {
             Console.WriteLine("Finding profile");
-            var db = new PartyFinderContext();
             var foundProfile = db.Profiles
                        .Where(e => e.Id == id).SingleOrDefault();
             return foundProfile;
@@ -65,7 +66,6 @@ namespace PartyFinderData.DatabaseLayers
 
         public int GetProfileIdByUserIdValue(string aspNetFK)
         {
-            var db = new PartyFinderContext();
             var profile = db.Profiles
                         .Where(p => p.AspNetUserForeignKey == aspNetFK)
                         .SingleOrDefault();
@@ -76,7 +76,6 @@ namespace PartyFinderData.DatabaseLayers
         public void UpdateProfile(int id, Profile updatedProfile)
         {
             Console.WriteLine("Updating profile");
-            var db = new PartyFinderContext();
             var eventToUpdate = db.Profiles
                 .Where(e => e.Id == id).SingleOrDefault();
             eventToUpdate = updatedProfile;

@@ -14,11 +14,25 @@ namespace PartyFinderWEB.Controllers
         }
         public async Task<ActionResult> SwipeEvent()
         {
-            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var aspNetFK = claim.Value;
-            MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
-            return View(foundEvent);
+            try
+            {
+                var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+                var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+                var aspNetFK = claim.Value;
+                MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
+                if (foundEvent == null)
+                {
+                    return View(null); //Skal sende en til forsiden? Eller andet, med en besked om, at der ikke er nye events.
+                }
+                else
+                {
+                    return View(foundEvent);
+                }
+            }
+            catch
+            {
+                return View(null);
+            }
         }
 
         public async Task<int> LikeOrDislike(int id, bool isMatched)

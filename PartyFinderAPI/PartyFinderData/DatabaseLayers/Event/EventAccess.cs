@@ -9,10 +9,15 @@ namespace PartyFinderData.DatabaseLayers
 {
     public class EventAccess : IEventAccess
     {
+        readonly PartyFinderContext db;
+
+        public EventAccess()
+        {
+            db = new PartyFinderContext();
+        }
 
         public int CreateEvent(Event eventToAdd)
         {
-            var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new event");
             try
             {
@@ -30,7 +35,6 @@ namespace PartyFinderData.DatabaseLayers
         {
             bool successful = false;
             Console.WriteLine("Deleteting event");
-            var db = new PartyFinderContext();
             int id = eventToDelete.Id;
             var removeByID = db.Events
                         .Where(e => e.Id == id)
@@ -51,7 +55,6 @@ namespace PartyFinderData.DatabaseLayers
         public List<Event> GetEventAll()
         {
             Console.WriteLine("Getting all events");
-            var db = new PartyFinderContext();
             var allEvents = db.Events
                         .ToList();
             return allEvents;
@@ -71,7 +74,6 @@ namespace PartyFinderData.DatabaseLayers
         {
             bool successful = false;
             Console.WriteLine("Updating event");
-            var db = new PartyFinderContext();
             //int id = updatedEvent.Id;
             //var eventToUpdate = db.Events
             //    .Where(e => e.Id == id)
