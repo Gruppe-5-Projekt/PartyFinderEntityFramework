@@ -106,17 +106,18 @@ namespace PartyFinderData.DatabaseLayers
                         .Where(e => e.EndDateTime > DateTime.Now)
                         .Where(e => e.ProfileId != profileId)
                         .ToList();
-
             while (!complete)
             {
-                eventToRemove = -1;
-                var itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
-                foundEvents.Remove(itemToRemove);
-
+                if (eventToRemove > 0)
+                {
+                    Event itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
+                    foundEvents.Remove(itemToRemove);
+                }
                 int count = foundEvents.Count;
 
+
                 // Vælger et tilfældigt event, af de events funktionen over lige har fundet.
-                if (count > 0)
+                if (count > 1)
                 {
                     int r = rnd.Next(count);
                     foundEvent = foundEvents.ElementAt(r);
@@ -132,11 +133,11 @@ namespace PartyFinderData.DatabaseLayers
                     .Where(m => m.EventId == foundEvent.Id)
                     .ToList();
 
-                int capacity = CheckCapacity(foundEvent.Id);
-                int matchAmount = CheckCurrentMatches(foundEvent.Id);
+                int capacity = foundEvent.EventCapacity;
+                int matchAmount = foundEvent.Matches.Count;
 
                 // Tjekker om der er matches på eventet.
-                if (foundEvent.Matches.Count > 0)
+                if (matchAmount > 0)
                 {
                     // foreach der tjekker igennem ICollection af Matches på eventet.
                     foreach (Match item in foundEvent.Matches)
