@@ -91,6 +91,7 @@ namespace PartyFinderData.DatabaseLayers
 
             bool complete = false;
 
+            // Så længe while loopet ikke er true, fortsætter den.
             while (complete == false)
             {
                 var foundEvents = db.Events
@@ -98,9 +99,11 @@ namespace PartyFinderData.DatabaseLayers
                 .Where(e => e.ProfileId != profileId)
                 .ToList();
 
+                // Vælger et tilfældigt event, af de events funktionen over lige har fundet.
                 int r = rnd.Next(foundEvents.Count());
                 foundEvent = foundEvents.ElementAt(r);
 
+                // Laver en liste over matches, og placerer dem i en ICollection på eventet.
                 foundEvent.Matches = db.Matches
                     .Where(m => m.EventId == foundEvent.Id)
                     .ToList();
@@ -108,17 +111,20 @@ namespace PartyFinderData.DatabaseLayers
                 int capacity = CheckCapacity(foundEvent.Id);
                 int matchAmount = CheckCurrentMatches(foundEvent.Id);
 
-                //foundEvent.Matches.Count < capacity
+                // Tjekker om der er matches på eventet.
                 if(foundEvent.Matches.Count > 0)
                 {
+                    // foreach der tjekker igennem ICollection af Matches på eventet.
                     foreach (Match item in foundEvent.Matches)
                     {
+                        // Tjekker at man ikke allerede er matched.
                         if (item.ProfileId == profileId)
                         {
                             complete = false;
                         }
                         else
                         {
+                            // Tjekker om der er plads på eventet.
                             if (matchAmount == capacity)
                             {
                                 complete = false;
@@ -130,6 +136,7 @@ namespace PartyFinderData.DatabaseLayers
                         }
                     }
                 }
+                // Hvis der ikke er matches, tilføjes man uanset, da vi antager at der altid er plads på et event med 0 matches.
                 else
                 {
                     complete = true;
