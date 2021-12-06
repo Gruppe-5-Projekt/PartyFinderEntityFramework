@@ -10,16 +10,15 @@ namespace PartyFinderData.DatabaseLayers
     public class ProfileAccess : IProfileAccess
     {
 
-        public bool CreateProfile(Profile profileToAdd)
+        public int CreateProfile(Profile profileToAdd)
         {
-            bool status;
             var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new profile ");
             var exists = db.Profiles
                       .Where(p => p.AspNetUserForeignKey == profileToAdd.AspNetUserForeignKey);
             if (exists.Any())
             {
-                status = false;
+                return -2;
             }
             else
             {
@@ -27,14 +26,13 @@ namespace PartyFinderData.DatabaseLayers
                 {
                     db.Add(profileToAdd);
                     db.SaveChanges();
-                    status = true;
+                    return profileToAdd.Id;
                 }
                 catch
                 {
-                    status = false;
+                    return -1;
                 }
             }
-            return status;
         }
 
         public void DeleteProfileById(int id)

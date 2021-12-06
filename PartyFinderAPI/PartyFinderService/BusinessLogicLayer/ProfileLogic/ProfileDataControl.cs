@@ -11,18 +11,16 @@ namespace PartyFinderService.BusinessLogicLayer
         {
             _profileAccess = new ProfileAccess();
         }
-        public bool Add(Profile profileToAdd)
+        public int Add(Profile profileToAdd)
         {
-            bool status;
             try
             {
-                status = _profileAccess.CreateProfile(profileToAdd);
+                return _profileAccess.CreateProfile(profileToAdd);
             }
             catch
             {
-                status = false;
+                return -1;
             }
-            return status;
         }
 
         public int GetProfileByUserIdValue(string aspNetFK)

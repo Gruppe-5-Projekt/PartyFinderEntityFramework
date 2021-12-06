@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using PartyFinderData.ModelLayers;
 using PartyFinderService.BusinessLogicLayer;
-using PartyFinderService.BusinessLogicLayer;
 using PartyFinderService.DTO;
 using System.Collections.Generic;
 
@@ -40,7 +39,7 @@ namespace PartyFinderService.Controllers
             return Ok(foundDTOs); // Statuscode 200
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<EventDataReadDTO> Get(int Id)
         {
             ActionResult<EventDataReadDTO> foundReturn;
@@ -52,7 +51,7 @@ namespace PartyFinderService.Controllers
             return Ok(foundDTOs); // Statuscode 200
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult<String> Delete(int id)
         {
             Event foundEvent = _eControl.Get(id);
@@ -72,7 +71,8 @@ namespace PartyFinderService.Controllers
                 int profileId = _pControl.GetProfileByUserIdValue(loggedInId);
                 postEvent.ProfileId = profileId;
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);
-                _eControl.Add(dbEvent);
+                int eventId = _eControl.Add(dbEvent);
+                if (eventId == -1) return new StatusCodeResult(500);
                 return new StatusCodeResult(200);
 
             }

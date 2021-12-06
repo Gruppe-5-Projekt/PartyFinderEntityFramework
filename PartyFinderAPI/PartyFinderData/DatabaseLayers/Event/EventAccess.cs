@@ -10,22 +10,20 @@ namespace PartyFinderData.DatabaseLayers
     public class EventAccess : IEventAccess
     {
 
-        public bool CreateEvent(Event eventToAdd)
+        public int CreateEvent(Event eventToAdd)
         {
-            bool successful = false;
             var db = new PartyFinderContext();
             Console.WriteLine("Inserting a new event");
             try
             {
                 db.Add(eventToAdd);
                 db.SaveChanges();
-                successful = true;
+                return eventToAdd.Id;
             }
             catch
             {
-                successful = false;
+                return -1;
             }
-            return successful;
         }
 
         public bool DeleteEventById(Event eventToDelete)

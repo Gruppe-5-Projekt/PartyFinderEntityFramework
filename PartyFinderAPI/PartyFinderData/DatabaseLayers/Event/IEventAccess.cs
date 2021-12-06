@@ -11,7 +11,7 @@ namespace PartyFinderData.DatabaseLayers
     {
         Event GetEventByID(int id);
         List<Event> GetEventAll();
-        bool CreateEvent(Event eventToAdd);
+        int CreateEvent(Event eventToAdd);
         bool UpdateEvent(Event updatedEvent);
         bool DeleteEventById(Event eventToDelete);
     }

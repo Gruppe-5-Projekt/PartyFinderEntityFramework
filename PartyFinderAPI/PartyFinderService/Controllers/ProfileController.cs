@@ -28,7 +28,7 @@ namespace PartyFinderService.Controllers
         }
 
         // GET api/<ProfileController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public string Get(int id)
         {
             return "value";
@@ -42,16 +42,10 @@ namespace PartyFinderService.Controllers
             try
             {
                 Profile dbProfile = ModelConversion.ProfileDataCreateDTOConvert.ToProfile(postProfile);
-                status = _pControl.Add(dbProfile);
-                if (status == true)
-                {
-                    return new StatusCodeResult(200);
-                }
-                else
-                {
-                    return new StatusCodeResult(403);
-                }
-
+                int profileId = _pControl.Add(dbProfile);
+                if (profileId == -1) return new StatusCodeResult(500);
+                if (profileId == -2) return new StatusCodeResult(403);
+                return new StatusCodeResult(200);
             }
             catch
             {
@@ -60,13 +54,13 @@ namespace PartyFinderService.Controllers
         }
 
         // PUT api/<ProfileController>/5
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<ProfileController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public void Delete(int id)
         {
         }

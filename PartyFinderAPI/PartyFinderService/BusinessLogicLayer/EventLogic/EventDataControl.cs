@@ -15,19 +15,16 @@ namespace PartyFinderService.BusinessLogicLayer
         }
 
 
-        public bool Add(Event eventToAdd)
+        public int Add(Event eventToAdd)
         {
-            bool status = false;
             try
             {
-                _eventAccess.CreateEvent(eventToAdd);
-                status = true;
+                return _eventAccess.CreateEvent(eventToAdd);
             }
             catch
             {
-                status = false;
+                return -1;
             }
-            return status;
         }
 
 
