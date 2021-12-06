@@ -29,28 +29,15 @@ namespace PartyFinderService.Controllers
         [HttpGet]
         public ActionResult<List<EventDataReadDTO>> Get()
         {
-            ActionResult<List<EventDataReadDTO>> foundReturn;
             // retrieve and convert data
             List<Event> foundEvents = _eControl.Get();
             List<EventDataReadDTO> foundDTOs = ModelConversion.EventDataReadDTOConvert.FromEventCollection(foundEvents);
             // evaluate
-            if (foundDTOs != null)
-            {
-                if (foundDTOs.Count > 0)
-                {
-                    foundReturn = Ok(foundDTOs);                 // Statuscode 200
-                }
-                else
-                {
-                    foundReturn = new StatusCodeResult(204);    // Ok, but no content
-                }
-            }
-            else
-            {
-                foundReturn = new StatusCodeResult(500);        // Internal server error
-            }
-            // send response back to client
-            return foundReturn;
+
+            if (foundDTOs is null) return new StatusCodeResult(500); // internal server error
+            if (foundDTOs.Count() is 0) return new StatusCodeResult(204); // Ok, but no content
+
+            return Ok(foundDTOs); // Statuscode 200
         }
 
         [HttpGet("{id}")]
@@ -60,30 +47,19 @@ namespace PartyFinderService.Controllers
             Event foundEvent = _eControl.Get(Id);
             EventDataReadDTO foundDTOs = ModelConversion.EventDataReadDTOConvert.FromEvent(foundEvent);
 
-            if (foundDTOs != null)
-            {
-                foundReturn = Ok(foundDTOs);                 // Statuscode 200  
-            }
-            else
-            {
-                foundReturn = new StatusCodeResult(204);    // Ok, but no content
-            }
-            return foundReturn;
+            if (foundDTOs is null) return new StatusCodeResult(500); // internal server error
+
+            return Ok(foundDTOs); // Statuscode 200
         }
 
         [HttpDelete("{id}")]
         public ActionResult<String> Delete(int id)
         {
             Event foundEvent = _eControl.Get(id);
-            if (foundEvent != null)
-            {
-                _eControl.Delete(foundEvent);
-                return new StatusCodeResult(200);
-            }
-            else
-            {
-                return new StatusCodeResult(204);
-            }
+
+            if (foundEvent is null) return new StatusCodeResult(500); // internal server error
+
+            return Ok(foundEvent); // Statuscode 200
 
         }
 
