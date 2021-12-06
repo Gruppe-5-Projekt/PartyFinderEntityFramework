@@ -12,15 +12,16 @@ namespace PartyFinderService.BusinessLogicLayer
         {
             _matchAccess = new MatchAccess();
         }
-        public bool Match(Match match)
+        public int Match(Match match)
         {
-            bool status = false;
+            int status = -1;
             try
             {
                 status = _matchAccess.CheckAndCommitMatchPublic(match);
             }
             catch
             {
+                status = -1;
             }
             return status;
         }

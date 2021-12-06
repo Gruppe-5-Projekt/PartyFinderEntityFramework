@@ -24,41 +24,46 @@ namespace PartyFinderService.Controllers
 
         //Vi skal have lavet en DTO der tager imod aspNetFK + 
         [HttpPost]
-        public ActionResult<bool> PostMatch(MatchDataCreateDTO postEvent)
+        public ActionResult<string> PostMatch(MatchDataCreateDTO postEvent)
         {
-            postEvent.ProfileId = _pControl.GetProfileByUserIdValue(postEvent.AspNetFK);
-            Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
+            try
+            {
+                postEvent.ProfileId = _pControl.GetProfileByUserIdValue(postEvent.AspNetFK);
+                Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
 
-            return _mControl.Match(dbMatch);
+                int matchPosted = _mControl.Match(dbMatch);
+                if (matchPosted == -1) return new StatusCodeResult(500);
+                if (matchPosted == -2) return new StatusCodeResult(403);
+                return new StatusCodeResult(200);
+            }
+            catch
+            {
+                return new StatusCodeResult(404);
+            }
+
+
         }
 
         [HttpGet("{aspNetFK}")]
         public ActionResult<Event> GetRandomEvent(string aspNetFK)
         {
-            int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
-
-            ActionResult<Event> foundReturn;
-            // retrieve and convert data
-            Event foundEvent = _mControl.GetRandomEvent(profileId);
-
-            // evaluate
-            if (foundEvent != null)
+            try
             {
-                if (foundEvent.Id > 0)
-                {
-                    foundReturn = Ok(foundEvent);                 // Statuscode 200
-                }
-                else
-                {
-                    foundReturn = new StatusCodeResult(204);    // Ok, but no content
-                }
+                int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
+                ActionResult<Event> foundReturn;
+                // retrieve and convert data
+                Event foundEvent = _mControl.GetRandomEvent(profileId);
+
+                if (foundEvent is null) return new StatusCodeResult(500); // internal server error
+                if (foundEvent.Id is <= 0) return new StatusCodeResult(204); // Ok, but no content
+                return Ok(foundEvent); // Statuscode 200
             }
-            else
+            catch
             {
-                foundReturn = new StatusCodeResult(500);        // Internal server error
+                return new StatusCodeResult(404);
             }
-            // send response back to client
-            return foundReturn;
+
+            
         }
     }
 }

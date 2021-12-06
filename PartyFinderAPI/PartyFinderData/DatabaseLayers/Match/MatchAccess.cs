@@ -34,13 +34,13 @@ namespace PartyFinderData.DatabaseLayers
         }
         
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-         public bool CheckAndCommitMatchPublic(Match match)
+         public int CheckAndCommitMatchPublic(Match match)
         {
             var db = new PartyFinderContext();
-            bool status = false;
             int eventId = match.EventId;
             int profileId = match.ProfileId;
             bool isMatched = match.Match1;
+            int status = -1;
             try
             {
                 
@@ -60,11 +60,11 @@ namespace PartyFinderData.DatabaseLayers
                         if (allMatchesNow < capacity)
                         {
                             db.SaveChanges();
-                            status = true;
+                            status = 0;
                         }
                         else
                         {
-                            status = false;
+                            status = -2;
                         }
                     }
                 }
@@ -73,12 +73,12 @@ namespace PartyFinderData.DatabaseLayers
                     db.Matches
                             .Add(match);
                     db.SaveChanges();
-                    status = true;
+                    status = 0;
                 }
             }
             catch
             {
-                status = false;
+                status = -1;
             }
 
             return status;
