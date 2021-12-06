@@ -47,9 +47,9 @@ namespace PartyFinderData.DatabaseLayers
                 if(isMatched == true)
                 {
                     //Koden tjekker på databasen om der er plads, og comitter en profil.
-                    int allMatches = CheckCurrentMatches(eventId);
+                    int matchAmount = CheckCurrentMatches(eventId);
                     int capacity = CheckCapacity(eventId);
-                    if (allMatches < capacity)
+                    if (matchAmount < capacity)
                     {
                         Console.WriteLine("Inserting a new match");
                         db.Matches
@@ -105,17 +105,28 @@ namespace PartyFinderData.DatabaseLayers
                     .Where(m => m.EventId == foundEvent.Id)
                     .ToList();
 
+                int capacity = CheckCapacity(foundEvent.Id);
+                int matchAmount = CheckCurrentMatches(foundEvent.Id);
+
+                //foundEvent.Matches.Count < capacity
                 if(foundEvent.Matches.Count > 0)
                 {
                     foreach (Match item in foundEvent.Matches)
                     {
-                        if (item.ProfileId == profileId || item.ProfileId == null)
+                        if (item.ProfileId == profileId)
                         {
                             complete = false;
                         }
                         else
                         {
-                            complete = true;
+                            if (matchAmount == capacity)
+                            {
+                                complete = false;
+                            }
+                            else
+                            {
+                                complete = true;
+                            }
                         }
                     }
                 }
