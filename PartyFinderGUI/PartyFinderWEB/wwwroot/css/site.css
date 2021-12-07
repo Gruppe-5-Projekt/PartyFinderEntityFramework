@@ -309,3 +309,15 @@ Swipe Template
     font-style: italic;
 }
 
+
+/************
+ *SwipeEvent*
+ ************
+*/
+
+.seh1 {
+    font-size: 30px;
+    text-align: center;
+    position: center;
+    color: darkred;
+}
