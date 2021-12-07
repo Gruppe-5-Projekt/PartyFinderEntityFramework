@@ -91,6 +91,8 @@ namespace PartyFinderService.Controllers
             {
                 string loggedInId = postEvent.AspNetFK;
                 int profileId = _pControl.GetProfileByUserIdValue(loggedInId);
+                if (profileId == -1) return new StatusCodeResult(500);
+
                 postEvent.ProfileId = profileId;
                 Event dbEvent = ModelConversion.EventDataCreateDTOConvert.ToEvent(postEvent);
                 int eventId = _eControl.Add(dbEvent);

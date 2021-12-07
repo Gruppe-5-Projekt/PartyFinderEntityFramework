@@ -117,7 +117,7 @@ namespace PartyFinderData.DatabaseLayers
 
 
                 // Vælger et tilfældigt event, af de events funktionen over lige har fundet.
-                if (count > 1)
+                if (count > 0)
                 {
                     int r = rnd.Next(count);
                     foundEvent = foundEvents.ElementAt(r);

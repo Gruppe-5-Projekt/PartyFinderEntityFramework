@@ -66,11 +66,18 @@ namespace PartyFinderData.DatabaseLayers
 
         public int GetProfileIdByUserIdValue(string aspNetFK)
         {
-            var profile = db.Profiles
+                var profile = db.Profiles
                         .Where(p => p.AspNetUserForeignKey == aspNetFK)
                         .SingleOrDefault();
-            int profileId = profile.Id;
-            return profileId;
+            if (profile == null)
+            {
+                return -1;
+            }
+            else
+            {
+                int profileId = profile.Id;
+                return profileId;
+            }
         }
 
         public void UpdateProfile(int id, Profile updatedProfile)

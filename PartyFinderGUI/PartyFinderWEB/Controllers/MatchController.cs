@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PartyFinderWEB.Models;
 using PartyFinderWEB.ServiceLayer;
 using System.Security.Claims;
@@ -12,6 +13,8 @@ namespace PartyFinderWEB.Controllers
         {
             _mAccess = new MatchServiceAccess();
         }
+
+        [Authorize]
         public async Task<ActionResult> SwipeEvent()
         {
             try
@@ -20,14 +23,7 @@ namespace PartyFinderWEB.Controllers
                 var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
                 var aspNetFK = claim.Value;
                 MatchViewModel foundEvent = await _mAccess.GetEvent(aspNetFK);
-                if (foundEvent == null)
-                {
-                    return View(null); //Skal sende en til forsiden? Eller andet, med en besked om, at der ikke er nye events.
-                }
-                else
-                {
                     return View(foundEvent);
-                }
             }
             catch
             {

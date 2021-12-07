@@ -29,6 +29,8 @@ namespace PartyFinderService.Controllers
             try
             {
                 postEvent.ProfileId = _pControl.GetProfileByUserIdValue(postEvent.AspNetFK);
+                if (postEvent.ProfileId == -1) return new StatusCodeResult(500);
+
                 Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
 
                 int matchPosted = _mControl.Match(dbMatch);
@@ -50,12 +52,14 @@ namespace PartyFinderService.Controllers
             try
             {
                 int profileId = _pControl.GetProfileByUserIdValue(aspNetFK);
+                if (profileId == -1) return new StatusCodeResult(500);
+
                 ActionResult<Event> foundReturn;
                 // retrieve and convert data
                 Event foundEvent = _mControl.GetRandomEvent(profileId);
 
                 if (foundEvent is null) return new StatusCodeResult(500); // internal server error
-                if (foundEvent.Id is <= 0) return new StatusCodeResult(204); // Ok, but no content
+                if (foundEvent.Id is -1) return new StatusCodeResult(204); // Ok, but no content
                 return Ok(foundEvent); // Statuscode 200
             }
             catch
