@@ -22,6 +22,8 @@
     {
         <h1 class=seh1 >@status</h1>
     }
+    else 
+    {
 <br />
 @eventName
 <br />
@@ -33,7 +35,7 @@
 <br />
 @desc
 <br />
-
+    }
 
 <div class="testForms">
     @using (Html.BeginForm("LikeOrDislike", "Match", new { @id, isMatched = true }, FormMethod.Post))
