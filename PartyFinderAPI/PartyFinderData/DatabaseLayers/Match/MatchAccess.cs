@@ -106,7 +106,7 @@ namespace PartyFinderData.DatabaseLayers
                     .ToList();
                 int capacity = foundEvent.EventCapacity;
                 int matchAmount = CheckCurrentMatches(foundEvent.Id);
-                if (matchAmount > 0)
+                if (matchAmount > 0 && matchAmount != capacity)
                 {
                     var matchInfo = db.Matches
                     .Where(m => m.EventId == foundEvent.Id)
