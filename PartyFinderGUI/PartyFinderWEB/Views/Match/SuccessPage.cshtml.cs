@@ -1,14 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PartyFinderWEB.Areas.Identity.Pages.Account.Manage
+namespace PartyFinderWEB.Views.Match
 {
-    public class Index1Model : PageModel
+    public class SuccessPageModel : PageModel
     {
         public void OnGet()
         {
         }
-
-
     }
 }

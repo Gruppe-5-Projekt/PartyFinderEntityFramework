@@ -43,9 +43,11 @@
     {
         if (status == null)
         {
-            <input class="like" type="submit" value="Like" />
+            <input class="like" type="submit" value="Like" onclick="like()"/>
+            
         }
     }
+    <p class="likep">Liked!</p>
 </div>
 <div class="testForms">
     @using (Html.BeginForm("LikeOrDislike", "Match", new { @id, isMatched = false }, FormMethod.Post))

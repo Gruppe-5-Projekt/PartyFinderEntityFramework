@@ -31,10 +31,25 @@ namespace PartyFinderWEB.Controllers
             }
         }
 
-        public async Task<int> LikeOrDislike(int id, bool isMatched)
+        public IActionResult Liked()
+        {
+            return View();
+        }
+
+        public IActionResult Disliked()
+        {
+            return View();
+        }
+
+        public IActionResult MaxCapacity()
+        {
+            return View();
+        }
+
+
+        public async Task<ActionResult> LikeOrDislike(int id, bool isMatched)
         {
             int insertedId = -1;
-            //HOW, database user != database profile. Hvordan hækler vi dem sammen? Identity er en string, men bliver converted til en int?
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var aspNetFK = claim.Value;
@@ -43,13 +58,25 @@ namespace PartyFinderWEB.Controllers
             {
                 MatchViewModel newMatch = new MatchViewModel(aspNetFK, id, isMatched);
                 insertedId = await _mAccess.LikeOrDislike(newMatch);
+                if (insertedId == 0)
+                {
+                    return RedirectToAction("Liked", "Match");
+                }
+
+                else if (insertedId == -1)
+                {
+                    return RedirectToAction("Disliked", "Match");
+                }
+                else if (insertedId == -2)
+                {
+                    return RedirectToAction("MaxCapacity", "Match");
+                }
             }
             else
             {
 
             }
-            return insertedId;
-            //return View("CreatedEvent", insertedId as object);
+            return RedirectToAction("SwipeEvent", "Match");
         }
         
     }

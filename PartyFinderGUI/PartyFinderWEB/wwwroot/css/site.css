@@ -321,3 +321,9 @@ Swipe Template
     position: center;
     color: darkred;
 }
+
+.likep {
+    font-size: 10px;
+    color: green;
+    display: none;
+}

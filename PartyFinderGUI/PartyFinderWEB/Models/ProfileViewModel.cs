@@ -17,17 +17,13 @@ namespace PartyFinderWEB.Models
         }
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "First name is required.")]
-        [Display(Name = "First name")]
+        [Display(Name = "FirstName"), Required(ErrorMessage = "First name is required.")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Last name is required.")]
-        [Display(Name = "Last name")]
+        [Display(Name = "LastName"), Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "Please set your birth date.")]
-        [Display(Name = "Birth date")]
+        [Display(Name = "Age"), Required(ErrorMessage = "Please set your birth date.")]
         public DateTime Age { get; set; }
-        [Required(ErrorMessage = "Please specify your gender.")]
-        [Display(Name = "Gender")]
+        [Display(Name = "Gender"), Required(ErrorMessage = "Please specify your gender.")]
         public string Gender { get; set; }
         public string Description { get; set; } 
         public bool IsBanned { get; set; }

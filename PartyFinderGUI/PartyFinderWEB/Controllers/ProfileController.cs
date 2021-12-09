@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PartyFinderWEB.Models;
 using PartyFinderWEB.ServiceLayer;
 using System.Security.Claims;
@@ -8,7 +9,7 @@ namespace PartyFinderWEB.Controllers
 {
     public class ProfileController : Controller
     {
-        
+
         ProfileServiceAccess _pAccess;
         public string ReturnUrl { get; set; }
 
@@ -17,13 +18,14 @@ namespace PartyFinderWEB.Controllers
             _pAccess = new ProfileServiceAccess();
         }
 
-        public IActionResult CreateProfile()
+        public IActionResult ChangeProfile()
         {
-            return View();
+            ModelState.AddModelError("CustomError", "Please specify your gender");
+            return LocalRedirect("/Identity/Account/Manage/ChangeProfile");
         }
 
         [Authorize]
-        public async Task<ActionResult> SaveProfile(string firstName, string lastName, DateTime age, string gender, string returnUrl = null)
+        public async Task<ActionResult> SaveProfile(string firstName, string lastName, DateTime age, string gender, string? returnUrl = null)
         {
             int insertedId = -1;
 
@@ -39,21 +41,23 @@ namespace PartyFinderWEB.Controllers
 
             ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, description, isBanned, aspNetFK);
             insertedId = await _pAccess.SaveProfile(newProfile);
-            if (insertedId == 0)
+            if (insertedId == 0 || ModelState.IsValid)
             {
                 returnUrl = Url.Content("~/Match/SwipeEvent");
-            } 
-                else 
-                {
-                //You must be logged in to create a profile.
-                //You already own a profile.
-                TempData["Message"] = "An error occured";
-                }
-   
-            
-            return LocalRedirect(returnUrl);
+                return LocalRedirect(returnUrl);
+
+
+            }
+            else
+            {
+                return RedirectToAction("ChangeProfile", "Profile");
+            }
+
+
+
 
         }
-        
+
     }
 }
+

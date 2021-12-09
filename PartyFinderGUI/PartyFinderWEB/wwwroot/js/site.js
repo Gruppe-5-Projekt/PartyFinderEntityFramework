@@ -8,3 +8,9 @@ function welcome() {
 function loginPage() {
     window.open("/Identity/Account/Login", "_self");
 }
+function like() {
+    var x = document.getElementById("likep");
+    if (x.style.display == "none") {
+        x.style.display == "block";
+    }
+}

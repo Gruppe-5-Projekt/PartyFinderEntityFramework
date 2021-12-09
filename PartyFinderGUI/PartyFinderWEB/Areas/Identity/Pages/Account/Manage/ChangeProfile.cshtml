@@ -3,8 +3,10 @@
 @model PartyFinderWEB.Models.ProfileViewModel
 
 @{
+    
     ViewData["Title"] = "Manage Profile";     //Vi burde få rykket der her over på en CreateProfile igen.
     ViewData["ActivePage"] = ManageNavPages.ChangeProfile;
+    }
 
 <div class="text-center">
     <h1 class="display-4">Manage Profile</h1>
@@ -16,23 +18,27 @@
         @using (Html.BeginForm("SaveProfile", "Profile", FormMethod.Post))
         //@Model Profile
         {
+            @Html.ValidationSummary() 
           <div class="eventForm">
-              @Html.TextAreaFor(m => m.FirstName, new {@class = "form-control", @placeholder="Fornavn"}) @Html.ValidationMessageFor(model => model.FirstName)
-              @Html.TextAreaFor(m => m.LastName, new {@class = "form-control", @placeholder="Efternavn"}) @Html.ValidationMessageFor(model => model.LastName)
+              @Html.TextAreaFor(m => m.FirstName, new {@class = "form-control", required="required", @placeholder="Fornavn"}) 
+              @Html.ValidationMessageFor(m => m.FirstName, "", new {@class = "text-danger"})
+              @Html.TextAreaFor(m => m.LastName, new {@class = "form-control", required="required", @placeholder="Efternavn"}) 
+              @Html.ValidationMessageFor(m => m.LastName, "", new {@class = "text-danger"})
                 <form>
                     <div class="nativeDateTimePicker">
-                        <label asp-for="Age">Fødselsdato:</label>
-                        <input asp-for="Age">
+                        <label asp-for="Age", required="">Fødselsdato:</label>
+                        <input asp-for="Age", type="date" id="date" value="2000-01-01" required="">
                         <span class="validity"></span>
                     </div>
                 </form>
             @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> { new SelectListItem {Text = "Male", Value = "Male"},
                                new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, 
-                               "Select Gender") @Html.ValidationMessageFor(model => model.Gender)
+                               "Select Gender") 
+                               @Html.ValidationMessageFor(model => model.Gender)
             <input class=createProfileSubmit type="submit" value="Opret"/>
             </div>
         }
-
+        @Html.ValidationMessage("CustomError")
     </div>
-}
+
 
