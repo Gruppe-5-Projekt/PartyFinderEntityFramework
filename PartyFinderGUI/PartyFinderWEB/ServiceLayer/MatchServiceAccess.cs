@@ -141,6 +141,10 @@ namespace PartyFinderWEB.ServiceLayer
                 }
                     else if (response.IsSuccessStatusCode.Equals(201))
                 {
+                    insertedMatchId = -1;
+                }
+                    else if (response.IsSuccessStatusCode.Equals(403))
+                {
                     insertedMatchId = -2;
                 }
                 else
