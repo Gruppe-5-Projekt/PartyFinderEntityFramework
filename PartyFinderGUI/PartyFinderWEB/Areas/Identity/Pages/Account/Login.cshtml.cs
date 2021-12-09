@@ -115,6 +115,7 @@ namespace PartyFinderWEB.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    returnUrl = Url.Content("~/Identity/Account/Manage/ChangeProfile");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

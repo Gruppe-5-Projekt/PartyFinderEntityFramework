@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PartyFinderWEB.Models;
 using PartyFinderWEB.ServiceLayer;
 using System.Security.Claims;
@@ -9,6 +10,7 @@ namespace PartyFinderWEB.Controllers
     {
         
         ProfileServiceAccess _pAccess;
+        public string ReturnUrl { get; set; }
 
         public ProfileController()
         {
@@ -20,29 +22,36 @@ namespace PartyFinderWEB.Controllers
             return View();
         }
 
-        
-        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, string gender)
+        [Authorize]
+        public async Task<ActionResult> SaveProfile(string firstName, string lastName, DateTime age, string gender, string returnUrl = null)
         {
             int insertedId = -1;
 
+            returnUrl ??= ("~/");
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var aspNetFK = claim.Value;
             //string sGender = gender.ToString();
 
-            if (aspNetFK != null)
-            {
-                string description = "";
-                bool isBanned = false;
 
-                ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, description, isBanned, aspNetFK);
-                insertedId = await _pAccess.SaveProfile(newProfile);
-            }
-            else
+            string description = "";
+            bool isBanned = false;
+
+            ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, description, isBanned, aspNetFK);
+            insertedId = await _pAccess.SaveProfile(newProfile);
+            if (insertedId == 0)
             {
+                returnUrl = Url.Content("~/Match/SwipeEvent");
+            } 
+                else 
+                {
                 //You must be logged in to create a profile.
-            }
-            return insertedId;
+                //You already own a profile.
+                TempData["Message"] = "An error occured";
+                }
+   
+            
+            return LocalRedirect(returnUrl);
 
         }
         
