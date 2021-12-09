@@ -43,93 +43,85 @@ namespace PartyFinderData.DatabaseLayers
             int eventId = match.EventId;
             bool isMatched = match.Match1;
             int status = -1;
-            try
+            if (!isMatched)
             {
-                if (!isMatched)
+                db.Matches
+                       .Add(match);
+                db.SaveChanges();
+                status = -3;
+            }
+            else
+            {
+                db.Matches
+                       .Add(match);
+                int matchAmount = CheckCurrentMatches(eventId);
+                int capacity = CheckCapacity(eventId);
+                if (matchAmount < capacity)
                 {
-                    db.Matches
-                           .Add(match);
                     db.SaveChanges();
                     status = 0;
                 }
                 else
                 {
-                    db.Matches
-                           .Add(match);
-                    int matchAmount = CheckCurrentMatches(eventId);
-                    int capacity = CheckCapacity(eventId);
-                    if (matchAmount < capacity)
-                    {
-                        db.SaveChanges();
-                        status = 0;
-                    }
-                    else
-                    {
-                        //db.Dispose();
-                        status = -2;
-                    }
+                    status = -2;
                 }
-            }
-            catch
-            {
             }
             return status;
         }
 
-        public Event GetRandomEvent(int profileId)
+    public Event GetRandomEvent(int profileId)
+    {
+        bool complete = false;
+        var foundEvents = db.Events
+                    .Where(e => e.EndDateTime > DateTime.Now)
+                    .Where(e => e.ProfileId != profileId)
+                    .ToList();
+        while (!complete)
         {
-            bool complete = false;
-            var foundEvents = db.Events
-                        .Where(e => e.EndDateTime > DateTime.Now)
-                        .Where(e => e.ProfileId != profileId)
-                        .ToList();
-            while (!complete)
+            if (eventToRemove > 0)
             {
-                if (eventToRemove > 0)
+                Event itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
+                foundEvents.Remove(itemToRemove);
+            }
+            int count = foundEvents.Count;
+            if (count > 0)
+            {
+                int r = rnd.Next(count);
+                foundEvent = foundEvents.ElementAt(r);
+            }
+            else
+            {
+                foundEvent.Id = -1;
+                complete = true;
+            }
+            foundEvent.Matches = db.Matches
+                .Where(m => m.EventId == foundEvent.Id)
+                .ToList();
+            int capacity = foundEvent.EventCapacity;
+            int matchAmount = CheckCurrentMatches(foundEvent.Id);
+            if (matchAmount > 0 && matchAmount != capacity)
+            {
+                Match matchInfo = db.Matches
+                .Where(m => m.EventId == foundEvent.Id)
+                .Where(m => m.ProfileId == profileId)
+                .SingleOrDefault();
+                if (matchInfo != null)
                 {
-                    Event itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
-                    foundEvents.Remove(itemToRemove);
-                }
-                int count = foundEvents.Count;
-                if (count > 0)
-                {
-                    int r = rnd.Next(count);
-                    foundEvent = foundEvents.ElementAt(r);
-                }
-                else
-                {
-                    foundEvent.Id = -1;
-                    complete = true;
-                }
-                foundEvent.Matches = db.Matches
-                    .Where(m => m.EventId == foundEvent.Id)
-                    .ToList();
-                int capacity = foundEvent.EventCapacity;
-                int matchAmount = CheckCurrentMatches(foundEvent.Id);
-                if (matchAmount > 0 && matchAmount != capacity)
-                {
-                    var matchInfo = db.Matches
-                    .Where(m => m.EventId == foundEvent.Id)
-                    .Where(m => m.ProfileId == profileId)
-                    .ToList();
-
-                    if(matchInfo.Count > 0)
-                    {
-                        complete = false;
-                        eventToRemove = foundEvent.Id;
-                    }
-                    else
-                    {
-                        complete = true;
-                    }
+                    complete = false;
+                    eventToRemove = foundEvent.Id;
                 }
                 else
                 {
                     complete = true;
                 }
             }
-            return foundEvent;
+            else
+            {
+                complete = true;
+            }
         }
+        return foundEvent;
     }
+}
 }
 
