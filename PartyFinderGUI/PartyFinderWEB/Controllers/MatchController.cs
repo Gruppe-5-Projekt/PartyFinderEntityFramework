@@ -62,12 +62,11 @@ namespace PartyFinderWEB.Controllers
                 {
                     return RedirectToAction("Liked", "Match");
                 }
-
-                else if (insertedId == -1)
+                else if (insertedId == -3)
                 {
                     return RedirectToAction("Disliked", "Match");
                 }
-                else if (insertedId == -2)
+                else if (insertedId == -1)
                 {
                     return RedirectToAction("MaxCapacity", "Match");
                 }
