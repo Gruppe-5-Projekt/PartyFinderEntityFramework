@@ -104,32 +104,45 @@ namespace PartyFinderData.DatabaseLayers
                 foundEvent.Matches = db.Matches
                     .Where(m => m.EventId == foundEvent.Id)
                     .ToList();
-
                 int capacity = foundEvent.EventCapacity;
                 int matchAmount = CheckCurrentMatches(foundEvent.Id);
                 if (matchAmount > 0)
                 {
-                    foreach (Match item in foundEvent.Matches)
+                    var matchInfo = db.Matches
+                    .Where(m => m.EventId == foundEvent.Id)
+                    .Where(m => m.ProfileId == profileId)
+                    .ToList();
+
+                    if(matchInfo.Count > 0)
                     {
-                        if (item.ProfileId == profileId || matchAmount == capacity)
-                        {
-                            eventToRemove = item.EventId;
-                            complete = false;
-                        }
-                        else
-                        {
-                            complete = true;
-                        }
+                        complete = false;
+                        eventToRemove = foundEvent.Id;
+                    }
+                    else
+                    {
+                        complete = true;
                     }
                 }
                 else
                 {
                     complete = true;
                 }
-
             }
             return foundEvent;
         }
+
+        //foreach (Match item in foundEvent.Matches)
+        //{
+        //    if (item.ProfileId == profileId || matchAmount == capacity)
+        //    {
+        //        eventToRemove = item.EventId;
+        //        complete = false;
+        //    }
+        //    else
+        //    {
+        //        complete = true;
+        //    }
+        //}
     }
 }
 
