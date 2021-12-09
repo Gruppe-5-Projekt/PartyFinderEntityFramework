@@ -135,15 +135,15 @@ namespace PartyFinderWEB.ServiceLayer
                 response = await _httpClient.PostAsync(uri, content);
                 string resultingIdString = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode.ToString().Equals(200))
+                if (response.Content.Headers.Contains("200"))
                 {
                     Int32.TryParse(resultingIdString, out insertedMatchId);
                 }
-                    else if (response.StatusCode.ToString().Equals(201))
+                    else if (response.Content.Headers.Contains("201"))
                 {
                     insertedMatchId = -1;
                 }
-                    else if (response.StatusCode.ToString().Equals(403))
+                    else if (response.Content.Headers.Contains("403"))
                 {
                     insertedMatchId = -2;
                 }
