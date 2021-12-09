@@ -17,7 +17,7 @@ namespace PartyFinderService.BusinessLogicLayer
             int status = -1;
             try
             {
-                status = _matchAccess.CheckAndCommitMatchPublic(match);
+                status = _matchAccess.CheckAndCommitMatch(match);
             }
             catch
             {

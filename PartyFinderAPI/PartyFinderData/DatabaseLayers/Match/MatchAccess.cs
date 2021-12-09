@@ -38,7 +38,7 @@ namespace PartyFinderData.DatabaseLayers
         }
 
         //Optimistisk concurency, der tilføjer en person til match-tabellen
-        public int CheckAndCommitMatchPublic(Match match)
+        public int CheckAndCommitMatch(Match match)
         {
             int eventId = match.EventId;
             bool isMatched = match.Match1;
@@ -130,19 +130,6 @@ namespace PartyFinderData.DatabaseLayers
             }
             return foundEvent;
         }
-
-        //foreach (Match item in foundEvent.Matches)
-        //{
-        //    if (item.ProfileId == profileId || matchAmount == capacity)
-        //    {
-        //        eventToRemove = item.EventId;
-        //        complete = false;
-        //    }
-        //    else
-        //    {
-        //        complete = true;
-        //    }
-        //}
     }
 }
 
