@@ -3,7 +3,7 @@
 @model PartyFinderWEB.Models.ProfileViewModel
 
 @{
-    ViewData["Title"] = "Manage Profile";
+    ViewData["Title"] = "Manage Profile";     //Vi burde få rykket der her over på en CreateProfile igen.
     ViewData["ActivePage"] = ManageNavPages.ChangeProfile;
 
 <div class="text-center">
@@ -28,7 +28,7 @@
                 </form>
             @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> { new SelectListItem {Text = "Male", Value = "Male"},
                                new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, "Select Gender")
-            <input type="submit" value="Opret"/>
+            <input class=createProfileSubmit type="submit" value="Opret"/>
             </div>
         }
 

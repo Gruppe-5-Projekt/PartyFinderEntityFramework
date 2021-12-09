@@ -9,6 +9,7 @@ namespace PartyFinderWEB.Controllers
     {
         
         ProfileServiceAccess _pAccess;
+        public string ReturnUrl { get; set; }
 
         public ProfileController()
         {
@@ -21,7 +22,7 @@ namespace PartyFinderWEB.Controllers
         }
 
         
-        public async Task<int> SaveProfile(string firstName, string lastName, DateTime age, string gender)
+        public async Task<ActionResult> SaveProfile(string firstName, string lastName, DateTime age, string gender, string returnUrl = null)
         {
             int insertedId = -1;
 
@@ -37,12 +38,15 @@ namespace PartyFinderWEB.Controllers
 
                 ProfileViewModel newProfile = new ProfileViewModel(firstName, lastName, age, gender, description, isBanned, aspNetFK);
                 insertedId = await _pAccess.SaveProfile(newProfile);
+                returnUrl = Url.Content("~/Match/SwipeEvent");
+                //return LocalRedirect(returnUrl);
             }
             else
             {
                 //You must be logged in to create a profile.
+                //You already own a profile.
             }
-            return insertedId;
+            return LocalRedirect(returnUrl);
 
         }
         
