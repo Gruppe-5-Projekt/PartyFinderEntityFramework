@@ -17,8 +17,8 @@
         //@Model Profile
         {
           <div class="eventForm">
-              @Html.TextAreaFor(m => m.FirstName, new {@class = "form-control", @placeholder="Fornavn"})
-              @Html.TextAreaFor(m => m.LastName, new {@class = "form-control", @placeholder="Efternavn"})
+              @Html.TextAreaFor(m => m.FirstName, new {@class = "form-control", @placeholder="Fornavn"}) @Html.ValidationMessageFor(model => model.FirstName)
+              @Html.TextAreaFor(m => m.LastName, new {@class = "form-control", @placeholder="Efternavn"}) @Html.ValidationMessageFor(model => model.LastName)
                 <form>
                     <div class="nativeDateTimePicker">
                         <label asp-for="Age">Fødselsdato:</label>
@@ -27,7 +27,8 @@
                     </div>
                 </form>
             @Html.DropDownListFor(m => m.Gender, new List<SelectListItem> { new SelectListItem {Text = "Male", Value = "Male"},
-                               new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, "Select Gender")
+                               new SelectListItem {Text = "Female", Value = "Female"}, new SelectListItem {Text = "Other", Value = "Other"}}, 
+                               "Select Gender") @Html.ValidationMessageFor(model => model.Gender)
             <input class=createProfileSubmit type="submit" value="Opret"/>
             </div>
         }

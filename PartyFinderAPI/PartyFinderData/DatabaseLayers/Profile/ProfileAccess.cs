@@ -26,13 +26,13 @@ namespace PartyFinderData.DatabaseLayers
             }
             else
             {
-                try
+                if(profileToAdd != null) //if
                 {
                     db.Add(profileToAdd);
                     db.SaveChanges();
                     return profileToAdd.Id;
                 }
-                catch
+                else
                 {
                     return -1;
                 }
