@@ -71,56 +71,16 @@ namespace PartyFinderData.DatabaseLayers
 
     public Event GetRandomEvent(int profileId)
     {
-        bool complete = false;
-        var foundEvents = db.Events
-                    .Where(e => e.EndDateTime > DateTime.Now)
-                    .Where(e => e.ProfileId != profileId)
-                    .ToList();
-        while (!complete)
-        {
-            if (eventToRemove > 0)
-            {
-                Event itemToRemove = foundEvents.Single(r => r.Id == eventToRemove);
-                foundEvents.Remove(itemToRemove);
-            }
-            int count = foundEvents.Count;
-            if (count > 0)
-            {
-                int r = rnd.Next(count);
-                foundEvent = foundEvents.ElementAt(r);
-            }
-            else
-            {
-                foundEvent.Id = -1;
-                complete = true;
-            }
-            foundEvent.Matches = db.Matches
-                .Where(m => m.EventId == foundEvent.Id)
-                .ToList();
-            int capacity = foundEvent.EventCapacity;
-            int matchAmount = CheckCurrentMatches(foundEvent.Id);
-            if (matchAmount > 0 && matchAmount != capacity)
-            {
-                Match matchInfo = db.Matches
-                .Where(m => m.EventId == foundEvent.Id)
-                .Where(m => m.ProfileId == profileId)
-                .SingleOrDefault();
-                if (matchInfo != null)
-                {
-                    complete = false;
-                    eventToRemove = foundEvent.Id;
-                }
-                else
-                {
-                    complete = true;
-                }
-            }
-            else
-            {
-                complete = true;
-            }
-        }
-        return foundEvent;
+            var foundEvent = db.Events
+              .Include(e => e.Matches)
+              .Where(e => e.EndDateTime > DateTime.Now)
+              .Where(e => e.ProfileId != profileId)
+              .Where(e => e.Matches.Count(m => m.Match1 == true) > 0
+                && e.EventCapacity > e.Matches.Count(m => m.Match1 == true))
+              .Where(e => e.Matches.Count(m => m.ProfileId == profileId) == 0)
+              .OrderBy(e => Guid.NewGuid())
+              .FirstOrDefault();
+            return foundEvent;
     }
 }
 }

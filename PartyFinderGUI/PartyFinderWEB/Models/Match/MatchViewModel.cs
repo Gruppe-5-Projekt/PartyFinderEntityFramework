@@ -24,15 +24,7 @@
 
         public int CalculateCount()
         {
-            int count = 0;
-            foreach (var item in Matches)
-            {
-                if (item.Match1 == true)
-                {
-                    count++;
-                }
-            }
-            return count;
+            return Matches.Count(m => m.Match1 == true);
         }
     }
     
