@@ -72,6 +72,7 @@ namespace PartyFinderService.Controllers
             try
             {
                 Event foundEvent = _eControl.Get(id);
+                _eControl.Delete(foundEvent);
 
                 if (foundEvent is null) return new StatusCodeResult(500); // internal server error
                 if (foundEvent.Id is <= 0) return new StatusCodeResult(204); // Ok, but no content

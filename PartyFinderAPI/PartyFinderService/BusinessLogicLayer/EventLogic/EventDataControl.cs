@@ -33,7 +33,7 @@ namespace PartyFinderService.BusinessLogicLayer
             bool successful = false;
             try
             {
-                _eventAccess.DeleteEventById(eventToDelete);
+                _eventAccess.DeleteEvent(eventToDelete);
                 successful = true;
             }
             catch

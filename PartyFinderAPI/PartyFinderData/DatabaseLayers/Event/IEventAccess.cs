@@ -13,6 +13,6 @@ namespace PartyFinderData.DatabaseLayers
         List<Event> GetEventAll();
         int CreateEvent(Event eventToAdd);
         bool UpdateEvent(Event updatedEvent);
-        bool DeleteEventById(Event eventToDelete);
+        bool DeleteEvent(Event eventToDelete);
     }
 }

@@ -61,7 +61,7 @@ namespace APIUnitTest
             Assert.True(eventWasRead);
 
 
-            _eventAccess.DeleteEventById(testEventOnDB);
+            _eventAccess.DeleteEvent(testEventOnDB);
         }
 
         // Test på at man kan slette Events, og at et Event ikke bliver slettet, hvis et andet Event har (næsten, med undtagelse af id) samme indhold.
@@ -76,7 +76,7 @@ namespace APIUnitTest
 
             int id1 = _eventAccess.CreateEvent(testEvent1);
             int id2 = _eventAccess.CreateEvent(testEvent2);
-            _eventAccess.DeleteEventById(testEvent1);
+            _eventAccess.DeleteEvent(testEvent1);
             Event testEventOnDB1 = _eventAccess.GetEventByID(id1);
             Event testEventOnDB2 = _eventAccess.GetEventByID(id2);
 
@@ -85,7 +85,7 @@ namespace APIUnitTest
             Assert.Equal(testEventOnDB1, null);
             Assert.Equal(testEventOnDB2.Id, id2);
 
-            _eventAccess.DeleteEventById(testEventOnDB2);
+            _eventAccess.DeleteEvent(testEventOnDB2);
         }
 
         // Test på at et Event kan oprettes og tilføjes til db.
@@ -105,7 +105,7 @@ namespace APIUnitTest
 
             Assert.Equal(id, testEventOnDB.Id);
 
-            _eventAccess.DeleteEventById(testEventOnDB);
+            _eventAccess.DeleteEvent(testEventOnDB);
         }
 
     }

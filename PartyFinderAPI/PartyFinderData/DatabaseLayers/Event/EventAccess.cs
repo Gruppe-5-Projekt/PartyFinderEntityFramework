@@ -31,7 +31,7 @@ namespace PartyFinderData.DatabaseLayers
             }
         }
 
-        public bool DeleteEventById(Event eventToDelete)
+        public bool DeleteEvent(Event eventToDelete)
         {
             bool successful = false;
             Console.WriteLine("Deleteting event");
