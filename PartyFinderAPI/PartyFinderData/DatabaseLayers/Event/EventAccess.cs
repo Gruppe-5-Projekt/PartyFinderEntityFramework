@@ -74,11 +74,6 @@ namespace PartyFinderData.DatabaseLayers
         {
             bool successful = false;
             Console.WriteLine("Updating event");
-            //int id = updatedEvent.Id;
-            //var eventToUpdate = db.Events
-            //    .Where(e => e.Id == id)
-            //    .SingleOrDefault();
-            //eventToUpdate = updatedEvent;
             try
             {
                 db.Update(updatedEvent);

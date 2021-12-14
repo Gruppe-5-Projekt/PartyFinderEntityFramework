@@ -69,19 +69,18 @@ namespace PartyFinderData.DatabaseLayers
             return status;
         }
 
-    public Event GetRandomEvent(int profileId)
-    {
+        public Event GetRandomEvent(int profileId)
+        {
             var foundEvent = db.Events
               .Include(e => e.Matches)
               .Where(e => e.EndDateTime > DateTime.Now)
               .Where(e => e.ProfileId != profileId)
-              .Where(e => e.Matches.Count(m => m.Match1 == true) > 0
-                && e.EventCapacity > e.Matches.Count(m => m.Match1 == true))
+              .Where(e => e.EventCapacity > e.Matches.Count(m => m.Match1 == true))
               .Where(e => e.Matches.Count(m => m.ProfileId == profileId) == 0)
               .OrderBy(e => Guid.NewGuid())
               .FirstOrDefault();
             return foundEvent;
+        }
     }
-}
 }
 

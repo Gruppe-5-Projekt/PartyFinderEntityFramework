@@ -60,7 +60,6 @@ namespace PartyFinderService.Controllers
                 Event foundEvent = _mControl.GetRandomEvent(profileId);
 
                 if (foundEvent is null) return new StatusCodeResult(500); // internal server error
-                if (foundEvent.Id is -1) return new StatusCodeResult(204); // Ok, but no content
                 return Ok(foundEvent); // Statuscode 200
             }
             catch
