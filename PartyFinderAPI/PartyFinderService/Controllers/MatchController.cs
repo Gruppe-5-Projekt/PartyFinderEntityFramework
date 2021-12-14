@@ -34,9 +34,7 @@ namespace PartyFinderService.Controllers
                 Match dbMatch = ModelConversion.MatchDataCreateDTOConvert.ToMatch(postEvent);
 
                 int matchPosted = _mControl.Match(dbMatch);
-                if (matchPosted == -3) return new StatusCodeResult(201);
-                if (matchPosted == -1) return new StatusCodeResult(500);
-                if (matchPosted == -2) return new StatusCodeResult(403);
+                if (matchPosted < 0) return new StatusCodeResult(500);
                 return new StatusCodeResult(200);
             }
             catch

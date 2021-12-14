@@ -9,8 +9,7 @@ namespace PartyFinderData.DatabaseLayers
 {
     public interface IMatchAccess
     {
-        int CheckCurrentMatches(int EventId);
-        int CheckCapacity(int eventId);
+        bool CheckIfFreeSpot(int eventId);
         int CheckAndCommitMatch(Match match);
         Event GetRandomEvent(int profileId);
     }

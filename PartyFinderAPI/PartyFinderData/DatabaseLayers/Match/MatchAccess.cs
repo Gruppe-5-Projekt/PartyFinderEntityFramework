@@ -17,24 +17,25 @@ namespace PartyFinderData.DatabaseLayers
             db = new PartyFinderContext();
         }
         static Random rnd = new Random();
-        private Event foundEvent;
-        private int eventToRemove;
 
-        public int CheckCurrentMatches(int eventId)
+        public bool CheckIfFreeSpot(int eventId)
         {
-            var allMatches = db.Matches
-                .Where(e => e.EventId == eventId)
-                .Where(m => m.Match1 == true)
-                .Count();
-            return allMatches;
-        }
-        public int CheckCapacity(int eventId)
-        {
-            var specificEvent = db.Events
+            var matchCount = db.Matches
+                    .Where(e => e.EventId == eventId)
+                    .Where(m => m.Match1 == true)
+                    .Count();
+            var eventCapacity = db.Events
                     .Where(e => e.Id == eventId)
-                    .ToList().SingleOrDefault();
-            int capacity = specificEvent.EventCapacity;
-            return capacity;
+                    .SingleOrDefault()
+                    .EventCapacity;
+            if(eventCapacity > matchCount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //Optimistisk concurency, der tilføjer en person til match-tabellen
@@ -54,9 +55,7 @@ namespace PartyFinderData.DatabaseLayers
             {
                 db.Matches
                        .Add(match);
-                int matchAmount = CheckCurrentMatches(eventId);
-                int capacity = CheckCapacity(eventId);
-                if (matchAmount < capacity)
+                if (CheckIfFreeSpot(eventId) == true)
                 {
                     db.SaveChanges();
                     status = 0;
